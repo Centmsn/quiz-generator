@@ -1,0 +1,48 @@
+@import "../../styles/variables";
+
+.loginContainer {
+  grid-area: 2/9/11/12;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px 0 rgb(148, 148, 148);
+
+  color: white;
+  background: $blue;
+  padding: 0 0.5rem;
+}
+
+.span {
+  flex-basis: 100%;
+}
+
+.label {
+  flex-basis: 100%;
+
+  font-size: 2rem;
+
+  input {
+    width: 90%;
+
+    border-radius: 5px;
+    border: none;
+
+    font-size: 1.25rem;
+
+    padding: 0.5rem;
+  }
+}
+
+.title {
+  flex-basis: 100%;
+
+  border-bottom: 2px solid white;
+
+  font-size: 2.5rem;
+
+  padding: 0.5rem 0;
+}

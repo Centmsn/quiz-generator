@@ -1,0 +1,64 @@
+@import "../../styles/variables";
+
+.button {
+  position: relative;
+  flex-basis: 60%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+
+  font-size: 1.25rem;
+
+  background-color: white;
+  padding: 0.5rem;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    transform: scaleX(0);
+    transform-origin: left center;
+
+    background: rgba(255, 183, 29, 0.363);
+
+    transition: transform 300ms linear;
+  }
+
+  &:hover:before {
+    transform: scaleX(1);
+  }
+
+  span {
+    z-index: 999;
+  }
+}
+
+.danger {
+  border: 2px solid map-get($red, 500);
+
+  color: white;
+  background: map-get($red, 300);
+
+  &:before {
+    background: map-get($red, 400);
+  }
+}
+
+.important {
+  border: 2px solid map-get($red, 500);
+
+  color: white;
+  background: map-get($red, 300);
+
+  &:before {
+    background: map-get($red, 400);
+  }
+}

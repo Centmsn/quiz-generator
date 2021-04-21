@@ -1,0 +1,68 @@
+@import "../../styles/variables";
+
+.container {
+  grid-area: 2/2/11/8;
+
+  border-radius: 5px;
+
+  background: rgb(226, 226, 226);
+  padding: 2rem;
+}
+
+.title {
+  font-size: 5rem;
+
+  color: $blue;
+}
+
+.icon {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+
+  transform: translate(-50%, 0);
+
+  border-radius: 5px;
+
+  font-size: 3rem;
+}
+
+.description {
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  box-shadow: 5px 5px 10px 0 gray;
+  border-radius: 5px;
+
+  color: white;
+  background: $blue;
+
+  padding: 1rem;
+}
+
+.instruction {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  position: relative;
+  margin-top: 1rem;
+
+  flex-basis: 30%;
+  height: 250px;
+
+  display: flex;
+
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px 0 gray;
+
+  background: $blue;
+  color: white;
+
+  &__number {
+    font-size: 6rem;
+    padding: 0.5rem;
+  }
+}
