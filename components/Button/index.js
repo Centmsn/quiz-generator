@@ -38,6 +38,16 @@ Button.propTypes = {
    * Function - called on every button click
    */
   onClick: PropTypes.func,
+
+  /**
+   * Marks the button as danger. Do not set important and danger to true concurrently
+   */
+  danger: PropTypes.bool,
+
+  /**
+   * Marks the button as important. Do not set important and danger to true concurrently
+   */
+  important: PropTypes.bool,
 };
 
 export default Button;

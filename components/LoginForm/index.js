@@ -1,17 +1,12 @@
 import styles from "./index.module.scss";
-import { signIn, signOut, useSession } from "next-auth/client";
-import { useEffect, useState } from "react";
+import { signIn } from "next-auth/client";
+import { useState } from "react";
 
 import Button from "../Button";
 
 const Navigation = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [session, loading] = useSession();
-
-  useEffect(() => {
-    console.log(session);
-  }, [session]);
 
   const handleSignIn = async () => {
     await signIn("credentials", {
@@ -63,9 +58,7 @@ const Navigation = () => {
         Login with Google
       </Button>
       <span className={styles.span}>or</span>
-      <Button onClick={handleSignup} danger>
-        Signup
-      </Button>
+      <Button onClick={handleSignup}>Signup</Button>
     </div>
   );
 };

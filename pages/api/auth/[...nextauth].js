@@ -41,5 +41,6 @@ export default (req, res) =>
     session: {
       jwt: true,
     },
+
     database: process.env.DB_URI,
   });

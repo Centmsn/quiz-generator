@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
 
+  border: 2px solid rgb(170, 169, 169);
   border-radius: 5px;
 
   font-size: 1.25rem;
@@ -27,7 +28,7 @@
     transform: scaleX(0);
     transform-origin: left center;
 
-    background: rgba(255, 183, 29, 0.363);
+    background: map-get($yellow, 200);
 
     transition: transform 300ms linear;
   }
@@ -41,18 +42,18 @@
   }
 }
 
-.danger {
-  border: 2px solid map-get($red, 500);
+.important {
+  border: 2px solid map-get($yellow, 300);
 
-  color: white;
-  background: map-get($red, 300);
+  color: black;
+  background: map-get($yellow, 200);
 
   &:before {
-    background: map-get($red, 400);
+    background: map-get($yellow, 300);
   }
 }
 
-.important {
+.danger {
   border: 2px solid map-get($red, 500);
 
   color: white;
