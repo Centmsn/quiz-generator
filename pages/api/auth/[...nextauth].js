@@ -2,6 +2,7 @@ import Providers from "next-auth/providers";
 import NextAuth from "next-auth";
 import mongoose from "mongoose";
 import User from "../../../models/user";
+import bcrypt from "bcrypt";
 
 export default (req, res) =>
   NextAuth(req, res, {
@@ -23,16 +24,18 @@ export default (req, res) =>
             email: credentials.email,
           });
 
-          // const client = await MongoClient.connect(process.env.DB_URI);
-          // const collection = client.db().collection("users");
-
-          // const user = await collection.findOne({ email: credentials.email });
-
           if (!user) {
             return;
           }
 
-          // todo add bcrypt validation
+          const isValid = await bcrypt.compare(
+            req.body.password,
+            user.password
+          );
+
+          if (!isValid) {
+            return;
+          }
 
           return { user };
         },
