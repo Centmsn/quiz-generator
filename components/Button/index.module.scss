@@ -2,7 +2,6 @@
 
 .button {
   position: relative;
-  flex-basis: 60%;
 
   display: flex;
   justify-content: center;
@@ -10,8 +9,6 @@
 
   border: 2px solid rgb(170, 169, 169);
   border-radius: 5px;
-
-  font-size: 1.25rem;
 
   background-color: white;
   padding: 0.5rem;

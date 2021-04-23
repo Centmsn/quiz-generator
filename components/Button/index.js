@@ -11,10 +11,23 @@ const Button = ({
   onClick = () => {},
   danger = false,
   important = false,
+  fontSize = "medium",
+  size = "medium",
 }) => {
   const handleOnClick = () => {
     onClick();
   };
+
+  let font;
+  if (fontSize === "small") font = "1.25rem";
+  if (fontSize === "medium") font = "1.5rem";
+  if (fontSize === "large") font = "1.75rem";
+
+  let btnSize;
+
+  if (size === "small") btnSize = "30%";
+  if (size === "medium") btnSize = "60%";
+  if (size === "large") btnSize = "75%";
 
   return (
     <button
@@ -22,6 +35,10 @@ const Button = ({
       className={`${styles.button} ${danger ? styles.danger : ""} ${
         important ? styles.important : ""
       }`}
+      style={{
+        fontSize: font,
+        flexBasis: btnSize,
+      }}
     >
       <span>{children}</span>
     </button>
@@ -48,6 +65,16 @@ Button.propTypes = {
    * Marks the button as important. Do not set important and danger to true concurrently
    */
   important: PropTypes.bool,
+
+  /**
+   * Button font size; Use "small" / "medium" / "large"
+   */
+  fontSize: PropTypes.oneOf(["small", "medium", "large"]),
+
+  /**
+   * Button size; Use "small" / "medium" / "large"
+   */
+  size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
 export default Button;

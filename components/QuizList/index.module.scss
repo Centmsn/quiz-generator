@@ -1,0 +1,35 @@
+@import "../../styles/variables";
+
+.container {
+  grid-area: 1/4/-1/12;
+
+  box-shadow: 0 0 10px 5px gray;
+
+  background: white;
+
+  overflow-y: auto;
+}
+
+.title {
+  width: 95%;
+  margin: 0 auto;
+
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  text-align: center;
+
+  color: white;
+  background: $blue;
+
+  padding: 0.25rem;
+}
+
+.quizList {
+  height: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}

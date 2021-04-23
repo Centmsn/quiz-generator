@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+
+.container {
+  grid-area: 1/1/-1/3;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+
+  box-shadow: 0 0 5px 5px gray;
+
+  color: white;
+  background: $blue;
+}
+
+.title {
+  border-radius: 5px;
+
+  font-size: 2.5rem;
+
+  color: $blue;
+  background: white;
+
+  padding: 0.5rem;
+}

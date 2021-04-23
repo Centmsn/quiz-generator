@@ -1,11 +1,17 @@
+import styles from "./index.module.scss";
+
 import { signout, getSession } from "next-auth/client";
 
-import Button from "../../components/Button";
 import UserPanel from "../../components/UserPanel";
 import QuizList from "../../components/QuizList";
 
 const Dashboard = () => {
-  return <Button onClick={signout}>Logout</Button>;
+  return (
+    <div className={styles.container}>
+      <UserPanel />
+      <QuizList />
+    </div>
+  );
 };
 
 export const getServerSideProps = async context => {
