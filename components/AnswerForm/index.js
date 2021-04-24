@@ -16,11 +16,15 @@ const ANSWERS_LETTERS = {
   3: "D",
 };
 
-const AnswerForm = () => {
+const AnswerForm = ({ value, setQuestion }) => {
   const [isCorrect, setIsCorrect] = useState(0);
 
   const handleSetCorrectAnswer = index => {
     setIsCorrect(index);
+  };
+
+  const handleSetQuestion = (e, index) => {
+    setQuestion(e.target.value, index);
   };
 
   const renderAnswerForms = () => {
@@ -32,7 +36,12 @@ const AnswerForm = () => {
       answers.push(
         <div className={styles.answerContainer}>
           <span className={styles.answerNumber}>{ANSWERS_LETTERS[i]}</span>
-          <textarea type="text" className={styles.answerInput}></textarea>
+          <textarea
+            type="text"
+            className={styles.answerInput}
+            value={value[i]}
+            onChange={e => handleSetQuestion(e, i)}
+          ></textarea>
           <span
             onClick={() => handleSetCorrectAnswer(i)}
             className={[
