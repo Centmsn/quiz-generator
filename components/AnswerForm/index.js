@@ -16,11 +16,12 @@ const ANSWERS_LETTERS = {
   3: "D",
 };
 
-const AnswerForm = ({ value, setQuestion }) => {
+const AnswerForm = ({ value, setQuestion, setCorrect }) => {
   const [isCorrect, setIsCorrect] = useState(0);
 
   const handleSetCorrectAnswer = index => {
     setIsCorrect(index);
+    setCorrect(index);
   };
 
   const handleSetQuestion = (e, index) => {
@@ -34,7 +35,7 @@ const AnswerForm = ({ value, setQuestion }) => {
       const isAnswerCorrect = i === isCorrect;
 
       answers.push(
-        <div className={styles.answerContainer}>
+        <div className={styles.answerContainer} key={i}>
           <span className={styles.answerNumber}>{ANSWERS_LETTERS[i]}</span>
           <textarea
             type="text"

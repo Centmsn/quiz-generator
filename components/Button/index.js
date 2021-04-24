@@ -11,6 +11,7 @@ const Button = ({
   onClick = () => {},
   danger = false,
   important = false,
+  disabled = false,
   fontSize = "medium",
   size = "medium",
 }) => {
@@ -32,13 +33,17 @@ const Button = ({
   return (
     <button
       onClick={handleOnClick}
-      className={`${styles.button} ${danger ? styles.danger : ""} ${
-        important ? styles.important : ""
-      }`}
+      className={[
+        styles.button,
+        danger ? styles.danger : "",
+        important ? styles.important : "",
+        disabled ? styles.disabled : "",
+      ].join(" ")}
       style={{
         fontSize: font,
         flexBasis: btnSize,
       }}
+      disabled={disabled}
     >
       <span>{children}</span>
     </button>
@@ -65,6 +70,11 @@ Button.propTypes = {
    * Marks the button as important. Do not set important and danger to true concurrently
    */
   important: PropTypes.bool,
+
+  /**
+   * Marks the button as disabled. Can be set together with danger / important.
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Button font size; Use "small" / "medium" / "large"

@@ -50,6 +50,12 @@
   }
 }
 
+.disabled {
+  &:hover:before {
+    transform: scaleX(0);
+  }
+}
+
 .danger {
   border: 2px solid map-get($red, 500);
 
