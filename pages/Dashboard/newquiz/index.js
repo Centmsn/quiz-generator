@@ -12,6 +12,7 @@ const newQuiz = () => {
 
   return (
     <div className={styles.container}>
+      <div class={styles.questionNumber}>Question number: 2</div>
       <QuestionForm />
       <AnswerForm />
 
