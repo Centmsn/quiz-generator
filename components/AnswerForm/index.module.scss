@@ -1,0 +1,104 @@
+@import "../../styles/variables";
+
+.container {
+  grid-area: 6/2/11/12;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.answerContainer {
+  position: relative;
+  flex-basis: 49%;
+  height: 45%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 5px;
+
+  background: white;
+
+  overflow: hidden;
+}
+
+.toggleCorrectAnswer {
+  flex-basis: 10%;
+  height: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2.5rem;
+
+  cursor: pointer;
+}
+
+.answerInput {
+  height: 100%;
+  flex-basis: 80%;
+
+  border: none;
+  outline: none;
+
+  font-size: 1.5rem;
+
+  resize: none;
+}
+
+.answerNumber {
+  flex-basis: 10%;
+  height: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+
+  background: $gray;
+}
+
+.correct {
+  color: map-get($green, 500);
+  background: map-get($green, 100);
+}
+
+.incorrect {
+  color: map-get($red, 500);
+  background: map-get($red, 100);
+
+  &::before {
+    content: "Click to mark as correct answer";
+    position: absolute;
+    top: 0;
+    right: 10%;
+    bottom: 0;
+    left: 0;
+
+    transform: translateX(-100%);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+
+    background: fade-out($gray, 0.1);
+    color: black;
+
+    transition: 300ms;
+  }
+
+  &:hover:before {
+    transform: translateX(0);
+  }
+}

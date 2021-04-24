@@ -2,7 +2,7 @@ import Providers from "next-auth/providers";
 import NextAuth from "next-auth";
 import mongoose from "mongoose";
 import User from "../../../models/user";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export default (req, res) =>
   NextAuth(req, res, {

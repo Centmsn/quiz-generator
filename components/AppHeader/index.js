@@ -1,7 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
-import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
-import { faShareSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSignInAlt,
+  faPlusSquare,
+  faShareSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./index.module.scss";
 
