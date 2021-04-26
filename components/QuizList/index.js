@@ -7,6 +7,7 @@ const QuizList = ({ list }) => {
     const quizList = [];
 
     list.forEach(listItem => {
+      console.log(listItem);
       quizList.push(<QuizListItem {...listItem} />);
     });
 

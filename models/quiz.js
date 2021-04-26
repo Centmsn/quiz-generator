@@ -5,6 +5,7 @@ const quiz = new Schema({
     type: String,
     ref: "user",
   },
+  title: { type: String, required: true },
   questions: [
     {
       question: {

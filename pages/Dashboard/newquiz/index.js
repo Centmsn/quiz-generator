@@ -60,11 +60,11 @@ const newQuiz = () => {
     setIsModalVisible(prev => !prev);
   };
 
-  const handleAddQuiz = async () => {
+  const handleAddQuiz = async name => {
     try {
       await fetch("/api/addquiz", {
         method: "POST",
-        body: JSON.stringify(questions),
+        body: JSON.stringify({ title: name, questions: questions }),
         headers: {
           "Content-Type": "application/json",
         },

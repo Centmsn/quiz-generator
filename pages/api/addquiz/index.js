@@ -14,7 +14,8 @@ const handler = async (req, res) => {
 
     const newQuiz = new Quiz({
       creator: existingUser,
-      questions: [...req.body],
+      title: req.body.title,
+      questions: [...req.body.questions],
     });
 
     await newQuiz.save();
