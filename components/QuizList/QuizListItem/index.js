@@ -10,7 +10,7 @@ import Button from "../../Button";
 
 const QuizListItem = ({ title, _id }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} key={_id}>
       <h3 className={styles.title}>{title}</h3>
 
       <div className={styles.settings}>

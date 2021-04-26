@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 
 const Quiz = ({ quiz }) => {
   const router = useRouter();
-
-  return <div>{router.params.id}</div>;
+  console.log(router);
+  return <div>{router.query.id}</div>;
 };
 
 export const getServerSideProps = async context => {

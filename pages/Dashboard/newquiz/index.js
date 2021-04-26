@@ -1,6 +1,7 @@
 import styles from "./index.module.scss";
 
 import { useContext, useState } from "react";
+import { useRouter } from "next/router";
 
 import QuizContext from "../../../context/QuizContext";
 import AnswerForm from "../../../components/AnswerForm";
@@ -18,7 +19,9 @@ const newQuiz = () => {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState(INITIAL_ANSWERS);
   const [correct, setCorrect] = useState(0);
-  const { questions, addQuestion } = useContext(QuizContext);
+  const { questions, addQuestion, reset } = useContext(QuizContext);
+
+  const router = useRouter();
 
   const handleAddQuestion = () => {
     const questionObject = {
@@ -52,8 +55,6 @@ const newQuiz = () => {
   };
 
   const handleAddQuiz = async () => {
-    console.log(questions);
-
     try {
       await fetch("/api/addquiz", {
         method: "POST",
@@ -65,7 +66,8 @@ const newQuiz = () => {
     } catch (error) {
       console.log(error);
     }
-    console.log("OK");
+    router.replace("/dashboard");
+    reset();
   };
 
   const isButtonDisabled = !(

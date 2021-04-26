@@ -9,8 +9,14 @@ export const QuizContextProvider = ({ children }) => {
     setQuestion(prev => [...prev, question]);
   };
 
+  const handleReset = () => {
+    setQuestion([]);
+  };
+
   return (
-    <QuizContext.Provider value={{ questions, addQuestion: handleAddQuestion }}>
+    <QuizContext.Provider
+      value={{ questions, addQuestion: handleAddQuestion, reset: handleReset }}
+    >
       {children}
     </QuizContext.Provider>
   );
