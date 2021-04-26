@@ -7,27 +7,33 @@ import AnswerForm from "../../../components/AnswerForm";
 import QuestionForm from "../../../components/QuestionForm";
 import Button from "../../../components/Button";
 
+const INITIAL_ANSWERS = {
+  0: "",
+  1: "",
+  2: "",
+  3: "",
+};
+
 const newQuiz = () => {
   const [question, setQuestion] = useState("");
-  const [answers, setAnswers] = useState({
-    0: "",
-    1: "",
-    2: "",
-    3: "",
-  });
+  const [answers, setAnswers] = useState(INITIAL_ANSWERS);
   const [correct, setCorrect] = useState(0);
   const { questions, addQuestion } = useContext(QuizContext);
 
   const handleAddQuestion = () => {
-    // todo add input validation
-
     const questionObject = {
       answers,
       question,
       correct,
     };
 
+    // add question
     addQuestion(questionObject);
+
+    //reset forms after the question is submitted
+    setAnswers(INITIAL_ANSWERS);
+    setQuestion("");
+    setCorrect(0);
   };
 
   const handleSetCorrect = index => {
@@ -45,8 +51,25 @@ const newQuiz = () => {
     }));
   };
 
+  const handleAddQuiz = async () => {
+    console.log(questions);
+
+    try {
+      await fetch("/api/addquiz", {
+        method: "POST",
+        body: JSON.stringify(questions),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("OK");
+  };
+
   const isButtonDisabled = !(
-    question &&
+    question.length > 4 &&
     answers[0] &&
     answers[1] &&
     answers[2] &&
@@ -73,7 +96,7 @@ const newQuiz = () => {
         >
           Add question
         </Button>
-        <Button size="small" danger>
+        <Button size="small" danger onClick={handleAddQuiz}>
           Finish
         </Button>
       </div>

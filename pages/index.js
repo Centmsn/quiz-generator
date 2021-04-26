@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     if (session) {
-      router.replace("/dashboard");
+      router.push("/dashboard");
     }
   }, [session]);
 

@@ -7,7 +7,6 @@ const user = new Schema({
   },
   password: {
     type: String,
-    required: true,
   },
   quizes: {
     type: [mongoose.Types.ObjectId],
@@ -16,6 +15,6 @@ const user = new Schema({
   },
 });
 
-const User = mongoose.models.user || mongoose.model("user", user);
+const User = mongoose.models?.user || mongoose.model("user", user);
 
 module.exports = User;

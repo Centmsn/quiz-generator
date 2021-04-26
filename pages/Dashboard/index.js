@@ -1,15 +1,18 @@
 import styles from "./index.module.scss";
 
-import { signout, getSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
+import User from "../../models/user";
+import Quiz from "../../models/quiz";
 
 import UserPanel from "../../components/UserPanel";
 import QuizList from "../../components/QuizList";
+import mongoose from "mongoose";
 
-const Dashboard = () => {
+const Dashboard = ({ quizList }) => {
   return (
     <div className={styles.container}>
       <UserPanel />
-      <QuizList />
+      <QuizList list={JSON.parse(quizList)} />
     </div>
   );
 };
@@ -26,8 +29,16 @@ export const getServerSideProps = async context => {
     };
   }
 
+  await mongoose.connect(process.env.DB_URI);
+
+  const existingUser = await User.findOne({
+    email: session.user.email,
+  }).populate("quizes");
+
   return {
-    props: session,
+    props: {
+      quizList: JSON.stringify(existingUser.quizes),
+    },
   };
 };
 
