@@ -3,12 +3,19 @@ import styles from "./index.module.scss";
 import QuizListItem from "./QuizListItem";
 
 const QuizList = ({ list }) => {
+  const handleQuizDelete = async id => {
+    await fetch(`/api/deletequiz/${id}`, {
+      method: "DELETE",
+    });
+  };
+
   const renderList = () => {
     const quizList = [];
 
     list.forEach(listItem => {
-      console.log(listItem);
-      quizList.push(<QuizListItem {...listItem} />);
+      quizList.push(
+        <QuizListItem {...listItem} deleteQuiz={handleQuizDelete} />
+      );
     });
 
     if (!quizList.length) {

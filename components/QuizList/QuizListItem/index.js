@@ -8,7 +8,7 @@ import Link from "next/link";
 
 import Button from "../../Button";
 
-const QuizListItem = ({ title, _id }) => {
+const QuizListItem = ({ title, _id, deleteQuiz }) => {
   return (
     <div className={styles.container} key={_id}>
       <h3 className={styles.title}>{title}</h3>
@@ -24,7 +24,8 @@ const QuizListItem = ({ title, _id }) => {
         <Button size="small">
           Get link <FontAwesomeIcon icon={faLink} />
         </Button>
-        <Button danger size="small">
+
+        <Button danger size="small" onClick={() => deleteQuiz(_id)}>
           Delete <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>

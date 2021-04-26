@@ -13,16 +13,14 @@ export default (req, res) =>
       }),
       Providers.Credentials({
         async authorize(credentials) {
-          const client = await mongoose.connect(process.env.DB_URI, {
+          await mongoose.connect(process.env.DB_URI, {
             useFindAndModify: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
             useNewUrlParser: true,
           });
 
-          const user = await client.models.user.findOne({
-            email: credentials.email,
-          });
+          const user = await User.findOne({ email: credentials.email });
 
           if (!user) {
             return;
@@ -37,7 +35,7 @@ export default (req, res) =>
             return;
           }
 
-          return { user };
+          return { email: user.email, _id: user.id };
         },
       }),
     ],
