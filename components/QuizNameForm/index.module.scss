@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+.container {
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 50vw;
+  height: 35vh;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 black;
+
+  background: $blue;
+
+  padding: 1rem;
+}
+
+.backdrop {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: fade-out($gray, 0.2);
+}
+
+.input {
+  flex-basis: 60%;
+
+  border-radius: 5px;
+  border: none;
+
+  font-size: 1.5rem;
+
+  padding: 0.5rem;
+}
+
+.title {
+  flex-basis: 100%;
+
+  border-bottom: 2px solid $gray;
+
+  text-align: center;
+
+  color: white;
+}

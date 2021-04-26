@@ -7,6 +7,7 @@ import QuizContext from "../../../context/QuizContext";
 import AnswerForm from "../../../components/AnswerForm";
 import QuestionForm from "../../../components/QuestionForm";
 import Button from "../../../components/Button";
+import QuizNameForm from "../../../components/QuizNameForm";
 
 const INITIAL_ANSWERS = {
   0: "",
@@ -19,6 +20,7 @@ const newQuiz = () => {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState(INITIAL_ANSWERS);
   const [correct, setCorrect] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { questions, addQuestion, reset } = useContext(QuizContext);
 
   const router = useRouter();
@@ -52,6 +54,10 @@ const newQuiz = () => {
       ...prev,
       [index]: value,
     }));
+  };
+
+  const handleToggleModal = () => {
+    setIsModalVisible(prev => !prev);
   };
 
   const handleAddQuiz = async () => {
@@ -98,10 +104,14 @@ const newQuiz = () => {
         >
           Add question
         </Button>
-        <Button size="small" danger onClick={handleAddQuiz}>
+        <Button size="small" danger onClick={handleToggleModal}>
           Finish
         </Button>
       </div>
+
+      {isModalVisible && (
+        <QuizNameForm closeModal={handleToggleModal} addQuiz={handleAddQuiz} />
+      )}
     </div>
   );
 };
