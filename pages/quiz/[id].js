@@ -34,7 +34,14 @@ const Quiz = ({ quiz }) => {
 
     // display next question or show quiz summary
     if (currentQuestion + 1 > quizLength - 1) {
-      router.replace("/Quiz/summary");
+      // quiz length and quiz id are passed as query params
+      router.replace({
+        pathname: "/Quiz/summary",
+        query: {
+          id: router.query.id,
+          length: parsed.questions.length,
+        },
+      });
       return;
     }
 

@@ -10,6 +10,11 @@ export const GameContextProvider = ({ children }) => {
     setCorrectAnswers(prev => prev + 1);
   };
 
+  const handleResetStore = () => {
+    setSummary([]);
+    setCorrectAnswers(0);
+  };
+
   const handleSummary = (correctAnswer, userAnswer, question, isCorrect) => {
     setSummary(prev => [
       ...prev,
@@ -26,6 +31,7 @@ export const GameContextProvider = ({ children }) => {
         summary,
         setSummary: handleSummary,
         addScore: handleCorrectAnswers,
+        resetStore: handleResetStore,
       }}
     >
       {children}
