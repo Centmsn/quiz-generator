@@ -14,7 +14,7 @@ const QuizListItem = ({ title, _id, deleteQuiz }) => {
       <h3 className={styles.title}>{title}</h3>
 
       <div className={styles.settings}>
-        <Link href={`/quiz/${_id}`}>
+        <Link href={`/Quiz/${_id}`}>
           <a>
             <Button size="small">
               Play <FontAwesomeIcon icon={faPlay} />

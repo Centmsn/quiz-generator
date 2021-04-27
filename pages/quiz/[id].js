@@ -2,22 +2,75 @@ import styles from "./index.module.scss";
 
 import mongoose from "mongoose";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
+import { LETTER_ENUM } from "../../consts";
 import QuizModel from "../../models/quiz";
+import GameContext from "../../context/GameContext";
 
 const Quiz = ({ quiz }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const router = useRouter();
-
   const parsed = JSON.parse(quiz);
+  const { addScore, setSummary } = useContext(GameContext);
+
+  const handleUserAnswer = index => {
+    const quizLength = parsed.questions.length;
+    const questionObject = parsed.questions[currentQuestion];
+
+    //add user answer, correct answer, question and bool if user answer is correct to quiz summary
+    const { answers } = questionObject;
+    setSummary(
+      answers[questionObject.correct],
+      answers[index],
+      questionObject.question,
+      index === questionObject.correct
+    );
+
+    // add score if answer is correct
+    if (index === questionObject.correct) {
+      addScore();
+    }
+
+    // display next question or show quiz summary
+    if (currentQuestion + 1 > quizLength - 1) {
+      router.replace("/Quiz/summary");
+      return;
+    }
+
+    // increment current question index
+    setCurrentQuestion(prev => prev + 1);
+  };
+
+  const renderAnswers = () => {
+    const answers = [];
+    for (let i = 0; i < 4; i++) {
+      answers.push(
+        <button className={styles.answer} onClick={() => handleUserAnswer(i)}>
+          <span className={styles.answerNumber}>{LETTER_ENUM[i]}</span>
+          <span className={styles.answerContent}>
+            {parsed.questions[currentQuestion].answers[i]}
+          </span>
+        </button>
+      );
+    }
+
+    return answers;
+  };
+
   return (
-    <div>
-      <div>{parsed.questions[currentQuestion].question}</div>
-      <button>{parsed.questions[currentQuestion].answers[0]}</button>
-      <button>{parsed.questions[currentQuestion].answers[1]}</button>
-      <button>{parsed.questions[currentQuestion].answers[2]}</button>
-      <button>{parsed.questions[currentQuestion].answers[3]}</button>
+    <div className={styles.container}>
+      <div className={styles.tooltip}>
+        <h3>
+          Question {currentQuestion + 1} of {parsed.questions.length}
+        </h3>
+      </div>
+
+      <div className={styles.questionContainer}>
+        {parsed.questions[currentQuestion].question}
+      </div>
+
+      <div className={styles.answerContainer}>{renderAnswers()}</div>
     </div>
   );
 };

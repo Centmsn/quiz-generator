@@ -12,7 +12,7 @@ const UserPanel = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Dashboard</h2>
-      <Link href="Dashboard/Newquiz">
+      <Link href="Dashboard/newquiz">
         <a>
           <Button fontSize="large" important>
             <FontAwesomeIcon icon={faPlus} /> New Quiz

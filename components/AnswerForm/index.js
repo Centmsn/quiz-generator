@@ -3,18 +3,7 @@ import styles from "./index.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-
-/**
- * Letters to mark answers
- * @enum
- * @readonly
- */
-const ANSWERS_LETTERS = {
-  0: "A",
-  1: "B",
-  2: "C",
-  3: "D",
-};
+import { LETTER_ENUM } from "../../consts";
 
 const AnswerForm = ({ value, setQuestion, setCorrect }) => {
   const [isCorrect, setIsCorrect] = useState(0);
@@ -36,7 +25,7 @@ const AnswerForm = ({ value, setQuestion, setCorrect }) => {
 
       answers.push(
         <div className={styles.answerContainer} key={i}>
-          <span className={styles.answerNumber}>{ANSWERS_LETTERS[i]}</span>
+          <span className={styles.answerNumber}>{LETTER_ENUM[i]}</span>
           <textarea
             type="text"
             className={styles.answerInput}

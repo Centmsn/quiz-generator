@@ -1,0 +1,92 @@
+@import "../../styles/variables";
+
+.container {
+  height: 100vh;
+
+  display: grid;
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0.5rem;
+
+  overflow: hidden;
+}
+
+.questionContainer {
+  grid-area: 2/2/6/12;
+
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 gray;
+
+  font-size: 1.5rem;
+
+  background: white;
+  padding: 0.5rem;
+
+  overflow-y: auto;
+}
+
+.answerContainer {
+  grid-area: 7/2/12/12;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tooltip {
+  grid-area: 1/1/2/-1;
+
+  text-align: center;
+}
+
+.answer {
+  flex-basis: 49%;
+  height: 47%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.5rem;
+
+  background: $blue;
+  color: white;
+
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 gray;
+
+  overflow-y: auto;
+
+  &:hover .answerNumber {
+    flex-basis: 15%;
+
+    background: map-get($yellow, 300);
+  }
+}
+
+.answerNumber {
+  flex-basis: 10%;
+  height: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+  font-size: 2.5rem;
+
+  background: $gray;
+  color: $blue;
+
+  transition: 300ms;
+  transform-origin: left center;
+}
+
+.answerContent {
+  flex-basis: 80%;
+}
