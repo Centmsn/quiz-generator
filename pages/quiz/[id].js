@@ -90,7 +90,7 @@ export const getServerSideProps = async context => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return {
       props: {
-        quiz: [],
+        quiz: JSON.stringify([]),
       },
     };
   }
