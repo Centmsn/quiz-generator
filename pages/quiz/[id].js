@@ -84,8 +84,18 @@ const Quiz = ({ quiz }) => {
 
 export const getServerSideProps = async context => {
   await mongoose.connect(process.env.DB_URI);
+  const { id } = context.params;
 
-  const currentQuiz = await QuizModel.findById(context.params.id);
+  // return if id is not a valid type
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return {
+      props: {
+        quiz: [],
+      },
+    };
+  }
+
+  const currentQuiz = await QuizModel.findById(id);
 
   return {
     props: {
