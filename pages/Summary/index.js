@@ -18,9 +18,10 @@ const Summary = () => {
   const { summary, correctAnswers, resetStore } = useContext(GameContext);
   const navRef = useRef(null);
   const summaryRef = useRef(null);
+  const containerRef = useRef(null);
   const router = useRouter();
 
-  //reset game context when on component unmount
+  //reset game context on unmount
   useEffect(() => {
     return () => {
       resetStore();
@@ -30,7 +31,10 @@ const Summary = () => {
   const handleShowDetails = () => {
     const summary = summaryRef.current;
     const nav = navRef.current;
-    setIsDetailsVisible(prev => !prev);
+
+    setTimeout(() => {
+      setIsDetailsVisible(prev => !prev);
+    }, 300);
 
     if (!isDetailsVisible) {
       gsap.to(summary, {
@@ -44,6 +48,7 @@ const Summary = () => {
       return;
     }
 
+    gsap.to(containerRef.current.lastChild, { y: "100vh" });
     gsap.to(nav, { y: 0 });
     gsap.to(summary, { y: 0 });
   };
@@ -51,7 +56,7 @@ const Summary = () => {
   const result = Math.floor((correctAnswers / router.query.length) * 100);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <div className={styles.summary} ref={summaryRef}>
         <h1 className={styles.title}>Quiz summary</h1>
         <h2>Your result: {result}%</h2>
@@ -80,7 +85,7 @@ const Summary = () => {
         </Link>
       </div>
 
-      {isDetailsVisible && <QuizDetails />}
+      {isDetailsVisible && <QuizDetails details={summary} />}
     </div>
   );
 };

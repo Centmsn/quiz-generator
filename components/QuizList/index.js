@@ -1,20 +1,22 @@
 import styles from "./index.module.scss";
 
 import QuizListItem from "./QuizListItem";
+import Spinner from "../Spinner";
+import { useHttpRequest } from "../../hooks/useHttpRequest";
 
 const QuizList = ({ list }) => {
+  const { loading, sendRequest } = useHttpRequest();
+
   const handleQuizDelete = async id => {
-    await fetch(`/api/deletequiz/${id}`, {
-      method: "DELETE",
-    });
+    await sendRequest(`/api/deletequiz/${id}`, "DELETE");
   };
 
   const renderList = () => {
     const quizList = [];
 
-    list.forEach(listItem => {
+    list.forEach((listItem, key) => {
       quizList.push(
-        <QuizListItem {...listItem} deleteQuiz={handleQuizDelete} />
+        <QuizListItem {...listItem} deleteQuiz={handleQuizDelete} key={key} />
       );
     });
 
@@ -27,6 +29,8 @@ const QuizList = ({ list }) => {
 
   return (
     <div className={styles.container}>
+      {loading && <Spinner overlay />}
+
       <div className={styles.title}>
         <h1>Created quizes</h1>
       </div>

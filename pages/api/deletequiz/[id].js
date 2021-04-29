@@ -23,6 +23,8 @@ const handler = async (req, res) => {
     await currentUser.quizes.pull(currentQuiz);
     await currentUser.save();
     await Quiz.deleteOne({ _id: currentQuiz });
+
+    res.json({ message: "OK" });
   }
 };
 
