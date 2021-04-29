@@ -8,6 +8,8 @@ import AnswerForm from "../../../components/AnswerForm";
 import QuestionForm from "../../../components/QuestionForm";
 import Button from "../../../components/Button";
 import QuizNameForm from "../../../components/QuizNameForm";
+import Spinner from "../../../components/Spinner";
+import { useHttpRequest } from "../../../hooks/useHttpRequest";
 
 const INITIAL_ANSWERS = {
   0: "",
@@ -22,6 +24,7 @@ const newQuiz = () => {
   const [correct, setCorrect] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { questions, addQuestion, reset } = useContext(QuizContext);
+  const { loading, error, sendRequest } = useHttpRequest();
 
   const router = useRouter();
 
@@ -61,18 +64,17 @@ const newQuiz = () => {
   };
 
   const handleAddQuiz = async name => {
-    try {
-      await fetch("/api/addquiz", {
-        method: "POST",
-        body: JSON.stringify({ title: name, questions: questions }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    await sendRequest(
+      "/api/addquiz",
+      "POST",
+      JSON.stringify({ title: name, questions: questions }),
+      {
+        "Content-Type": "application/json",
+      }
+    );
+
     router.replace("/Dashboard");
+    // resets questions form
     reset();
   };
 
@@ -86,6 +88,8 @@ const newQuiz = () => {
 
   return (
     <div className={styles.container}>
+      {loading && <Spinner overlay />}
+
       <div className={styles.questionNumber}>
         Question number: {questions.length + 1}
       </div>
