@@ -3,6 +3,7 @@ import { signIn } from "next-auth/client";
 import { useState } from "react";
 
 import Button from "components/Button";
+import Spinner from "components/Spinner";
 import { useHttpRequest } from "hooks/useHttpRequest";
 
 const Navigation = () => {
@@ -19,20 +20,25 @@ const Navigation = () => {
   };
 
   const handleSignup = async () => {
-    await fetch("/api/auth/signup", {
-      method: "POST",
-      body: JSON.stringify({
+    await sendRequest(
+      "/api/auth/signup",
+      "POST",
+      JSON.stringify({
         email: userEmail,
         password: userPassword,
       }),
-      headers: {
+      {
         "Content-Type": "application/json",
-      },
-    });
+      }
+    );
+
+    handleSignIn();
   };
 
   return (
     <div className={styles.loginContainer}>
+      {loading && <Spinner overlay />}
+
       <h2 className={styles.title}>Login</h2>
 
       <section>
