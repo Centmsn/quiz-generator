@@ -36,7 +36,7 @@ const Quiz = ({ quiz }) => {
     if (currentQuestion + 1 > quizLength - 1) {
       // quiz length and quiz id are passed as query params
       router.replace({
-        pathname: "/Quiz/summary",
+        pathname: "/Summary",
         query: {
           id: router.query.id,
           length: parsed.questions.length,

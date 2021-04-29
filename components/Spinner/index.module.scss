@@ -1,9 +1,51 @@
+@import "../../styles/variables";
+
 .overlay {
   position: absolute;
+  z-index: 9999;
+
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 
-  background: gray;
+  background: fade-out($gray, 0.5);
+}
+
+.spinner {
+  z-index: 99999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  transform-origin: left center;
+
+  width: 8rem;
+  height: 8rem;
+
+  border-radius: 10px;
+
+  font-size: 0;
+}
+
+.box {
+  display: inline-block;
+  width: 50%;
+  height: 50%;
+
+  border-radius: 10px;
+}
+
+.box1 {
+  background: map-get($yellow, 300);
+}
+.box2 {
+  background: map-get($red, 400);
+}
+.box3 {
+  background: map-get($green, 400);
+}
+.box4 {
+  background: $blue;
 }

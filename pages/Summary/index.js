@@ -7,9 +7,9 @@ import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import GameContext from "../../../context/GameContext";
+import GameContext from "../../context/GameContext";
 
-import Button from "../../../components/Button";
+import Button from "../../components/Button";
 
 const Summary = () => {
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);
