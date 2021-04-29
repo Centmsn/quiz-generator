@@ -2,11 +2,13 @@ import styles from "./index.module.scss";
 import { signIn } from "next-auth/client";
 import { useState } from "react";
 
-import Button from "../Button";
+import Button from "components/Button";
+import { useHttpRequest } from "hooks/useHttpRequest";
 
 const Navigation = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const { loading, error, sendRequest } = useHttpRequest();
 
   const handleSignIn = async () => {
     await signIn("credentials", {

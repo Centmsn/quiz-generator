@@ -6,7 +6,7 @@ import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-import Button from "../../components/Button";
+import Button from "components/Button";
 
 const UserPanel = () => {
   return (

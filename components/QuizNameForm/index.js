@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 
-import Button from "../Button";
+import Button from "components/Button";
 import { useRef, useState } from "react";
 
 const QuizNameForm = ({ closeModal, addQuiz }) => {

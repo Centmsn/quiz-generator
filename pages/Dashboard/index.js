@@ -1,11 +1,11 @@
 import styles from "./index.module.scss";
 
 import { getSession } from "next-auth/client";
-import User from "../../models/user";
-import Quiz from "../../models/quiz";
+import User from "models/user";
+import Quiz from "models/quiz";
 
-import UserPanel from "../../components/UserPanel";
-import QuizList from "../../components/QuizList";
+import UserPanel from "components/UserPanel";
+import QuizList from "components/QuizList";
 import mongoose from "mongoose";
 
 const Dashboard = ({ quizList }) => {

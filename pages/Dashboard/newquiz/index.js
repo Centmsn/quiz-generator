@@ -3,13 +3,13 @@ import styles from "./index.module.scss";
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 
-import QuizContext from "../../../context/QuizContext";
-import AnswerForm from "../../../components/AnswerForm";
-import QuestionForm from "../../../components/QuestionForm";
-import Button from "../../../components/Button";
-import QuizNameForm from "../../../components/QuizNameForm";
-import Spinner from "../../../components/Spinner";
-import { useHttpRequest } from "../../../hooks/useHttpRequest";
+import QuizContext from "context/QuizContext";
+import AnswerForm from "components/AnswerForm";
+import QuestionForm from "components/QuestionForm";
+import Button from "components/Button";
+import QuizNameForm from "components/QuizNameForm";
+import Spinner from "components/Spinner";
+import { useHttpRequest } from "hooks/useHttpRequest";
 
 const INITIAL_ANSWERS = {
   0: "",

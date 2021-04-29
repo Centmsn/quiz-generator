@@ -8,7 +8,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import Button from "../../Button";
+import Button from "components/Button";
 
 const QuizListItem = ({ title, _id, deleteQuiz }) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);

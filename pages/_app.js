@@ -1,8 +1,8 @@
 import "../styles/globals.css";
 import { Provider } from "next-auth/client";
 
-import { QuizContextProvider } from "../context/QuizContext";
-import { GameContextProvider } from "../context/GameContext";
+import { QuizContextProvider } from "context/QuizContext";
+import { GameContextProvider } from "context/GameContext";
 
 function MyApp({ Component, pageProps }) {
   return (

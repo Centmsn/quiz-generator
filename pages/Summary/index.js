@@ -9,9 +9,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState, useRef } from "react";
 
-import GameContext from "../../context/GameContext";
-import Button from "../../components/Button";
-import QuizDetails from "../../components/QuizDetails";
+import GameContext from "context/GameContext";
+import Button from "components/Button";
+import QuizDetails from "components/QuizDetails";
 
 const Summary = () => {
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);

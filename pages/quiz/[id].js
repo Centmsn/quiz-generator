@@ -4,9 +4,9 @@ import mongoose from "mongoose";
 import { useRouter } from "next/router";
 import { useState, useContext } from "react";
 
-import { LETTER_ENUM } from "../../consts";
-import QuizModel from "../../models/quiz";
-import GameContext from "../../context/GameContext";
+import { LETTER_ENUM } from "consts";
+import QuizModel from "models/quiz";
+import GameContext from "context/GameContext";
 
 const Quiz = ({ quiz }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
