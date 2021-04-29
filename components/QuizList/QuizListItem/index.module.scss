@@ -1,6 +1,7 @@
 @import "../../../styles/variables";
 
 .container {
+  position: relative;
   margin: 2rem 0;
 
   flex-basis: 95%;
@@ -15,19 +16,52 @@
 }
 
 .settings {
-  width: 60%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.title {
-  flex-basis: 100%;
-  width: 40%;
+.link {
+  width: 100%;
 
   border-radius: 5px;
 
   background: white;
+  color: $blue;
+
+  padding: 0.5rem;
+}
+
+.tooltip {
+  position: absolute;
+  top: -15%;
+  right: -1%;
+
+  border: 2px solid map-get($green, 400);
+  box-shadow: 0 0 4px 0 $gray;
+  border-radius: 5px;
+
+  background: map-get($green, 100);
+  color: map-get($green, 400);
+
+  padding: 0.25rem 0.5rem;
+}
+
+.title {
+  position: absolute;
+  top: -12.5%;
+  left: 50%;
+
+  width: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 5px;
+
+  text-align: center;
+
+  background: $blue;
+  color: white;
 
   padding: 0.25rem;
 }
