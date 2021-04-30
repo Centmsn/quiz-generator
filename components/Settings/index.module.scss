@@ -9,5 +9,35 @@
 
   transform: translateY(100vh);
 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+
   background: $blue;
+}
+
+.title {
+  margin: 0;
+  flex-basis: 90%;
+
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  font-size: 2rem;
+  text-align: center;
+
+  background: white;
+  color: $blue;
+
+  padding: 1rem;
+}
+
+.temporaryTitle {
+  flex-basis: 100%;
+
+  text-align: center;
+  font-size: 2rem;
+
+  color: white;
 }
