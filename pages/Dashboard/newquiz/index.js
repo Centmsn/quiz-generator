@@ -108,7 +108,12 @@ const newQuiz = () => {
         >
           Add question
         </Button>
-        <Button size="small" danger onClick={handleToggleModal}>
+        <Button
+          size="small"
+          danger
+          onClick={handleToggleModal}
+          disabled={!questions.length}
+        >
           Finish
         </Button>
       </div>

@@ -25,7 +25,7 @@ const handler = async (req, res) => {
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
-    res.status(422).json({ error: "User already exists" });
+    res.status(422).json({ message: "User already exists" });
     return;
   }
 

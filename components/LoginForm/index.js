@@ -6,6 +6,7 @@ import Button from "components/Button";
 import Spinner from "components/Spinner";
 import { useHttpRequest } from "hooks/useHttpRequest";
 
+// ! refactor required
 const Navigation = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
