@@ -23,7 +23,7 @@ export default (req, res) =>
           const user = await User.findOne({ email: credentials.email });
 
           if (!user) {
-            return;
+            throw new Error("User does not exist.");
           }
 
           const isValid = await bcrypt.compare(
@@ -32,7 +32,7 @@ export default (req, res) =>
           );
 
           if (!isValid) {
-            return;
+            throw new Error("Password is incorrect.");
           }
 
           return { email: user.email, _id: user.id };

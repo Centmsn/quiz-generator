@@ -20,6 +20,21 @@
   flex-basis: 100%;
 }
 
+.tooltip {
+  width: 90%;
+
+  border-radius: 5px;
+
+  color: map-get($red, 500);
+  background: map-get($red, 100);
+
+  padding: 0.5rem;
+}
+
+.tooltipHidden {
+  opacity: 0;
+}
+
 .label {
   flex-basis: 100%;
 
@@ -38,6 +53,7 @@
 }
 
 .title {
+  margin: 0;
   flex-basis: 100%;
 
   border-bottom: 2px solid white;
