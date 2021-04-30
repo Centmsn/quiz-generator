@@ -34,6 +34,7 @@ const QuizNameForm = ({ closeModal, addQuiz }) => {
           className={styles.input}
           value={name}
           onChange={handleNameChange}
+          maxLength="25"
         />
         <Button
           important

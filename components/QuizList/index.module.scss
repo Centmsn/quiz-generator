@@ -1,6 +1,7 @@
 @import "../../styles/variables";
 
 .container {
+  z-index: 9;
   grid-area: 1/4/-1/12;
 
   box-shadow: 0 0 10px 5px gray;

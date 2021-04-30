@@ -3,12 +3,13 @@ import { signout } from "next-auth/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { faList } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 import Button from "components/Button";
 
-const UserPanel = () => {
+const UserPanel = ({ displaySettings, settingsVisible }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Dashboard</h2>
@@ -19,8 +20,9 @@ const UserPanel = () => {
           </Button>
         </a>
       </Link>
-      <Button>
-        <FontAwesomeIcon icon={faCog} /> Settings
+      <Button onClick={displaySettings}>
+        <FontAwesomeIcon icon={settingsVisible ? faList : faCog} />{" "}
+        {settingsVisible ? "Quiz list" : "Settings"}
       </Button>
       <Button onClick={signout} danger>
         <FontAwesomeIcon icon={faSignOutAlt} /> Logout
