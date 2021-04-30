@@ -2,6 +2,7 @@ import styles from "./index.module.scss";
 
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import QuizContext from "context/QuizContext";
 import AnswerForm from "components/AnswerForm";
@@ -10,6 +11,8 @@ import Button from "components/Button";
 import QuizNameForm from "components/QuizNameForm";
 import Spinner from "components/Spinner";
 import { useHttpRequest } from "hooks/useHttpRequest";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const INITIAL_ANSWERS = {
   0: "",
@@ -89,6 +92,11 @@ const newQuiz = () => {
   return (
     <div className={styles.container}>
       {loading && <Spinner overlay />}
+      <Link href="/Dashboard">
+        <a className={styles.closeBtn}>
+          <FontAwesomeIcon icon={faTimes} />
+        </a>
+      </Link>
 
       <div className={styles.questionNumber}>
         Question number: {questions.length + 1}
