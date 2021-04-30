@@ -1,6 +1,7 @@
 @import "../../styles/variables";
 
 .container {
+  position: relative;
   grid-area: 2/2/6/12;
   width: 100%;
   height: 100%;
@@ -41,6 +42,19 @@
   font-size: 2rem;
 
   resize: none;
+
+  padding: 0.5rem;
+}
+
+.tooltip {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.5rem;
+
+  border-radius: 5px;
+
+  background: map-get($red, 100);
+  color: map-get($red, 500);
 
   padding: 0.5rem;
 }
