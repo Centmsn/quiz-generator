@@ -4,6 +4,11 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
 
+/**
+ * Functional react component - renders checkbox
+ * @param {object} - react props
+ * @returns {JSX.Element}
+ */
 const Checkbox = ({
   isChecked = false,
   onClick = () => {},

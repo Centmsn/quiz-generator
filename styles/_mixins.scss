@@ -1,0 +1,17 @@
+@import "./variables";
+
+@mixin rounded-border($size) {
+  @if map-has-key($round-size, $size) {
+    border-radius: map-get($round-size, $size);
+  } @else {
+    border-radius: 5px;
+  }
+}
+
+@mixin shadow($size, $color: black) {
+  @if map-has-key($shadow-size, $size) {
+    box-shadow: 0 0 map-get($shadow-size, $size) 0 $color;
+  } @else {
+    box-shadow: 0 0 5px 0 $color;
+  }
+}

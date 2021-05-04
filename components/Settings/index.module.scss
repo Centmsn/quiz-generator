@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .container {
   position: absolute;
@@ -33,6 +34,17 @@
   padding: 1rem;
 }
 
-.settingsContainer {
-  flex-basis: 100%;
+.settingsSection {
+  @include rounded-border("small");
+  @include shadow("small");
+
+  flex-basis: 90%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  background: map-get($gray, 100);
+  // border-radius: 5px;
 }

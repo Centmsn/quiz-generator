@@ -11,9 +11,15 @@ const Settings = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>Settings</h2>
 
-      <div className={styles.settingsContainer}>
+      <section className={styles.settingsSection}>
+        Switch between dark / light mode
         <Checkbox label="Darkmode" />
-      </div>
+      </section>
+
+      <section className={styles.settingsSection}>
+        Switch between dark / light mode
+        <Checkbox label="cokolwiek" />
+      </section>
     </div>
   );
 };

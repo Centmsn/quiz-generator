@@ -93,7 +93,7 @@
 
     font-size: 2rem;
 
-    background: fade-out($gray, 0.1);
+    background: fade-out(map-get($gray, 200), 0.1);
     color: black;
 
     transition: 300ms;
