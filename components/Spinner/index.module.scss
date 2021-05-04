@@ -9,7 +9,7 @@
   bottom: 0;
   left: 0;
 
-  background: fade-out($gray, 0.5);
+  background: fade-out(map-get($gray, 200), 0.5);
 }
 
 .spinner {

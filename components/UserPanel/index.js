@@ -1,10 +1,12 @@
 import styles from "./index.module.scss";
 import { signout } from "next-auth/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
-import { faList } from "@fortawesome/free-solid-svg-icons";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faList,
+  faCog,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 import Button from "components/Button";

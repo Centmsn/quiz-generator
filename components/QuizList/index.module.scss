@@ -36,5 +36,5 @@
 .tooltip {
   font-size: 2rem;
 
-  color: $gray;
+  color: map-get($gray, 200);
 }

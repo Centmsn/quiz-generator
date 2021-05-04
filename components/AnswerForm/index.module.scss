@@ -64,7 +64,7 @@
 
   font-size: 2rem;
 
-  background: $gray;
+  background: map-get($gray, 200);
 }
 
 .correct {

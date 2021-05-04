@@ -9,7 +9,7 @@
   align-items: flex-start;
 
   border-radius: 5px;
-  box-shadow: 5px 5px 10px 0 rgb(148, 148, 148);
+  box-shadow: 5px 5px 10px 0 map-get($gray, 400);
 
   color: white;
   background: $blue;

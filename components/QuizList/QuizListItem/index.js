@@ -2,9 +2,12 @@ import styles from "./index.module.scss";
 
 import copy from "copy-to-clipboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTrash,
+  faLink,
+  faPlay,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

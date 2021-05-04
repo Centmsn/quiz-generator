@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
 
-  border: 2px solid rgb(170, 169, 169);
+  border: 2px solid map-get($gray, 400);
   border-radius: 5px;
 
   background-color: white;

@@ -10,7 +10,7 @@
   border-radius: 5px;
   box-shadow: 0 0 5px 0 black;
 
-  background: $gray;
+  background: map-get($gray, 200);
 
   padding: 1rem;
 }

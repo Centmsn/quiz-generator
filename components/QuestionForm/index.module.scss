@@ -13,7 +13,7 @@
 
   border-radius: 5px;
 
-  background: $gray;
+  background: map-get($gray, 200);
 
   padding: 1rem;
 }

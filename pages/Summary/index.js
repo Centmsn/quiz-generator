@@ -2,9 +2,11 @@ import styles from "./index.module.scss";
 
 import gsap from "gsap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { faRedo } from "@fortawesome/free-solid-svg-icons";
-import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faRedo,
+  faAlignCenter,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState, useRef } from "react";
