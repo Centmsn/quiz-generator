@@ -11,7 +11,7 @@
 
   border-radius: 5px;
 
-  background: $blue;
+  background: map-get($blue, 200);
 
   padding: 1rem;
 }

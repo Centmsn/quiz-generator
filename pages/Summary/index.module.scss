@@ -22,7 +22,7 @@
   text-align: center;
   font-size: 1.25rem;
 
-  background: $blue;
+  background: map-get($blue, 200);
   color: white;
 
   padding: 1rem;

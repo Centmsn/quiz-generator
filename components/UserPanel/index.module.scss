@@ -11,7 +11,7 @@
   box-shadow: 0 0 5px 5px map-get($gray, 500);
 
   color: white;
-  background: $blue;
+  background: map-get($blue, 200);
 }
 
 .title {
@@ -19,7 +19,7 @@
 
   font-size: 2.5rem;
 
-  color: $blue;
+  color: map-get($blue, 200);
   background: white;
 
   padding: 0.5rem;

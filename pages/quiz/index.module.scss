@@ -51,7 +51,7 @@
 
   font-size: 1.5rem;
 
-  background: $blue;
+  background: map-get($blue, 200);
   color: white;
 
   border-radius: 5px;
@@ -81,7 +81,7 @@
   font-size: 2.5rem;
 
   background: map-get($gray, 200);
-  color: $blue;
+  color: map-get($blue, 200);
 
   transition: 300ms;
   transform-origin: left center;

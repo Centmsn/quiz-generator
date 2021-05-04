@@ -12,7 +12,7 @@
   box-shadow: 5px 5px 10px 0 map-get($gray, 400);
 
   color: white;
-  background: $blue;
+  background: map-get($blue, 200);
   padding: 0 0.5rem;
 }
 
