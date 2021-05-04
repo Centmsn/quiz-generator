@@ -12,7 +12,7 @@ import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
 const Checkbox = ({
   isChecked = false,
   onClick = () => {},
-  disabled = true,
+  disabled = false,
   label = "",
 }) => {
   const handleOnClick = () => {
@@ -20,8 +20,8 @@ const Checkbox = ({
   };
 
   return (
-    <div>
-      {label}
+    <div className={styles.checkboxContainer}>
+      <span>{label}</span>
       <div
         onClick={handleOnClick}
         className={[styles.checkbox, disabled ? styles.disabled : ""].join(" ")}

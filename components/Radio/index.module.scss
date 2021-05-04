@@ -1,0 +1,61 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.radioContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    margin: 0 1rem;
+  }
+}
+
+.radio {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+
+  border: 2px solid map-get($blue, 200);
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+
+    width: 75%;
+    height: 75%;
+
+    border-radius: 50%;
+
+    background: map-get($blue, 200);
+
+    transition: transform 300ms linear;
+  }
+
+  &:hover:before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.active {
+  &::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.disabled {
+  border: 2px solid map-get($gray, 400);
+  background: map-get($gray, 200);
+
+  &:hover:before {
+    transform: scale(0);
+  }
+}

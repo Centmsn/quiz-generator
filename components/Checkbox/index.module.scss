@@ -1,8 +1,18 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
+.checkboxContainer {
+  flex-basis: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .checkbox {
   @include rounded-border("small");
+  margin: 0 1rem;
   width: 2rem;
   height: 2rem;
 
@@ -10,6 +20,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+
+  box-shadow: 0 0 0 2px map-get($blue, 100);
 
   font-size: 2rem;
 
@@ -24,6 +36,8 @@
 }
 
 .disabled {
+  box-shadow: 0 0 0 2px map-get($gray, 400);
+
   background: map-get($gray, 200);
   color: map-get($gray, 500);
 

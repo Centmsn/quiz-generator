@@ -42,8 +42,21 @@
 
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 
+  text-align: center;
+
   background: map-get($gray, 100);
+
+  padding: 0.5rem 0;
+
+  p {
+    flex-basis: 100%;
+  }
+}
+
+.temporaryImportant {
+  color: map-get($red, 500);
+  background: map-get($red, 100);
 }
