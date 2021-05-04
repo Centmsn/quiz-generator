@@ -1,6 +1,8 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .checkbox {
+  @include rounded-border("small");
   width: 2rem;
   height: 2rem;
 
@@ -8,8 +10,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
-  border-radius: 5px;
 
   font-size: 2rem;
 

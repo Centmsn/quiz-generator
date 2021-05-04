@@ -1,6 +1,9 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .button {
+  @include rounded-border("small");
+
   position: relative;
 
   display: flex;
@@ -8,7 +11,6 @@
   align-items: center;
 
   border: 2px solid map-get($gray, 400);
-  border-radius: 5px;
 
   background-color: white;
   padding: 0.5rem;

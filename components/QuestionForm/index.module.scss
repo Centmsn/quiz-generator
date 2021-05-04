@@ -1,6 +1,9 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .container {
+  @include rounded-border("small");
+
   position: relative;
   grid-area: 2/2/6/12;
   width: 100%;
@@ -11,19 +14,17 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 5px;
-
   background: map-get($gray, 200);
 
   padding: 1rem;
 }
 
 .title {
+  @include rounded-border("small");
+
   margin: 0;
   flex-basis: 100%;
   height: 20%;
-
-  border-radius: 5px;
 
   text-align: center;
   font-size: 2rem;
@@ -32,12 +33,13 @@
 }
 
 .question {
+  @include rounded-border("small");
+
   flex-basis: 100%;
   height: 75%;
 
   border: none;
   outline: none;
-  border-radius: 5px;
 
   font-size: 2rem;
 
@@ -47,11 +49,11 @@
 }
 
 .tooltip {
+  @include rounded-border("small");
+
   position: absolute;
   right: 1.25rem;
   bottom: 1.5rem;
-
-  border-radius: 5px;
 
   background: map-get($red, 100);
   color: map-get($red, 500);

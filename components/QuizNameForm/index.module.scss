@@ -1,6 +1,10 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .container {
+  @include rounded-border("small");
+  @include shadow("medium");
+
   z-index: 9999;
   position: absolute;
   top: 50%;
@@ -15,9 +19,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
-  border-radius: 5px;
-  box-shadow: 0 0 10px 0 black;
 
   background: map-get($blue, 200);
 
@@ -36,9 +37,10 @@
 }
 
 .input {
+  @include rounded-border("small");
+
   flex-basis: 60%;
 
-  border-radius: 5px;
   border: none;
 
   font-size: 1.5rem;

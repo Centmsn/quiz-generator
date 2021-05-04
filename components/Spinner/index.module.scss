@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .overlay {
   position: absolute;
@@ -9,10 +10,12 @@
   bottom: 0;
   left: 0;
 
-  background: fade-out(map-get($gray, 200), 0.5);
+  background: fade-out(map-get($gray, 300), 0.5);
 }
 
 .spinner {
+  @include rounded-border("medium");
+
   z-index: 99999;
   position: absolute;
   top: 50%;
@@ -24,17 +27,15 @@
   width: 8rem;
   height: 8rem;
 
-  border-radius: 10px;
-
   font-size: 0;
 }
 
 .box {
+  @include rounded-border("medium");
+
   display: inline-block;
   width: 50%;
   height: 50%;
-
-  border-radius: 10px;
 }
 
 .box1 {

@@ -25,9 +25,9 @@
 }
 
 .link {
-  width: 100%;
+  @include rounded-border("small");
 
-  border-radius: 5px;
+  width: 100%;
 
   background: white;
   color: map-get($blue, 200);

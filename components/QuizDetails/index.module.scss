@@ -1,6 +1,9 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .container {
+  @include rounded-border("small");
+
   position: absolute;
   top: 20%;
   right: calc(100vw / 12);
@@ -9,14 +12,14 @@
 
   transform: translateY(100vh);
 
-  border-radius: 5px;
-
   background: map-get($blue, 200);
 
   padding: 1rem;
 }
 
 .card {
+  @include rounded-border("small");
+
   margin-bottom: 1rem;
   width: 100%;
   height: auto;
@@ -25,8 +28,6 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-
-  border-radius: 5px;
 
   background: white;
 
@@ -43,9 +44,9 @@
 }
 
 .number {
-  width: 5%;
+  @include rounded-border("small");
 
-  border-radius: 5px;
+  width: 5%;
 
   text-align: center;
   font-size: 3rem;
@@ -55,10 +56,10 @@
 }
 
 .question {
+  @include rounded-border("small");
+
   margin: 0 0 0.25rem 0;
   flex-basis: 100%;
-
-  border-radius: 5px;
 
   text-align: center;
 
@@ -78,10 +79,10 @@
   }
 
   span {
+    @include rounded-border("small");
+
     width: 150px;
     display: inline-block;
-
-    border-radius: 5px;
 
     text-align: center;
     font-weight: 600;

@@ -1,6 +1,9 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .loginContainer {
+  @include rounded-border("small");
+
   grid-area: 2/9/11/12;
 
   display: flex;
@@ -8,7 +11,6 @@
   justify-content: center;
   align-items: flex-start;
 
-  border-radius: 5px;
   box-shadow: 5px 5px 10px 0 map-get($gray, 400);
 
   color: white;
@@ -21,9 +23,9 @@
 }
 
 .tooltip {
-  width: 90%;
+  @include rounded-border("small");
 
-  border-radius: 5px;
+  width: 90%;
 
   color: map-get($red, 500);
   background: map-get($red, 100);
@@ -41,9 +43,10 @@
   font-size: 2rem;
 
   input {
+    @include rounded-border("small");
+
     width: 90%;
 
-    border-radius: 5px;
     border: none;
 
     font-size: 1.25rem;
