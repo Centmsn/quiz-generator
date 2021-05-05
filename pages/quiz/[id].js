@@ -141,16 +141,20 @@ const Quiz = ({ quiz }) => {
   const currentLength =
     (parsed.timeLimit.limit - (parsed.timeLimit.limit - time)) /
     parsed.timeLimit.limit;
+  const minutesLeft = Math.floor(time / 60);
+  const secondsLeft = time % 60;
 
   return (
     <div className={styles.container}>
       {/*do not show timeBar if time limit is not enabled */}
       {!!parsed.timeLimit.limit && (
-        <div
-          className={styles.timeBar}
-          ref={timeBarRef}
-          style={{ transform: `scaleX(${currentLength})` }}
-        ></div>
+        <div className={styles.timeBarContainer}>
+          <div
+            className={styles.timeBar}
+            ref={timeBarRef}
+            style={{ transform: `scaleX(${currentLength})` }}
+          ></div>
+        </div>
       )}
 
       <div className={styles.questionContainer}>
@@ -159,6 +163,10 @@ const Quiz = ({ quiz }) => {
 
       <div className={styles.tooltip}>
         <span>Question number: {currentQuestion + 1}</span>
+        <span className={styles.tooltip}>
+          Time left: {minutesLeft} {minutesLeft === 1 ? "minute" : "minutes"}{" "}
+          {secondsLeft} {secondsLeft === 1 ? "second" : "seconds"}
+        </span>
         <span>Quiz length: {parsed.questions.length}</span>
       </div>
 

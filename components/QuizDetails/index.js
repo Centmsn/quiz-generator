@@ -32,7 +32,7 @@ const QuizDetails = ({ details }) => {
             </div>
             <div className={styles.answer}>
               <p>
-                <span>Your answer</span> {el.userAnswer}
+                <span>Your answer</span> {el.userAnswer || "Out of time"}
               </p>
             </div>
           </div>
