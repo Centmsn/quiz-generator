@@ -1,6 +1,7 @@
 import styles from "./index.module.scss";
 
 import Radio from "components/Radio";
+import Slider from "components/Slider";
 
 const QuizTimeForm = () => {
   return (
@@ -8,6 +9,7 @@ const QuizTimeForm = () => {
       <p>type</p>
       <Radio label="Quiz" />
       <Radio label="Question" />
+      <Slider min={1} max={60} />
     </div>
   );
 };

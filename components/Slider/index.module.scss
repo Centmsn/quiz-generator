@@ -1,0 +1,43 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.slider {
+  @include rounded-border("small");
+  position: relative;
+
+  width: 90%;
+  height: 2rem;
+
+  background: white;
+}
+
+.progressBar {
+  position: absolute;
+  top: 15%;
+  right: 0;
+  bottom: 15%;
+  left: 0;
+
+  background-color: map-get($yellow, 200);
+}
+
+.draggable {
+  position: absolute;
+  left: 0;
+  top: -25%;
+
+  height: 150%;
+  width: 48px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid map-get($yellow, 300);
+  border-radius: 50%;
+
+  background: white;
+
+  cursor: grab;
+}
