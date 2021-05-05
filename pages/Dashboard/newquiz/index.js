@@ -8,7 +8,7 @@ import QuizContext from "context/QuizContext";
 import AnswerForm from "components/AnswerForm";
 import QuestionForm from "components/QuestionForm";
 import Button from "components/Button";
-import QuizNameForm from "components/QuizNameForm";
+import QuizNameForm from "components/QuizSettingsForm";
 import Spinner from "components/Spinner";
 import { useHttpRequest } from "hooks/useHttpRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,7 +26,9 @@ const newQuiz = () => {
   const [answers, setAnswers] = useState(INITIAL_ANSWERS);
   const [correct, setCorrect] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { questions, addQuestion, reset } = useContext(QuizContext);
+  const { questions, addQuestion, reset, setTimeControl } = useContext(
+    QuizContext
+  );
   const { loading, error, sendRequest } = useHttpRequest();
 
   const router = useRouter();
@@ -45,6 +47,17 @@ const newQuiz = () => {
     setAnswers(INITIAL_ANSWERS);
     setQuestion("");
     setCorrect(0);
+  };
+
+  const handleTimeControl = removeTimeControl => {
+    if (removeTimeControl) {
+      // remove time control
+      setTimeControl(null, null);
+      return;
+    }
+
+    // set initial time control values
+    setTimeControl(5, "quiz");
   };
 
   const handleSetCorrect = index => {
@@ -127,7 +140,11 @@ const newQuiz = () => {
       </div>
 
       {isModalVisible && (
-        <QuizNameForm closeModal={handleToggleModal} addQuiz={handleAddQuiz} />
+        <QuizNameForm
+          closeModal={handleToggleModal}
+          addQuiz={handleAddQuiz}
+          addTimeControl={handleTimeControl}
+        />
       )}
     </div>
   );

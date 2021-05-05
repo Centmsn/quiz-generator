@@ -1,5 +1,7 @@
 import styles from "./index.module.scss";
 
+import PropTypes from "prop-types";
+
 /**
  * Functional react component - renders radio input
  * @param {object} props - react props
@@ -13,7 +15,8 @@ const Radio = ({
   disabled = false,
 }) => {
   const handleOnClick = () => {
-    if (disabled) return;
+    // do not execute callback if active or disabled
+    if (disabled || active) return;
     onClick(value);
   };
 
@@ -31,6 +34,33 @@ const Radio = ({
       ></div>
     </div>
   );
+};
+
+Radio.propTypes = {
+  /**
+   * Radio description
+   */
+  label: PropTypes.string,
+
+  /**
+   * Callback function which is triggered on click
+   */
+  onClick: PropTypes.func.isRequired,
+
+  /**
+   * Radio will be displayed as active
+   */
+  active: PropTypes.bool.isRequired,
+
+  /**
+   * Value which is passed to the callback function as an argument
+   */
+  value: PropTypes.any.isRequired,
+
+  /**
+   * Radio will be displayed as disabled, callback function will not be triggered
+   */
+  disabled: PropTypes.bool,
 };
 
 export default Radio;

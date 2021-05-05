@@ -28,13 +28,13 @@ const Settings = () => {
       <section className={styles.settingsSection}>
         <p>
           You will receive message after one of Your quizes has been solved.
-          Result will be included.
+          Result will be included
         </p>
         <Checkbox label="Feedback" disabled />
       </section>
 
       <section className={styles.settingsSection}>
-        <p>Adjust font sizie to Your needs.</p>
+        <p>Adjust font size to Your needs</p>
         <Radio label="small" disabled />
         <Radio label="medium" disabled />
         <Radio label="large" disabled />

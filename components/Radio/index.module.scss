@@ -20,6 +20,8 @@
   border: 2px solid map-get($blue, 200);
   border-radius: 50%;
 
+  background: white;
+
   cursor: pointer;
 
   &::before {

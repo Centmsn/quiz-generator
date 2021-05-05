@@ -49,10 +49,12 @@
 
   background: map-get($gray, 100);
 
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
 
   p {
     flex-basis: 100%;
+
+    border-bottom: 1px solid map-get($gray, 300);
   }
 }
 

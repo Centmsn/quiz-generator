@@ -6,6 +6,14 @@ const quiz = new Schema({
     ref: "user",
   },
   title: { type: String, required: true },
+  timeLimit: {
+    limit: {
+      type: Number,
+    },
+    limitType: {
+      type: String,
+    },
+  },
   questions: [
     {
       question: {
