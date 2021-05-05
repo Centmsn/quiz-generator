@@ -162,12 +162,18 @@ const Quiz = ({ quiz }) => {
       </div>
 
       <div className={styles.tooltip}>
-        <span>Question number: {currentQuestion + 1}</span>
-        <span className={styles.tooltip}>
-          Time left: {minutesLeft} {minutesLeft === 1 ? "minute" : "minutes"}{" "}
-          {secondsLeft} {secondsLeft === 1 ? "second" : "seconds"}
+        <span className={styles.info}>
+          Question number: {currentQuestion + 1}
         </span>
-        <span>Quiz length: {parsed.questions.length}</span>
+        {!!parsed.timeLimit.limit && (
+          <span className={[styles.info, styles.infoSmall].join(" ")}>
+            Time left: {minutesLeft} {minutesLeft === 1 ? "minute" : "minutes"}{" "}
+            {secondsLeft} {secondsLeft === 1 ? "second" : "seconds"}
+          </span>
+        )}
+        <span className={styles.info}>
+          Quiz length: {parsed.questions.length}
+        </span>
       </div>
 
       <div className={styles.answerContainer}>{renderAnswers()}</div>

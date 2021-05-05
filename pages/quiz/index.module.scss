@@ -50,19 +50,19 @@
   text-align: center;
 
   color: map-get($blue, 200);
+}
 
-  span {
-    @include rounded-border("small");
-    flex-basis: 35%;
+.info {
+  @include rounded-border("small");
+  flex-basis: 35%;
 
-    background: map-get($gray, 200);
+  background: map-get($gray, 200);
 
-    padding: 0.5rem;
+  padding: 0.5rem;
+}
 
-    &:nth-child(2) {
-      flex-basis: 25%;
-    }
-  }
+.infoSmall {
+  flex-basis: 25%;
 }
 
 .timeBarContainer {

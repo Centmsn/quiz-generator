@@ -6,6 +6,7 @@ import {
   faList,
   faCog,
   faSignOutAlt,
+  faInbox,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
@@ -26,6 +27,11 @@ const UserPanel = ({ displaySettings, settingsVisible }) => {
         <FontAwesomeIcon icon={settingsVisible ? faList : faCog} />{" "}
         {settingsVisible ? "Quiz list" : "Settings"}
       </Button>
+
+      <Button onClick={displaySettings} disabled>
+        <FontAwesomeIcon icon={faInbox} /> Inbox
+      </Button>
+
       <Button onClick={signout} danger>
         <FontAwesomeIcon icon={faSignOutAlt} /> Logout
       </Button>
