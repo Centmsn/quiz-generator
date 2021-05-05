@@ -4,6 +4,7 @@
 .slider {
   @include rounded-border("small");
   position: relative;
+  margin: 0 auto;
 
   width: 90%;
   height: 2rem;
@@ -37,6 +38,7 @@
   border: 2px solid map-get($yellow, 300);
   border-radius: 50%;
 
+  color: black;
   background: white;
 
   cursor: grab;

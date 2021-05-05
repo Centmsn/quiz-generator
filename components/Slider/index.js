@@ -27,9 +27,6 @@ const Slider = ({ label = "", min = 0, max = 100, onChange = () => {} }) => {
 
     document.body.removeEventListener("mouseup", handleStopDrag);
     document.body.removeEventListener("mousemove", handleDraggablePosition);
-
-    // callback func is called after the drag is over
-    onChange(value);
   };
 
   const handleDraggablePosition = e => {
@@ -43,7 +40,7 @@ const Slider = ({ label = "", min = 0, max = 100, onChange = () => {} }) => {
     const mouseX = e.clientX - sliderX;
 
     // value which is displayed in the draggable
-    const value = Math.round(((max - min) / sliderWidth) * mouseX + min);
+    const newValue = Math.round(((max - min) / sliderWidth) * mouseX + min);
 
     // if mouseX is smaller than slider width
     if (mouseX - DRAGGABLE_WIDTH / 2 <= -DRAGGABLE_WIDTH / 2) {
@@ -59,7 +56,10 @@ const Slider = ({ label = "", min = 0, max = 100, onChange = () => {} }) => {
 
     // set current draggable position and current value
     setPosition(mouseX - DRAGGABLE_WIDTH / 2);
-    setValue(value);
+    setValue(newValue);
+
+    // trigger callback if value has been changed
+    if (newValue !== value) onChange(newValue);
   };
 
   return (

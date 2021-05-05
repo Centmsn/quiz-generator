@@ -56,28 +56,36 @@ export const QuizContextProvider = ({ children }) => {
   const handleTimeControl = (limit, type) => {
     // if both arguments are null - remove time control
     if (limit === null && type === null) {
+      console.log("usuwam");
       setTimeControl(TIME_CONTROL_DEFAULT);
       return;
     }
 
+    // validate arguments
+    if (typeof type !== "string") {
+      throw new Error(
+        `Incorrect argument. Expected string instead got ${typeof type}`
+      );
+    }
+
     const formattedType = type.toLowerCase();
 
-    // validate arguments
     if (typeof limit !== "number") {
       throw new Error(
-        `Incorrect argument. Expected number instead got ${typeof limit}`
+        `Incorrect argument. Expected number | null instead got ${typeof limit}`
       );
     }
 
     if (formattedType !== "quiz" && formattedType !== "question") {
       throw new Error(
-        `Incorrect argument. Expected 'quiz' or 'question'. Instead got ${type}`
+        `Incorrect argument. Expected 'quiz' | 'question' | null. Instead got ${type}`
       );
     }
     // enable time control
+    console.log("dodaje");
     setTimeControl({
       limit,
-      type,
+      limitType: type,
     });
   };
 

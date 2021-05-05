@@ -8,7 +8,7 @@ import Checkbox from "components/Checkbox";
 import QuizTimeForm from "components/QuizTimeForm";
 import { useThrottle } from "hooks/useThrottle";
 
-const QuizNameForm = ({ closeModal, addQuiz, addTimeControl }) => {
+const QuizNameForm = ({ closeModal, addQuiz }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [timeFormVisibility, setTimeFormVisibility] = useState(false);
   const [name, setName] = useState("");
@@ -37,9 +37,6 @@ const QuizNameForm = ({ closeModal, addQuiz, addTimeControl }) => {
     );
 
     if (!timeFormVisibility) {
-      // add time contro to quiz context
-      addTimeControl();
-
       // display form
       gsap.to(nameFormRef.current, { y: "-90%" });
       setTimeout(() => {
@@ -51,9 +48,6 @@ const QuizNameForm = ({ closeModal, addQuiz, addTimeControl }) => {
     // remove form from the screen
     gsap.to(timeFormRef.current, { y: "100%" });
     gsap.to(nameFormRef.current, { y: 0, delay: 0.35 });
-
-    // remove time control from context
-    addTimeControl(true);
   }, 400);
 
   const handleNameChange = e => {
