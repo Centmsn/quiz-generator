@@ -1,0 +1,12 @@
+@import "../../../styles/variables";
+
+.quizList {
+  flex-basis: 100%;
+  height: 90%;
+}
+
+.tooltip {
+  font-size: 2rem;
+
+  color: map-get($gray, 200);
+}

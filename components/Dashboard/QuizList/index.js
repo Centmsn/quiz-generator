@@ -1,9 +1,11 @@
 import styles from "./index.module.scss";
 
-import QuizListItem from "./QuizListItem";
+import { useState, useEffect } from "react";
+
+import Container from "components/Dashboard/Container";
+import QuizListItem from "../QuizListItem";
 import Spinner from "components/Spinner";
 import { useHttpRequest } from "hooks/useHttpRequest";
-import { useState, useEffect } from "react";
 
 const QuizList = ({ list }) => {
   const { loading, sendRequest } = useHttpRequest();
@@ -38,15 +40,11 @@ const QuizList = ({ list }) => {
   };
 
   return (
-    <div className={styles.container}>
+    <Container title="Quiz list" light>
       {loading && <Spinner overlay />}
 
-      <div className={styles.title}>
-        <h1>Created quizes</h1>
-      </div>
-
       <div className={styles.quizList}>{renderList()}</div>
-    </div>
+    </Container>
   );
 };
 

@@ -1,17 +1,12 @@
 import styles from "./index.module.scss";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTools } from "@fortawesome/free-solid-svg-icons";
-
-import Button from "components/Button";
+import Container from "components/Dashboard/Container";
 import Checkbox from "components/Checkbox";
 import Radio from "components/Radio";
 
 const Settings = () => {
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Settings</h2>
-
+    <Container title="Settings">
       <section
         className={[styles.settingsSection, styles.temporaryImportant].join(
           " "
@@ -39,7 +34,7 @@ const Settings = () => {
         <Radio label="medium" disabled />
         <Radio label="large" disabled />
       </section>
-    </div>
+    </Container>
   );
 };
 

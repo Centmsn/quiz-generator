@@ -12,10 +12,11 @@ import Link from "next/link";
 
 import Button from "components/Button";
 
-const UserPanel = ({ displaySettings, settingsVisible }) => {
+const UserPanel = ({ setDashboardView }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Dashboard</h2>
+
       <Link href="Dashboard/newquiz">
         <a>
           <Button fontSize="large" important>
@@ -23,12 +24,16 @@ const UserPanel = ({ displaySettings, settingsVisible }) => {
           </Button>
         </a>
       </Link>
-      <Button onClick={displaySettings}>
-        <FontAwesomeIcon icon={settingsVisible ? faList : faCog} />{" "}
-        {settingsVisible ? "Quiz list" : "Settings"}
+
+      <Button onClick={() => setDashboardView(1)}>
+        <FontAwesomeIcon icon={faList} /> Quiz list
       </Button>
 
-      <Button onClick={displaySettings} disabled>
+      <Button onClick={() => setDashboardView(2)}>
+        <FontAwesomeIcon icon={faCog} /> Settings
+      </Button>
+
+      <Button onClick={() => setDashboardView(3)}>
         <FontAwesomeIcon icon={faInbox} /> Inbox
       </Button>
 

@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export const useThrottle = () => {
+export function useThrottle() {
   const [isWaiting, setIsWaiting] = useState(false);
 
   const throttle = (callback, time = 100) => {
-    return () => {
+    return function () {
       if (isWaiting) return;
 
       setIsWaiting(true);
@@ -20,4 +20,4 @@ export const useThrottle = () => {
     isWaiting,
     throttle,
   };
-};
+}
