@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import QuizContext from "context/QuizContext";
-import AnswerForm from "components/AnswerForm";
-import QuestionForm from "components/QuestionForm";
+import AnswerForm from "components/NewQuiz/AnswerForm";
+import QuestionForm from "components/NewQuiz/QuestionForm";
 import Button from "components/Button";
-import QuizSettingsForm from "components/QuizSettingsForm";
+import QuizSettingsForm from "components/NewQuiz/QuizSettingsForm";
 import Spinner from "components/Spinner";
 import { useHttpRequest } from "hooks/useHttpRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

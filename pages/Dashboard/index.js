@@ -14,7 +14,6 @@ import Inbox from "components/Dashboard/Inbox";
 import { useThrottle } from "hooks/useThrottle";
 
 const Dashboard = ({ quizList }) => {
-  const [isSettingsVisible, setIsSettingsVisible] = useState(false);
   const [dashboardView, setDashboardView] = useState(1);
   const containerRef = useRef(null);
   const { throttle } = useThrottle();
@@ -45,10 +44,7 @@ const Dashboard = ({ quizList }) => {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <UserPanel
-        setDashboardView={handleDashboardView}
-        settingsVisible={isSettingsVisible}
-      />
+      <UserPanel setDashboardView={handleDashboardView} index={dashboardView} />
       <QuizList list={JSON.parse(quizList)} />
       <Settings />
       <Inbox />

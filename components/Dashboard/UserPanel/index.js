@@ -12,10 +12,17 @@ import Link from "next/link";
 
 import Button from "components/Button";
 
-const UserPanel = ({ setDashboardView }) => {
+const UserPanel = ({ setDashboardView, index }) => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Dashboard</h2>
+      <h2
+        className={styles.title}
+        onClick={() => {
+          setDashboardView(1);
+        }}
+      >
+        Dashboard
+      </h2>
 
       <Link href="Dashboard/newquiz">
         <a>
@@ -25,15 +32,15 @@ const UserPanel = ({ setDashboardView }) => {
         </a>
       </Link>
 
-      <Button onClick={() => setDashboardView(1)}>
+      <Button onClick={() => setDashboardView(1)} disabled={index === 1}>
         <FontAwesomeIcon icon={faList} /> Quiz list
       </Button>
 
-      <Button onClick={() => setDashboardView(2)}>
+      <Button onClick={() => setDashboardView(2)} disabled={index === 2}>
         <FontAwesomeIcon icon={faCog} /> Settings
       </Button>
 
-      <Button onClick={() => setDashboardView(3)}>
+      <Button onClick={() => setDashboardView(3)} disabled={index === 3}>
         <FontAwesomeIcon icon={faInbox} /> Inbox
       </Button>
 

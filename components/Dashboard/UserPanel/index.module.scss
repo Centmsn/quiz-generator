@@ -1,5 +1,5 @@
-@import "../../../styles/variables";
-@import "../../../styles/mixins";
+@import "styles/variables";
+@import "styles/mixins";
 
 .container {
   @include shadow("small", map-get($gray, 500));
@@ -24,4 +24,9 @@
   background: map-get($gray, 100);
 
   padding: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background: map-get($gray, 200);
+  }
 }

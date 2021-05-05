@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 
 import Button from "components/Button";
 import Checkbox from "components/Checkbox";
-import QuizTimeForm from "components/QuizTimeForm";
+import QuizTimeForm from "components/NewQuiz/QuizTimeForm";
 import { useThrottle } from "hooks/useThrottle";
 
 const QuizNameForm = ({ closeModal, addQuiz }) => {
