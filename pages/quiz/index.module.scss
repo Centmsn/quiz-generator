@@ -16,6 +16,7 @@
 .questionContainer {
   @include rounded-border("small");
   @include shadow("medium", map-get($gray, 500));
+  @extend %flex-center;
 
   grid-area: 2/2/6/12;
 

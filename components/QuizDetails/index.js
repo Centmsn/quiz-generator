@@ -21,9 +21,7 @@ const QuizDetails = ({ details }) => {
           </div>
 
           <div className={styles.questionContainer}>
-            <h3 className={[styles.question, correctClass].join(" ")}>
-              {el.question}
-            </h3>
+            <h3 className={styles.question}>{el.question}</h3>
 
             <div className={styles.answer}>
               <p>

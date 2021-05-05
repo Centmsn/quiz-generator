@@ -64,8 +64,10 @@
 
   text-align: center;
 
-  background: map-get($red, 100);
-  color: map-get($red, 500);
+  // background: map-get($red, 100);
+  // color: map-get($red, 500);
+  background: map-get($gray, 200);
+  color: black;
 }
 
 .answer {
