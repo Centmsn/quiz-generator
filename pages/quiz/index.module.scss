@@ -36,9 +36,40 @@
 }
 
 .tooltip {
-  grid-area: 1/1/2/-1;
+  @include rounded-border("small");
+
+  grid-area: 6/2/7/12;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 
   text-align: center;
+
+  color: map-get($blue, 200);
+
+  span {
+    @include rounded-border("small");
+    flex-basis: 40%;
+
+    background: map-get($gray, 200);
+
+    padding: 0.5rem;
+  }
+}
+
+.timeBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  height: 2rem;
+
+  background: map-get($yellow, 300);
+
+  transform-origin: left center;
 }
 
 .answer {

@@ -72,7 +72,14 @@ const newQuiz = () => {
     await sendRequest(
       "/api/addquiz",
       "POST",
-      JSON.stringify({ title, timeControl, questions }),
+      JSON.stringify({
+        title,
+        timeControl: {
+          limit: timeControl.limit * 60,
+          limitType: timeControl.limitType,
+        },
+        questions,
+      }),
       {
         "Content-Type": "application/json",
       }

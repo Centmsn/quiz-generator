@@ -12,7 +12,6 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     const existingUser = await User.findOne({ email: session.user.email });
 
-    console.log(req.body.timeControl);
     const newQuiz = new Quiz({
       creator: existingUser,
       title: req.body.title,

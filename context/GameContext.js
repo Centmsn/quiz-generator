@@ -20,8 +20,6 @@ export const GameContextProvider = ({ children }) => {
       ...prev,
       { correctAnswer, userAnswer, question, isCorrect },
     ]);
-
-    console.log(summary);
   };
 
   return (

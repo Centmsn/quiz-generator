@@ -56,7 +56,6 @@ export const QuizContextProvider = ({ children }) => {
   const handleTimeControl = (limit, type) => {
     // if both arguments are null - remove time control
     if (limit === null && type === null) {
-      console.log("usuwam");
       setTimeControl(TIME_CONTROL_DEFAULT);
       return;
     }
@@ -82,7 +81,6 @@ export const QuizContextProvider = ({ children }) => {
       );
     }
     // enable time control
-    console.log("dodaje");
     setTimeControl({
       limit,
       limitType: type,
