@@ -19,7 +19,7 @@ import QuizDetails from "components/QuizDetails";
 const Summary = () => {
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);
   const [session, loading] = useSession();
-  const { summary, correctAnswers } = useContext(GameContext);
+  const { summary, correctAnswers, username } = useContext(GameContext);
   const navRef = useRef(null);
   const summaryRef = useRef(null);
   const containerRef = useRef(null);
@@ -56,7 +56,7 @@ const Summary = () => {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.summary} ref={summaryRef}>
-        <h1 className={styles.title}>Quiz summary</h1>
+        <h1 className={styles.title}>Quick summary for {username}</h1>
         <h2>Your result: {result}%</h2>
         <p>Questions total: {router.query.length}</p>
         <p>Correct answers: {correctAnswers}</p>

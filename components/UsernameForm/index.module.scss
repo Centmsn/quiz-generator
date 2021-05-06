@@ -48,3 +48,15 @@
     border-bottom: 1px solid map-get($gray, 200);
   }
 }
+
+.tooltip {
+  @include rounded-border("small");
+  flex-basis: 80%;
+
+  background: map-get($red, 100);
+  color: map-get($red, 500);
+
+  padding: 0.5rem;
+
+  opacity: 0;
+}

@@ -15,8 +15,9 @@ const Button = ({
   fontSize = "medium",
   size = "medium",
 }) => {
-  const handleOnClick = () => {
-    onClick();
+  const handleOnClick = e => {
+    // event is passed to the callback function
+    onClick(e);
   };
 
   let font;
