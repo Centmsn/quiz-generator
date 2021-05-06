@@ -67,11 +67,12 @@ const Summary = () => {
   };
 
   const result = Math.floor((correctAnswers / router.query.length) * 100);
+  const title = username ? `Quick summary for ${username}` : "Quick summary";
 
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.summary} ref={summaryRef}>
-        <h1 className={styles.title}>Quick summary for {username}</h1>
+        <h1 className={styles.title}>{title}</h1>
         <h2>Your result: {result}%</h2>
         <p>Questions total: {router.query.length}</p>
         <p>Correct answers: {correctAnswers}</p>

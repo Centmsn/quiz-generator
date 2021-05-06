@@ -1,5 +1,6 @@
 @import "styles/variables";
 @import "styles/mixins";
+@import "styles/partials";
 
 .container {
   @include shadow("small", map-get($gray, 500));
@@ -29,4 +30,21 @@
   &:hover {
     background: map-get($gray, 200);
   }
+}
+
+.test {
+  @extend %flex-center;
+  position: absolute;
+  top: -30%;
+  right: -10%;
+
+  width: 2rem;
+  height: 2rem;
+
+  border-radius: 50%;
+  border: 2px solid map-get($gray, 500);
+
+  font-size: 1rem;
+
+  background: map-get($yellow, 200);
 }

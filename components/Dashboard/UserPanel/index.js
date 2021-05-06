@@ -1,4 +1,5 @@
 import styles from "./index.module.scss";
+
 import { signout } from "next-auth/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +13,7 @@ import Link from "next/link";
 
 import Button from "components/Button";
 
-const UserPanel = ({ setDashboardView, index }) => {
+const UserPanel = ({ setDashboardView, index, unreadMessages }) => {
   return (
     <div className={styles.container}>
       <h2
@@ -41,11 +42,14 @@ const UserPanel = ({ setDashboardView, index }) => {
       </Button>
 
       <Button onClick={() => setDashboardView(3)} disabled={index === 3}>
-        <FontAwesomeIcon icon={faInbox} /> Inbox
+        <FontAwesomeIcon icon={faInbox} /> Inbox{" "}
+        {unreadMessages > 0 && (
+          <span className={styles.test}>{unreadMessages}</span>
+        )}
       </Button>
 
       <Button onClick={signout} danger>
-        <FontAwesomeIcon icon={faSignOutAlt} /> Logout
+        <FontAwesomeIcon icon={faSignOutAlt} /> Logout{" "}
       </Button>
     </div>
   );

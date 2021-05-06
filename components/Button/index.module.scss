@@ -14,9 +14,9 @@
 
   background-color: white;
   padding: 0.5rem;
-  overflow: hidden;
 
   &::before {
+    @include rounded-border("small");
     content: "";
     position: absolute;
     top: 0;

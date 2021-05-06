@@ -6,8 +6,6 @@ import { getSession } from "next-auth/client";
 import { useState, useContext, useEffect, useRef } from "react";
 
 import { LETTER_ENUM } from "consts";
-import QuizModel from "models/quiz";
-import UserModel from "models/user";
 import GameContext from "context/GameContext";
 import UsernameForm from "components/UsernameForm";
 import { connectToDb } from "utils/connectToDb";
@@ -217,6 +215,8 @@ const Quiz = ({ quiz, quizOwner }) => {
 
 export const getServerSideProps = connectToDb(async context => {
   const session = await getSession({ req: context.req });
+  const User = mongoose.model("user");
+  const Quiz = mongoose.model("quiz");
 
   const { id } = context.params;
 
@@ -230,11 +230,11 @@ export const getServerSideProps = connectToDb(async context => {
   }
 
   //! add error handling
-  const currentQuiz = await QuizModel.findById(id);
+  const currentQuiz = await Quiz.findById(id);
 
   let quizOwner;
   if (session) {
-    const quizCreator = await UserModel.findOne({ quizes: currentQuiz._id });
+    const quizCreator = await User.findOne({ quizes: currentQuiz._id });
     quizOwner = quizCreator.email === session.user.email;
   }
 

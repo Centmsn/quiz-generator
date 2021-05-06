@@ -66,7 +66,7 @@ const Navigation = () => {
     });
   };
 
-  const isLoginDisabled = !userEmail || userPassword.length < 5;
+  const isLoginDisabled = !userEmail || userPassword.length < 6;
 
   return (
     <div className={styles.loginContainer}>
