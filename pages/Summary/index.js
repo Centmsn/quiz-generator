@@ -8,8 +8,9 @@ import {
   faAlignCenter,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useState, useRef } from "react";
 
 import GameContext from "context/GameContext";
 import Button from "components/Button";
@@ -17,18 +18,13 @@ import QuizDetails from "components/QuizDetails";
 
 const Summary = () => {
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);
-  const { summary, correctAnswers, resetStore } = useContext(GameContext);
+  const [session, loading] = useSession();
+  const { summary, correctAnswers } = useContext(GameContext);
   const navRef = useRef(null);
   const summaryRef = useRef(null);
   const containerRef = useRef(null);
-  const router = useRouter();
 
-  //reset game context on unmount
-  useEffect(() => {
-    return () => {
-      resetStore();
-    };
-  }, []);
+  const router = useRouter();
 
   const handleShowDetails = () => {
     const summary = summaryRef.current;
@@ -78,7 +74,7 @@ const Summary = () => {
             </Button>
           </a>
         </Link>
-        <Link href="/">
+        <Link href={session ? "/Dashboard" : "/"}>
           <a>
             <Button danger>
               <FontAwesomeIcon icon={faHome} /> Home page

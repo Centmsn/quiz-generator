@@ -5,24 +5,38 @@ import { useRouter } from "next/router";
 import { useState, useContext, useEffect, useRef, useMemo } from "react";
 
 import { LETTER_ENUM } from "consts";
+
 import QuizModel from "models/quiz";
 import GameContext from "context/GameContext";
+import UsernameForm from "components/UsernameForm";
 
 const Quiz = ({ quiz }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
   const [time, setTime] = useState(null);
   const router = useRouter();
   const parsed = JSON.parse(quiz);
-  const { addScore, setSummary } = useContext(GameContext);
+  const {
+    addScore,
+    setSummary,
+    username,
+    setUsername,
+    resetStore,
+  } = useContext(GameContext);
 
   const timeBarRef = useRef(null);
+
+  // reset game context when the component is mounted
+  useEffect(() => {
+    resetStore();
+  }, []);
 
   useEffect(() => {
     const { limit, limitType } = parsed.timeLimit;
     let id;
+
     // if timelimit is set
-    if (limit) {
+    if (limit && username) {
       // clear previous interval and start new one for each question
       if (limitType === "question" && intervalId) {
         clearInterval(intervalId);
@@ -77,10 +91,16 @@ const Quiz = ({ quiz }) => {
       }
 
       // if time limit is assigned to question
-
+      // set user answer to null
       handleUserAnswer(null);
     }
   }, [time]);
+
+  // triggered when username is submitted
+  const handleStartQuiz = value => {
+    setUsername(value);
+    setCurrentQuestion(0);
+  };
 
   const handleUserAnswer = index => {
     const { questions } = parsed;
@@ -129,7 +149,7 @@ const Quiz = ({ quiz }) => {
         <button className={styles.answer} onClick={() => handleUserAnswer(i)}>
           <span className={styles.answerNumber}>{LETTER_ENUM[i]}</span>
           <span className={styles.answerContent}>
-            {parsed.questions[currentQuestion].answers[i]}
+            {parsed.questions[currentQuestion || 0].answers[i]}
           </span>
         </button>
       );
@@ -143,41 +163,51 @@ const Quiz = ({ quiz }) => {
     parsed.timeLimit.limit;
   const minutesLeft = Math.floor(time / 60);
   const secondsLeft = time % 60;
-
+  const currentTime = `Time left: ${minutesLeft}
+  ${minutesLeft === 1 ? "minute" : "minutes"} ${secondsLeft}
+  ${secondsLeft === 1 ? "second" : "seconds"}
+`;
   return (
-    <div className={styles.container}>
-      {/*do not show timeBar if time limit is not enabled */}
-      {!!parsed.timeLimit.limit && (
-        <div className={styles.timeBarContainer}>
-          <div
-            className={styles.timeBar}
-            ref={timeBarRef}
-            style={{ transform: `scaleX(${currentLength})` }}
-          ></div>
-        </div>
-      )}
+    <>
+      {!username && <UsernameForm startQuiz={handleStartQuiz} />}
 
-      <div className={styles.questionContainer}>
-        {parsed.questions[currentQuestion].question}
-      </div>
-
-      <div className={styles.tooltip}>
-        <span className={styles.info}>
-          Question number: {currentQuestion + 1}
-        </span>
+      <div
+        className={styles.container}
+        style={{ filter: username ? "" : "blur(5px)" }}
+      >
+        {/*do not show timeBar if time limit is not enabled */}
         {!!parsed.timeLimit.limit && (
-          <span className={[styles.info, styles.infoSmall].join(" ")}>
-            Time left: {minutesLeft} {minutesLeft === 1 ? "minute" : "minutes"}{" "}
-            {secondsLeft} {secondsLeft === 1 ? "second" : "seconds"}
-          </span>
+          <div className={styles.timeBarContainer}>
+            <div
+              className={styles.timeBar}
+              ref={timeBarRef}
+              style={{ transform: `scaleX(${currentLength})` }}
+            ></div>
+          </div>
         )}
-        <span className={styles.info}>
-          Quiz length: {parsed.questions.length}
-        </span>
-      </div>
 
-      <div className={styles.answerContainer}>{renderAnswers()}</div>
-    </div>
+        <div className={styles.questionContainer}>
+          {/* initial value is null */}
+          {parsed.questions[currentQuestion || 0].question}
+        </div>
+
+        <div className={styles.tooltip}>
+          <span className={styles.info}>
+            Question number: {currentQuestion + 1}
+          </span>
+          {!!parsed.timeLimit.limit && (
+            <span className={[styles.info, styles.infoSmall].join(" ")}>
+              {currentTime}
+            </span>
+          )}
+          <span className={styles.info}>
+            Quiz length: {parsed.questions.length}
+          </span>
+        </div>
+
+        <div className={styles.answerContainer}>{renderAnswers()}</div>
+      </div>
+    </>
   );
 };
 

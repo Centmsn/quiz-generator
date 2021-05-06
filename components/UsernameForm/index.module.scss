@@ -1,0 +1,50 @@
+@import "styles/variables";
+@import "styles/partials";
+@import "styles/mixins";
+
+.modal {
+  @extend %flex-center;
+
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: fade-out(map-get($gray, 500), 0.75);
+}
+
+.form {
+  @extend %flex-center;
+  @include shadow("small");
+  @include rounded-border("small");
+
+  flex-basis: 50%;
+  height: 40%;
+
+  text-align: center;
+
+  background: white;
+
+  input {
+    @include rounded-border("small");
+
+    flex-basis: 80%;
+
+    border: none;
+
+    font-size: 1.5rem;
+
+    background: map-get($gray, 200);
+
+    padding: 1rem;
+  }
+
+  h1 {
+    margin: 0;
+    flex-basis: 100%;
+
+    border-bottom: 1px solid map-get($gray, 200);
+  }
+}

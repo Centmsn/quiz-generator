@@ -2,19 +2,56 @@ import { createContext, useState } from "react";
 
 const GameContext = createContext({});
 
+const DEFAULT_USER_NAME = null;
+
+/**
+ * Functional react component - provides store for GameContext
+ * @param {object} props - react props
+ * @returns {JSX.Element}
+ */
 export const GameContextProvider = ({ children }) => {
-  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [score, setScore] = useState(0);
+  const [username, setUsername] = useState(DEFAULT_USER_NAME);
   const [summary, setSummary] = useState([]);
 
-  const handleCorrectAnswers = () => {
-    setCorrectAnswers(prev => prev + 1);
+  /**
+   * Adds 1 to the score value
+   * @returns {undefined}
+   */
+  const handleAddScore = () => {
+    setScore(prev => prev + 1);
   };
 
+  /**
+   * Set username, summary and score to default value
+   * @returns {undefined}
+   */
   const handleResetStore = () => {
     setSummary([]);
-    setCorrectAnswers(0);
+    setScore(0);
+    setUsername(DEFAULT_USER_NAME);
   };
 
+  /**
+   * Sets the username to the provided value
+   * @param {string} value - username
+   * @returns {undefined}
+   */
+  const handleSetUsername = value => {
+    if (typeof value !== "string") {
+      throw new Error(
+        `Incorrect argument. Expected string instead got ${typeof value}`
+      );
+    }
+
+    if (!value.length) {
+      throw new Error("Incorrect argument. Username must have atleast 1 char");
+    }
+
+    setUsername(value);
+  };
+
+  // TODO add JSDoc
   const handleSummary = (correctAnswer, userAnswer, question, isCorrect) => {
     setSummary(prev => [
       ...prev,
@@ -25,11 +62,13 @@ export const GameContextProvider = ({ children }) => {
   return (
     <GameContext.Provider
       value={{
-        correctAnswers,
+        correctAnswers: score,
         summary,
         setSummary: handleSummary,
-        addScore: handleCorrectAnswers,
+        addScore: handleAddScore,
         resetStore: handleResetStore,
+        setUsername: handleSetUsername,
+        username,
       }}
     >
       {children}
