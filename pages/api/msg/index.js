@@ -8,6 +8,12 @@ const handler = async (req, res) => {
   if (req.method !== "POST") return;
   const { quizId, username, result } = req.body;
 
+  // if no username - player is owner of this quiz
+  // message will not be send
+  if (!username) {
+    return res.status(200);
+  }
+
   const quizOwner = await User.findOne({ quizes: quizId });
 
   if (!quizOwner) {

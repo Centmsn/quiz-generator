@@ -38,6 +38,9 @@ export const GameContextProvider = ({ children }) => {
    * @returns {undefined}
    */
   const handleSetUsername = value => {
+    //user owns this quiz if null is provided. Username is not required in this case
+    if (typeof value === "object") return;
+
     if (typeof value !== "string") {
       throw new Error(
         `Incorrect argument. Expected string instead got ${typeof value}`

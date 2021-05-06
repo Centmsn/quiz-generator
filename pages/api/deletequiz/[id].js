@@ -1,8 +1,8 @@
 import { getSession } from "next-auth/client";
 
-import { connectToDb } from "../../../utils/connectToDb";
-import User from "../../../models/user";
-import Quiz from "../../../models/quiz";
+import { connectToDb } from "utils/connectToDb";
+import User from "models/user";
+import Quiz from "models/quiz";
 
 const handler = async (req, res) => {
   if (req.method === "DELETE") {

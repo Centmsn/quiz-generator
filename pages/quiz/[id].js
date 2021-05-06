@@ -2,16 +2,18 @@ import styles from "./index.module.scss";
 
 import mongoose from "mongoose";
 import { useRouter } from "next/router";
-import { useState, useContext, useEffect, useRef, useMemo } from "react";
+import { getSession } from "next-auth/client";
+import { useState, useContext, useEffect, useRef } from "react";
 
 import { LETTER_ENUM } from "consts";
-
 import QuizModel from "models/quiz";
+import UserModel from "models/user";
 import GameContext from "context/GameContext";
 import UsernameForm from "components/UsernameForm";
+import { connectToDb } from "utils/connectToDb";
 
-const Quiz = ({ quiz }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(null);
+const Quiz = ({ quiz, quizOwner }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(quizOwner ? 0 : null);
   const [intervalId, setIntervalId] = useState(null);
   const [time, setTime] = useState(null);
   const router = useRouter();
@@ -31,12 +33,13 @@ const Quiz = ({ quiz }) => {
     resetStore();
   }, []);
 
+  // handle timer interval after question has changed
   useEffect(() => {
     const { limit, limitType } = parsed.timeLimit;
     let id;
 
     // if timelimit is set
-    if (limit && username) {
+    if ((limit && username) || (limit && quizOwner)) {
       // clear previous interval and start new one for each question
       if (limitType === "question" && intervalId) {
         clearInterval(intervalId);
@@ -54,6 +57,7 @@ const Quiz = ({ quiz }) => {
     }
   }, [currentQuestion]);
 
+  //checks if time > 0
   useEffect(() => {
     const { limitType } = parsed.timeLimit;
 
@@ -169,11 +173,11 @@ const Quiz = ({ quiz }) => {
 `;
   return (
     <>
-      {!username && <UsernameForm startQuiz={handleStartQuiz} />}
+      {!username && !quizOwner && <UsernameForm startQuiz={handleStartQuiz} />}
 
       <div
         className={styles.container}
-        style={{ filter: username ? "" : "blur(5px)" }}
+        style={{ filter: username || quizOwner ? "" : "blur(5px)" }}
       >
         {/*do not show timeBar if time limit is not enabled */}
         {!!parsed.timeLimit.limit && (
@@ -211,8 +215,9 @@ const Quiz = ({ quiz }) => {
   );
 };
 
-export const getServerSideProps = async context => {
-  await mongoose.connect(process.env.DB_URI);
+export const getServerSideProps = connectToDb(async context => {
+  const session = await getSession({ req: context.req });
+
   const { id } = context.params;
 
   // return if id is not a valid type
@@ -224,13 +229,21 @@ export const getServerSideProps = async context => {
     };
   }
 
+  //! add error handling
   const currentQuiz = await QuizModel.findById(id);
+
+  let quizOwner;
+  if (session) {
+    const quizCreator = await UserModel.findOne({ quizes: currentQuiz._id });
+    quizOwner = quizCreator.email === session.user.email;
+  }
 
   return {
     props: {
       quiz: JSON.stringify(currentQuiz),
+      quizOwner: quizOwner || false,
     },
   };
-};
+});
 
 export default Quiz;

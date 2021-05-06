@@ -7,6 +7,8 @@ import { useState, useRef, useEffect } from "react";
 // backend
 import { connectToDb } from "utils/connectToDb";
 import User from "models/user";
+import "models/quiz";
+import "models/message";
 // frontend
 import Settings from "components/Dashboard/Settings";
 import UserPanel from "components/Dashboard/UserPanel";
