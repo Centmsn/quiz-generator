@@ -16,6 +16,7 @@ import { useThrottle } from "hooks/useThrottle";
 
 const Dashboard = ({ quizList, messages, unreadMessages }) => {
   const [dashboardView, setDashboardView] = useState(1);
+  const [unread, setUnread] = useState(unreadMessages);
   const containerRef = useRef(null);
   const [session, loading] = useSession();
   const { throttle } = useThrottle();
@@ -31,6 +32,9 @@ const Dashboard = ({ quizList, messages, unreadMessages }) => {
       fetch("/api/msg/read", {
         method: "PATCH",
       });
+
+      // set unread messages to null
+      setUnread(null);
     }
   }, [dashboardView]);
 
@@ -59,7 +63,7 @@ const Dashboard = ({ quizList, messages, unreadMessages }) => {
       <UserPanel
         setDashboardView={handleDashboardView}
         index={dashboardView}
-        unreadMessages={unreadMessages}
+        unreadMessages={unread}
       />
       <QuizList list={JSON.parse(quizList)} />
       <Settings />

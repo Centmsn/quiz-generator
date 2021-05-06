@@ -1,7 +1,6 @@
 import Providers from "next-auth/providers";
 import NextAuth from "next-auth";
 import mongoose from "mongoose";
-import User from "../../../models/user";
 import bcrypt from "bcryptjs";
 
 export default (req, res) =>
@@ -19,6 +18,7 @@ export default (req, res) =>
             useCreateIndex: true,
             useNewUrlParser: true,
           });
+          const User = mongoose.model("user");
 
           const user = await User.findOne({ email: credentials.email });
 

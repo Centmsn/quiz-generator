@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 import { connectToDb } from "utils/connectToDb";
 
 // !add error handling

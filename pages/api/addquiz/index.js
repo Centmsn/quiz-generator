@@ -1,11 +1,12 @@
 import { getSession } from "next-auth/client";
+import mongoose from "mongoose";
 
-import { connectToDb } from "../../../utils/connectToDb";
-import Quiz from "../../../models/quiz";
-import User from "../../../models/user";
+import { connectToDb } from "utils/connectToDb";
 
 const handler = async (req, res) => {
   const session = await getSession({ req });
+  const User = mongoose.model("user");
+  const Quiz = mongoose.model("quiz");
 
   if (!session) return;
 
