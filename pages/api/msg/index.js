@@ -14,7 +14,7 @@ const handler = async (req, res) => {
   // if no username - player is owner of this quiz
   // message will not be send
   if (!username) {
-    return res.status(200);
+    return res.status(200).json({ message: "OK" });
   }
 
   const quizOwner = await User.findOne({ quizes: quizId });

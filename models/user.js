@@ -22,4 +22,4 @@ const user = new Schema({
 
 const User = mongoose.models?.user || mongoose.model("user", user);
 
-module.exports = User;
+export default User;

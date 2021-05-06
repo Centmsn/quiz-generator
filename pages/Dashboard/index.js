@@ -3,6 +3,8 @@ import styles from "./index.module.scss";
 // backend
 import { connectToDb } from "utils/connectToDb";
 import User from "models/user";
+import Quiz from "models/quiz";
+import Message from "models/message";
 // frontend
 import gsap from "gsap";
 import { getSession, useSession } from "next-auth/client";
@@ -29,6 +31,7 @@ const Dashboard = ({ quizList, messages, unreadMessages }) => {
     if (!session) return;
 
     if (dashboardView === 3 && unreadMessages > 0) {
+      //! refactor to http hook
       fetch("/api/msg/read", {
         method: "PATCH",
       });
