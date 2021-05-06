@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const message = new Schema({
   recipient: {
-    type: mongoose.Types.ObjectId,
+    type: String,
     ref: "user",
     required: true,
   },
@@ -25,5 +25,5 @@ const message = new Schema({
   },
 });
 
-// export default mongoose.models?.message || mongoose.model("message", message);
-export default mongoose.model("message", message);
+const Message = mongoose.models?.message || mongoose.model("message", message);
+module.exports = Message;

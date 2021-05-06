@@ -3,6 +3,9 @@ import styles from "./index.module.scss";
 // backend
 import { connectToDb } from "utils/connectToDb";
 import mongoose from "mongoose";
+import User from "models/user";
+import Quiz from "models/quiz";
+import Message from "models/Message";
 // frontend
 import gsap from "gsap";
 import { getSession, useSession } from "next-auth/client";
@@ -72,9 +75,11 @@ const Dashboard = ({ quizList, messages, unreadMessages }) => {
   );
 };
 
-export const getServerSideProps = connectToDb(async context => {
+export const getServerSideProps = async context => {
+  // connect to db
+  await connectToDb();
+
   const session = await getSession({ req: context.req });
-  const User = mongoose.model("user");
 
   if (!session) {
     return {
@@ -105,6 +110,6 @@ export const getServerSideProps = connectToDb(async context => {
       quizList,
     },
   };
-});
+};
 
 export default Dashboard;

@@ -3,6 +3,9 @@ import NextAuth from "next-auth";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+import { connectToDb } from "utils/connectToDb";
+import User from "models/user";
+
 export default (req, res) =>
   NextAuth(req, res, {
     providers: [
@@ -12,13 +15,8 @@ export default (req, res) =>
       }),
       Providers.Credentials({
         async authorize(credentials) {
-          await mongoose.connect(process.env.DB_URI, {
-            useFindAndModify: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-            useNewUrlParser: true,
-          });
-          const User = mongoose.model("user");
+          // connect to db
+          await connectToDb();
 
           const user = await User.findOne({ email: credentials.email });
 

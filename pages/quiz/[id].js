@@ -213,7 +213,10 @@ const Quiz = ({ quiz, quizOwner }) => {
   );
 };
 
-export const getServerSideProps = connectToDb(async context => {
+export const getServerSideProps = async context => {
+  // connect to db
+  await connectToDb();
+
   const session = await getSession({ req: context.req });
   const User = mongoose.model("user");
   const Quiz = mongoose.model("quiz");
@@ -244,6 +247,6 @@ export const getServerSideProps = connectToDb(async context => {
       quizOwner: quizOwner || false,
     },
   };
-});
+};
 
 export default Quiz;

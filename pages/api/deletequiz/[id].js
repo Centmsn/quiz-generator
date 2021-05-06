@@ -1,13 +1,15 @@
 import { getSession } from "next-auth/client";
-import mongoose from "mongoose";
 
 import { connectToDb } from "utils/connectToDb";
+import User from "models/user";
+import Quiz from "models/quiz";
 
 const handler = async (req, res) => {
   if (req.method === "DELETE") {
+    // connect to db
+    await connectToDb();
+
     const session = await getSession({ req });
-    const User = mongoose.model("user");
-    const Quiz = mongoose.model("quiz");
 
     if (!session) {
       return res.status(401).json({
@@ -29,4 +31,4 @@ const handler = async (req, res) => {
   }
 };
 
-export default connectToDb(handler);
+export default handler;

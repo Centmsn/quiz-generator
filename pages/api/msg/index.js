@@ -1,13 +1,14 @@
-import mongoose from "mongoose";
-
 import { connectToDb } from "utils/connectToDb";
+import User from "models/user";
+import Quiz from "models/quiz";
+import Message from "models/message";
 
 // !add error handling
 const handler = async (req, res) => {
   if (req.method !== "POST") return;
-  const User = mongoose.model("user");
-  const Quiz = mongoose.model("quiz");
-  const Message = mongoose.model("message");
+  // connect to db
+  await connectToDb();
+
   const { quizId, username, result } = req.body;
 
   // if no username - player is owner of this quiz
@@ -51,4 +52,4 @@ const handler = async (req, res) => {
   res.json({ message: "OK" });
 };
 
-export default connectToDb(handler);
+export default handler;
