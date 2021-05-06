@@ -13,6 +13,11 @@ const user = new Schema({
     ref: "quiz",
     default: [],
   },
+  inbox: {
+    default: [],
+    ref: "message",
+    type: [mongoose.Types.ObjectId],
+  },
 });
 
 const User = mongoose.models?.user || mongoose.model("user", user);

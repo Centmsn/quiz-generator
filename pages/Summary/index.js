@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 
 import GameContext from "context/GameContext";
 import Button from "components/Button";
@@ -25,6 +25,20 @@ const Summary = () => {
   const containerRef = useRef(null);
 
   const router = useRouter();
+
+  useEffect(() => {
+    fetch("/api/msg", {
+      method: "POST",
+      body: JSON.stringify({
+        quizId: router.query.id,
+        result,
+        username,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }, []);
 
   const handleShowDetails = () => {
     const summary = summaryRef.current;
