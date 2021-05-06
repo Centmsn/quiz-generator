@@ -27,6 +27,7 @@ const Summary = () => {
   const router = useRouter();
 
   useEffect(() => {
+    //! refactor to useHttp hook
     fetch("/api/msg", {
       method: "POST",
       body: JSON.stringify({

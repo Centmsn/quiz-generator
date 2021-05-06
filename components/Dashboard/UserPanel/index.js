@@ -24,7 +24,7 @@ const UserPanel = ({ setDashboardView, index }) => {
         Dashboard
       </h2>
 
-      <Link href="Dashboard/newquiz">
+      <Link href="/Dashboard/newquiz">
         <a>
           <Button fontSize="large" important>
             <FontAwesomeIcon icon={faPlus} /> New Quiz

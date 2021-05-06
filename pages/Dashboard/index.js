@@ -3,17 +3,18 @@ import styles from "./index.module.scss";
 import gsap from "gsap";
 import { getSession } from "next-auth/client";
 import { useState, useRef, useEffect } from "react";
-import mongoose from "mongoose";
 
-import Settings from "components/Dashboard/Settings";
+// backend
+import { connectToDb } from "utils/connectToDb";
 import User from "models/user";
+// frontend
+import Settings from "components/Dashboard/Settings";
 import UserPanel from "components/Dashboard/UserPanel";
-import Quiz from "models/quiz";
 import QuizList from "components/Dashboard/QuizList";
 import Inbox from "components/Dashboard/Inbox";
 import { useThrottle } from "hooks/useThrottle";
 
-const Dashboard = ({ quizList }) => {
+const Dashboard = ({ quizList, messages }) => {
   const [dashboardView, setDashboardView] = useState(1);
   const containerRef = useRef(null);
   const { throttle } = useThrottle();
@@ -47,12 +48,12 @@ const Dashboard = ({ quizList }) => {
       <UserPanel setDashboardView={handleDashboardView} index={dashboardView} />
       <QuizList list={JSON.parse(quizList)} />
       <Settings />
-      <Inbox />
+      <Inbox messages={messages} />
     </div>
   );
 };
 
-export const getServerSideProps = async context => {
+export const getServerSideProps = connectToDb(async context => {
   const session = await getSession({ req: context.req });
 
   if (!session) {
@@ -64,17 +65,18 @@ export const getServerSideProps = async context => {
     };
   }
 
-  await mongoose.connect(process.env.DB_URI);
-
   const existingUser = await User.findOne({
     email: session.user.email,
-  }).populate("quizes");
+  })
+    .populate("quizes")
+    .populate("inbox");
 
   return {
     props: {
+      messages: JSON.stringify(existingUser.inbox),
       quizList: JSON.stringify(existingUser.quizes),
     },
   };
-};
+});
 
 export default Dashboard;

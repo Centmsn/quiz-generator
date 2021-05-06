@@ -17,7 +17,12 @@ const Settings = () => {
 
       <section className={styles.settingsSection}>
         <p>Switch between dark / light mode</p>
-        <Checkbox label="Darkmode" disabled />
+        <Checkbox
+          label="Darkmode"
+          isChecked={false}
+          onClick={() => {}}
+          disabled
+        />
       </section>
 
       <section className={styles.settingsSection}>
@@ -25,14 +30,32 @@ const Settings = () => {
           You will receive message after one of Your quizes has been solved.
           Result will be included
         </p>
-        <Checkbox label="Feedback" disabled />
+        <Checkbox label="Feedback" onClick={() => {}} isChecked disabled />
       </section>
 
       <section className={styles.settingsSection}>
         <p>Adjust font size to Your needs</p>
-        <Radio label="small" disabled />
-        <Radio label="medium" disabled />
-        <Radio label="large" disabled />
+        <Radio
+          label="small"
+          onClick={() => {}}
+          disabled
+          active={false}
+          value={"placeholder"}
+        />
+        <Radio
+          label="medium"
+          onClick={() => {}}
+          disabled
+          active
+          value={"placeholder"}
+        />
+        <Radio
+          label="large"
+          onClick={() => {}}
+          disabled
+          active={false}
+          value={"placeholder"}
+        />
       </section>
     </Container>
   );
