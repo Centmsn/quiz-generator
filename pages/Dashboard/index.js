@@ -2,10 +2,7 @@ import styles from "./index.module.scss";
 
 // backend
 import { connectToDb } from "utils/connectToDb";
-import mongoose from "mongoose";
 import User from "models/user";
-import Quiz from "models/quiz";
-import Message from "models/Message";
 // frontend
 import gsap from "gsap";
 import { getSession, useSession } from "next-auth/client";
