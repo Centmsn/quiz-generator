@@ -27,6 +27,7 @@ const Button = ({
 
   let btnSize;
 
+  if (size === "xsmall") btnSize = "15%";
   if (size === "small") btnSize = "30%";
   if (size === "medium") btnSize = "60%";
   if (size === "large") btnSize = "75%";
@@ -85,7 +86,7 @@ Button.propTypes = {
   /**
    * Button size; Use "small" / "medium" / "large"
    */
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  size: PropTypes.oneOf(["xsmall", "small", "medium", "large"]),
 };
 
 export default Button;

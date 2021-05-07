@@ -2,14 +2,10 @@ import styles from "./index.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 import { LETTER_ENUM } from "consts";
 
-const AnswerForm = ({ value, setQuestion, setCorrect }) => {
-  const [isCorrect, setIsCorrect] = useState(0);
-
+const AnswerForm = ({ isCorrect, value, setQuestion, setCorrect }) => {
   const handleSetCorrectAnswer = index => {
-    setIsCorrect(index);
     setCorrect(index);
   };
 

@@ -7,6 +7,7 @@ const TIME_CONTROL_DEFAULT = {
   limitType: null,
 };
 const QUESTIONS_DEFAULT = [];
+const CURRENT_QUESTION_DEFAULT = 0;
 
 /**
  * Functional react component - provides store for quizContext
@@ -15,18 +16,38 @@ const QUESTIONS_DEFAULT = [];
  */
 export const QuizContextProvider = ({ children }) => {
   const [questions, setQuestion] = useState(QUESTIONS_DEFAULT);
+  const [currentQuestion, setCurrentQuestion] = useState(
+    CURRENT_QUESTION_DEFAULT
+  );
   const [timeControl, setTimeControl] = useState(TIME_CONTROL_DEFAULT);
 
+  const handleCurrentQuestion = index => {
+    if (typeof index !== "number") {
+      throw new Error(
+        `Incorrect argument. Expected number instead got ${typeof index}`
+      );
+    }
+
+    setCurrentQuestion(index);
+  };
+
   /**
-   * Adds question to the quiz
+   * Add / edit question
    * @param {Object} questionObj - question object
+   * @param {Number} index - function will overwrite question located under provided index, instead of creating new one.
    * @returns {undefined}
    */
-  const handleAddQuestion = questionObj => {
+  const handleQuestionObject = (questionObj, index = null) => {
     // initial validation
     if (typeof questionObj !== "object") {
       throw new Error(
         `Incorrect argument. Expected object instead got ${typeof questionObj}`
+      );
+    }
+
+    if (index < 0 || index > questions.length) {
+      throw new Error(
+        `Incorrect argument. Index cannot be smaller than 0 or greater than current quiz length`
       );
     }
 
@@ -41,6 +62,17 @@ export const QuizContextProvider = ({ children }) => {
       throw new Error(
         "Incorrect argument. Check question object passed to the function."
       );
+    }
+
+    // edit existing question
+    if (index !== null) {
+      setQuestion(prev => {
+        const newState = [...prev];
+        newState[index] = questionObj;
+
+        return newState;
+      });
+      return;
     }
 
     // add question
@@ -101,8 +133,10 @@ export const QuizContextProvider = ({ children }) => {
       value={{
         questions,
         timeControl,
+        current: currentQuestion,
         setTimeControl: handleTimeControl,
-        addQuestion: handleAddQuestion,
+        setCurrentQuestion: handleCurrentQuestion,
+        manageQuestion: handleQuestionObject,
         reset: handleReset,
       }}
     >

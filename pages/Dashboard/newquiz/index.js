@@ -12,7 +12,11 @@ import QuizSettingsForm from "components/NewQuiz/QuizSettingsForm";
 import Spinner from "components/Spinner";
 import { useHttpRequest } from "hooks/useHttpRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTimes,
+  faArrowLeft,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const INITIAL_ANSWERS = {
   0: "",
@@ -26,27 +30,54 @@ const newQuiz = () => {
   const [answers, setAnswers] = useState(INITIAL_ANSWERS);
   const [correct, setCorrect] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { questions, addQuestion, reset, timeControl } = useContext(
-    QuizContext
-  );
+  const {
+    questions,
+    manageQuestion,
+    reset,
+    timeControl,
+    current,
+    setCurrentQuestion,
+  } = useContext(QuizContext);
   const { loading, error, sendRequest } = useHttpRequest();
 
   const router = useRouter();
 
-  const handleAddQuestion = () => {
+  const handleQuestion = () => {
     const questionObject = {
       answers,
       question,
       correct,
     };
 
+    // if current question is not last question
+    if (current !== questions.length) {
+      manageQuestion(questionObject, current);
+      return;
+    }
+
+    setCurrentQuestion(questions.length + 1);
+
     // add question
-    addQuestion(questionObject);
+    manageQuestion(questionObject);
 
     //reset forms after the question is submitted
     setAnswers(INITIAL_ANSWERS);
     setQuestion("");
     setCorrect(0);
+  };
+
+  const handleFillForms = index => {
+    if (index < 0 || index > questions.length) {
+      return;
+    }
+    setCurrentQuestion(index);
+
+    // fill question and answer forms
+    const answers = questions[index]?.answers || INITIAL_ANSWERS;
+
+    setAnswers(answers);
+    setCorrect(questions[index]?.correct || 0);
+    setQuestion(questions[index]?.question || "");
   };
 
   const handleSetCorrect = index => {
@@ -90,13 +121,22 @@ const newQuiz = () => {
     reset();
   };
 
-  const isButtonDisabled = !(
+  const addBtnDisabled = !(
     question.length > 4 &&
     answers[0] &&
     answers[1] &&
     answers[2] &&
     answers[3]
   );
+
+  const updateBtnDisabled =
+    (question === questions[current]?.question &&
+      answers[0] === questions[current]?.answers[0] &&
+      answers[1] === questions[current]?.answers[1] &&
+      answers[2] === questions[current]?.answers[2] &&
+      answers[3] === questions[current]?.answers[3] &&
+      correct === questions[current]?.correct) ||
+    addBtnDisabled;
 
   return (
     <div className={styles.container}>
@@ -108,10 +148,11 @@ const newQuiz = () => {
       </Link>
 
       <div className={styles.questionNumber}>
-        Question number: {questions.length + 1}
+        Question number: {current + 1}
       </div>
       <QuestionForm value={question} setQuestion={handleSetQuestion} />
       <AnswerForm
+        isCorrect={correct}
         value={answers}
         setQuestion={handleSetAnswer}
         setCorrect={handleSetCorrect}
@@ -119,12 +160,23 @@ const newQuiz = () => {
 
       <div className={styles.btnContainer}>
         <Button
-          size="small"
-          onClick={handleAddQuestion}
-          disabled={isButtonDisabled}
+          size="xsmall"
+          onClick={() => handleFillForms(current - 1)}
+          disabled={current - 1 < 0}
         >
-          Add question
+          <FontAwesomeIcon icon={faArrowLeft} /> Previous
         </Button>
+
+        <Button
+          size="small"
+          onClick={handleQuestion}
+          disabled={
+            current === questions.length ? addBtnDisabled : updateBtnDisabled
+          }
+        >
+          {current === questions.length ? "Add question" : "Update question"}
+        </Button>
+
         <Button
           size="small"
           danger
@@ -132,6 +184,14 @@ const newQuiz = () => {
           disabled={!questions.length}
         >
           Finish
+        </Button>
+
+        <Button
+          size="xsmall"
+          onClick={() => handleFillForms(current + 1)}
+          disabled={current + 1 > questions.length}
+        >
+          Next <FontAwesomeIcon icon={faArrowRight} />
         </Button>
       </div>
 
