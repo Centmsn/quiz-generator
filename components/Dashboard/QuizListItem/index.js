@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 import Button from "components/Button";
 
-const QuizListItem = ({ title, _id, deleteQuiz }) => {
+const QuizListItem = ({ title, _id, deleteQuiz, index }) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [quizLink, setQuizLink] = useState("");
 
@@ -37,10 +37,14 @@ const QuizListItem = ({ title, _id, deleteQuiz }) => {
       <p className={styles.link}>{quizLink}</p>
 
       {isTooltipVisible && (
-        <div className={styles.tooltip}>
+        <div className={[styles.tooltip, styles.tooltipRight].join(" ")}>
           <FontAwesomeIcon icon={faCheck} />
         </div>
       )}
+
+      <div className={[styles.tooltip, styles.tooltipLeft].join(" ")}>
+        {index}
+      </div>
 
       <div className={styles.settings}>
         <Link href={`/Quiz/${_id}`}>

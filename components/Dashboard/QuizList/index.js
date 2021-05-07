@@ -30,9 +30,14 @@ const QuizList = ({ list }) => {
   const renderList = () => {
     const quizList = [];
 
-    localQuizList.forEach((listItem, key) => {
+    localQuizList.forEach((listItem, index) => {
       quizList.push(
-        <QuizListItem {...listItem} deleteQuiz={handleQuizDelete} key={key} />
+        <QuizListItem
+          {...listItem}
+          deleteQuiz={handleQuizDelete}
+          key={index}
+          index={index + 1}
+        />
       );
     });
 

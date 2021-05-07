@@ -8,10 +8,12 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { LETTER_ENUM } from "consts";
 import GameContext from "context/GameContext";
 import UsernameForm from "components/UsernameForm";
+import Spinner from "components/Spinner";
 import { connectToDb } from "utils/connectToDb";
 
 const Quiz = ({ quiz, quizOwner }) => {
   const [currentQuestion, setCurrentQuestion] = useState(quizOwner ? 0 : null);
+  const [spinnerVisbility, setSpinnerVisibility] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
   const [time, setTime] = useState(null);
   const router = useRouter();
@@ -126,6 +128,9 @@ const Quiz = ({ quiz, quizOwner }) => {
 
     // display next question or show quiz summary
     if (currentQuestion + 1 > quizLength - 1) {
+      // display loading spinner
+      setSpinnerVisibility(true);
+
       //clear time interval
       clearInterval(intervalId);
 
@@ -176,6 +181,7 @@ const Quiz = ({ quiz, quizOwner }) => {
   return (
     <>
       {!username && !quizOwner && <UsernameForm startQuiz={handleStartQuiz} />}
+      {spinnerVisbility && <Spinner overlay />}
 
       <div
         className={styles.container}
