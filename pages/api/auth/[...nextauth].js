@@ -2,10 +2,10 @@ import Providers from "next-auth/providers";
 import NextAuth from "next-auth";
 import bcrypt from "bcryptjs";
 
-import { connectToDb } from "utils/connectToDb";
 import User from "models/user";
-import "models/message";
-import "models/quiz";
+import Messager from "models/message";
+import Quiz from "models/quiz";
+import { connectToDb } from "utils/connectToDb";
 
 export default (req, res) =>
   NextAuth(req, res, {

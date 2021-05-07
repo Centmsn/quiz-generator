@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 
+import User from "models/user";
+import Messager from "models/message";
+import Quiz from "models/quiz";
+
 const MONGODB_URI = process.env.DB_URI;
 
 if (!MONGODB_URI) {
