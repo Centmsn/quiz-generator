@@ -148,7 +148,11 @@ const Quiz = ({ quiz, quizOwner }) => {
     const answers = [];
     for (let i = 0; i < 4; i++) {
       answers.push(
-        <button className={styles.answer} onClick={() => handleUserAnswer(i)}>
+        <button
+          className={styles.answer}
+          onClick={() => handleUserAnswer(i)}
+          key={i}
+        >
           <span className={styles.answerNumber}>{LETTER_ENUM[i]}</span>
           <span className={styles.answerContent}>
             {parsed.questions[currentQuestion || 0].answers[i]}

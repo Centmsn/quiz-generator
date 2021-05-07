@@ -59,3 +59,18 @@
     font-weight: 600;
   }
 }
+
+.tooltip {
+  font-size: 2rem;
+  text-align: center;
+
+  color: map-get($gray, 300);
+
+  p {
+    font-size: 1.25rem;
+  }
+}
+
+.icon {
+  font-size: 3rem;
+}

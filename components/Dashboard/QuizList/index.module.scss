@@ -6,7 +6,16 @@
 }
 
 .tooltip {
+  text-align: center;
   font-size: 2rem;
 
   color: map-get($gray, 200);
+
+  button {
+    margin: 15% auto;
+  }
+}
+
+.icon {
+  font-size: 5rem;
 }

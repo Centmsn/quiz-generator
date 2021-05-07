@@ -1,7 +1,11 @@
 import styles from "./index.module.scss";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSurprise, faPlus } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
+import Button from "components/Button";
 import Container from "components/Dashboard/Container";
 import QuizListItem from "../QuizListItem";
 import Spinner from "components/Spinner";
@@ -33,7 +37,20 @@ const QuizList = ({ list }) => {
     });
 
     if (!quizList.length) {
-      return <h3 className={styles.tooltip}>Nothing to display :(</h3>;
+      return (
+        <div className={styles.tooltip}>
+          <h3>Your list is empty</h3>
+          <span className={styles.icon}>
+            <FontAwesomeIcon icon={faSurprise} />
+          </span>
+
+          <Link href="/Dashboard/newquiz">
+            <a>
+              <Button fontSize="large">Let's create a quiz!</Button>
+            </a>
+          </Link>
+        </div>
+      );
     }
 
     return quizList;
