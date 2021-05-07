@@ -4,10 +4,21 @@
 
 .inbox {
   flex-basis: 100%;
-  height: 90%;
+  height: 80%;
 
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.menu {
+  @extend %flex-center;
+  @include rounded-border("small");
+  flex-basis: 90%;
+  height: 10%;
+
+  justify-content: space-around;
+
+  background: map-get($gray, 200);
 }
 
 .message {
@@ -41,9 +52,9 @@
   background: white;
 }
 
-.title {
+.body {
   @include rounded-border("small");
-  flex-basis: 75%;
+  flex-basis: 78%;
 
   font-size: 1.25rem;
   text-align: center;
@@ -72,5 +83,6 @@
 }
 
 .icon {
+  // flex-basis: 2%;
   font-size: 3rem;
 }

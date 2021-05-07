@@ -2,9 +2,28 @@ import { connectToDb } from "utils/connectToDb";
 import User from "models/user";
 import Quiz from "models/quiz";
 import Message from "models/message";
+import { getSession } from "next-auth/client";
 
 // !add error handling
 const handler = async (req, res) => {
+  // fetch all messages
+  if (req.method === "GET") {
+    await connectToDb();
+
+    const session = await getSession({ req });
+
+    if (!session) {
+      return res.status(401).json({ message: "401 unauthorized" });
+    }
+
+    const currentUser = await User.findOne({
+      email: session.user.email,
+    }).populate("inbox");
+
+    res.status(200).json({ message: "OK", content: currentUser.inbox });
+  }
+
+  // send a message
   if (req.method !== "POST") return;
   // connect to db
   await connectToDb();

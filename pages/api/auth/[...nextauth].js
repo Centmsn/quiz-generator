@@ -1,10 +1,11 @@
 import Providers from "next-auth/providers";
 import NextAuth from "next-auth";
-import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 import { connectToDb } from "utils/connectToDb";
 import User from "models/user";
+import "models/message";
+import "models/quiz";
 
 export default (req, res) =>
   NextAuth(req, res, {

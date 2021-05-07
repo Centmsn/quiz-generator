@@ -3,8 +3,6 @@ import styles from "./index.module.scss";
 // backend
 import { connectToDb } from "utils/connectToDb";
 import User from "models/user";
-import Quiz from "models/quiz";
-import Message from "models/message";
 // frontend
 import gsap from "gsap";
 import { getSession, useSession } from "next-auth/client";
@@ -14,14 +12,18 @@ import Settings from "components/Dashboard/Settings";
 import UserPanel from "components/Dashboard/UserPanel";
 import QuizList from "components/Dashboard/QuizList";
 import Inbox from "components/Dashboard/Inbox";
+import Spinner from "components/Spinner";
 import { useThrottle } from "hooks/useThrottle";
+import { useHttpRequest } from "hooks/useHttpRequest";
 
-const Dashboard = ({ quizList, messages, unreadMessages }) => {
+const Dashboard = ({ quizList, messages = [], unreadMessages = 0 }) => {
   const [dashboardView, setDashboardView] = useState(1);
+  const [localMessages, setLocalMessages] = useState(JSON.parse(messages));
   const [unread, setUnread] = useState(unreadMessages);
   const containerRef = useRef(null);
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const { throttle } = useThrottle();
+  const { sendRequest, loading } = useHttpRequest();
 
   useEffect(() => {
     gsap.set(containerRef.current.children[1], { y: 0 });
@@ -40,6 +42,21 @@ const Dashboard = ({ quizList, messages, unreadMessages }) => {
       setUnread(null);
     }
   }, [dashboardView]);
+
+  // fetch all user messages
+  const fetchInbox = async () => {
+    const data = await sendRequest("/api/msg");
+
+    setLocalMessages(data.content);
+  };
+
+  const deleteInbox = async () => {
+    //! add erro handling
+    await sendRequest("/api/msg/delete");
+
+    //TODO if no error
+    setLocalMessages([]);
+  };
 
   const handleDashboardView = throttle(index => {
     //if this component is already visible
@@ -63,6 +80,7 @@ const Dashboard = ({ quizList, messages, unreadMessages }) => {
 
   return (
     <div className={styles.container} ref={containerRef}>
+      {loading && <Spinner overlay />}
       <UserPanel
         setDashboardView={handleDashboardView}
         index={dashboardView}
@@ -70,7 +88,11 @@ const Dashboard = ({ quizList, messages, unreadMessages }) => {
       />
       <QuizList list={JSON.parse(quizList)} />
       <Settings />
-      <Inbox messages={messages} />
+      <Inbox
+        messages={localMessages}
+        fetchInbox={fetchInbox}
+        deleteInbox={deleteInbox}
+      />
     </div>
   );
 };
