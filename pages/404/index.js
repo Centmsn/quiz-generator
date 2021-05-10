@@ -10,7 +10,7 @@ const NotFound = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>
-        Page not found <FontAwesomeIcon icon={faSadTear} />
+        404 Not found <FontAwesomeIcon icon={faSadTear} />
       </h1>
 
       <h3 className={styles.subTitle}>

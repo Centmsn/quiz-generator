@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSurprise, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSurprise } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -9,10 +9,11 @@ import Button from "components/Button";
 import Container from "components/Dashboard/Container";
 import QuizListItem from "../QuizListItem";
 import Spinner from "components/Spinner";
+import PopUp from "components/PopUp";
 import { useHttpRequest } from "hooks/useHttpRequest";
 
 const QuizList = ({ list }) => {
-  const { loading, sendRequest } = useHttpRequest();
+  const { loading, sendRequest, error, clearError } = useHttpRequest();
   const [localQuizList, setLocalQuizList] = useState([]);
 
   useEffect(() => {
@@ -20,7 +21,11 @@ const QuizList = ({ list }) => {
   }, []);
 
   const handleQuizDelete = async id => {
-    await sendRequest(`/api/deletequiz/${id}`, "DELETE");
+    const response = await sendRequest(`/api/deletequiz/${id}`, "DELETE");
+
+    if (!response) {
+      return;
+    }
 
     // update local quiz list to avoid fetching data again
     const newList = localQuizList.filter(el => el._id !== id);
@@ -65,6 +70,12 @@ const QuizList = ({ list }) => {
     <Container title="Quiz list" light>
       {loading && <Spinner overlay />}
 
+      {error && (
+        <PopUp onClose={clearError} error>
+          Uuppsss... Something went wrong. Quiz was not deleted, please try
+          again later.
+        </PopUp>
+      )}
       <div className={styles.quizList}>{renderList()}</div>
     </Container>
   );

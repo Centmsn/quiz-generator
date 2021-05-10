@@ -16,6 +16,7 @@ export const useHttpRequest = () => {
         });
 
         const responseData = await response.json();
+
         if (!response.ok) {
           setError(responseData.message);
           throw new Error(responseData.message);

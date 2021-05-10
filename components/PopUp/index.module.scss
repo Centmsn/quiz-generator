@@ -1,0 +1,55 @@
+@import "styles/variables";
+@import "styles/mixins";
+@import "styles/partials";
+
+.container {
+  @extend %flex-center;
+  @include rounded-border("small");
+  @include shadow("medium", map-get($gray, 400));
+
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+
+  height: 25%;
+
+  font-size: 1.5rem;
+
+  background-color: fade-out(map-get($blue, 100), 0.25);
+  color: white;
+
+  padding: 1rem;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.error {
+  background-color: fade-out(map-get($red, 200), 0.25);
+  color: map-get($red, 500);
+}
+
+.important {
+  background-color: fade-out(map-get($yellow, 200), 0.25);
+
+  color: map-get($gray, 500);
+}
+
+.important .closeBtn {
+  color: map-get($gray, 500);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  font-size: 2rem;
+
+  color: map-get($gray, 200);
+
+  &:hover {
+    color: white;
+  }
+}
