@@ -10,6 +10,7 @@ import QuestionForm from "components/NewQuiz/QuestionForm";
 import Button from "components/Button";
 import QuizSettingsForm from "components/NewQuiz/QuizSettingsForm";
 import Spinner from "components/Spinner";
+import PopUp from "components/PopUp";
 import { useHttpRequest } from "hooks/useHttpRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -38,7 +39,7 @@ const newQuiz = () => {
     current,
     setCurrentQuestion,
   } = useContext(QuizContext);
-  const { loading, error, sendRequest } = useHttpRequest();
+  const { loading, error, sendRequest, clearError } = useHttpRequest();
 
   const router = useRouter();
 
@@ -100,7 +101,7 @@ const newQuiz = () => {
   };
 
   const handleAddQuiz = async title => {
-    await sendRequest(
+    const response = await sendRequest(
       "/api/addquiz",
       "POST",
       JSON.stringify({
@@ -115,6 +116,8 @@ const newQuiz = () => {
         "Content-Type": "application/json",
       }
     );
+
+    if (!response) return;
 
     router.replace("/Dashboard");
     // resets questions form
@@ -140,6 +143,12 @@ const newQuiz = () => {
 
   return (
     <div className={styles.container}>
+      {error && (
+        <PopUp onClose={clearError} error>
+          {error}
+        </PopUp>
+      )}
+
       {loading && <Spinner overlay />}
       <Link href="/Dashboard">
         <a className={styles.closeBtn}>
