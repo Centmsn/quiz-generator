@@ -40,7 +40,7 @@ PopUp.propTypes = {
   /**
    * Function which is triggered on close button click
    */
-  onClose: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default PopUp;

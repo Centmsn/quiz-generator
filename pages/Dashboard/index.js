@@ -16,7 +16,7 @@ import Spinner from "components/Spinner";
 import { useThrottle } from "hooks/useThrottle";
 import { useHttpRequest } from "hooks/useHttpRequest";
 
-const Dashboard = ({ quizList, messages = [], unreadMessages = 0 }) => {
+const Dashboard = ({ quizList = [], messages = [], unreadMessages = 0 }) => {
   const [dashboardView, setDashboardView] = useState(1);
   const [localMessages, setLocalMessages] = useState(JSON.parse(messages));
   const [unread, setUnread] = useState(unreadMessages);
@@ -120,6 +120,15 @@ export const getServerSideProps = async context => {
   })
     .populate("quizes")
     .populate("inbox");
+
+  if (!existingUser) {
+    return {
+      redirect: {
+        destination: "/500",
+        permanent: false,
+      },
+    };
+  }
 
   const quizList = JSON.stringify(existingUser.quizes);
   const messages = existingUser.inbox;
