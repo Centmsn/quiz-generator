@@ -5,13 +5,21 @@ import {
   faEnvelope,
   faEnvelopeOpen,
   faTrashAlt,
+  faRedo,
   faKiwiBird,
 } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "components/Button";
 import Container from "components/Dashboard/Container";
+import PopUp from "components/PopUp";
 
-const Inbox = ({ messages, fetchInbox, deleteInbox }) => {
+const Inbox = ({
+  messages,
+  fetchInbox,
+  deleteInbox,
+  error,
+  clearError = () => {},
+}) => {
   const renderMessages = () => {
     if (!messages.length) {
       return (
@@ -40,9 +48,15 @@ const Inbox = ({ messages, fetchInbox, deleteInbox }) => {
 
   return (
     <Container title="Inbox" light>
+      {error && (
+        <PopUp onClose={clearError} error>
+          {error}
+        </PopUp>
+      )}
+
       <div className={styles.menu}>
         <Button size="small" onClick={fetchInbox}>
-          Refresh
+          <FontAwesomeIcon icon={faRedo} /> Refresh
         </Button>
         <Button
           size="small"
@@ -50,7 +64,7 @@ const Inbox = ({ messages, fetchInbox, deleteInbox }) => {
           disabled={!messages.length}
           danger
         >
-          Delete all
+          <FontAwesomeIcon icon={faTrashAlt} /> Delete all
         </Button>
       </div>
       <div className={styles.inbox}>{renderMessages()}</div>

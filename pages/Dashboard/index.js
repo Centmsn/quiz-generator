@@ -23,7 +23,7 @@ const Dashboard = ({ quizList, messages = [], unreadMessages = 0 }) => {
   const containerRef = useRef(null);
   const [session] = useSession();
   const { throttle } = useThrottle();
-  const { sendRequest, loading } = useHttpRequest();
+  const { sendRequest, loading, error, clearError } = useHttpRequest();
 
   useEffect(() => {
     gsap.set(containerRef.current.children[1], { y: 0 });
@@ -33,10 +33,7 @@ const Dashboard = ({ quizList, messages = [], unreadMessages = 0 }) => {
     if (!session) return;
 
     if (dashboardView === 3 && unreadMessages > 0) {
-      //! refactor to http hook
-      fetch("/api/msg/read", {
-        method: "PATCH",
-      });
+      sendRequest("/api/msg/read", "PATCH");
 
       // set unread messages to null
       setUnread(null);
@@ -47,14 +44,18 @@ const Dashboard = ({ quizList, messages = [], unreadMessages = 0 }) => {
   const fetchInbox = async () => {
     const data = await sendRequest("/api/msg");
 
+    if (!data) {
+      return;
+    }
+
     setLocalMessages(data.content);
   };
 
   const deleteInbox = async () => {
-    //! add erro handling
-    await sendRequest("/api/msg/delete");
+    const response = await sendRequest("/api/msg/delete");
 
-    //TODO if no error
+    if (!response) return;
+
     setLocalMessages([]);
   };
 
@@ -92,6 +93,8 @@ const Dashboard = ({ quizList, messages = [], unreadMessages = 0 }) => {
         messages={localMessages}
         fetchInbox={fetchInbox}
         deleteInbox={deleteInbox}
+        error={error}
+        clearError={clearError}
       />
     </div>
   );

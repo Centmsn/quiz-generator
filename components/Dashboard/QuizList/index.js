@@ -23,9 +23,8 @@ const QuizList = ({ list }) => {
   const handleQuizDelete = async id => {
     const response = await sendRequest(`/api/deletequiz/${id}`, "DELETE");
 
-    if (!response) {
-      return;
-    }
+    // if response is undefined - an error occured
+    if (!response) return;
 
     // update local quiz list to avoid fetching data again
     const newList = localQuizList.filter(el => el._id !== id);
