@@ -37,6 +37,8 @@
 
 .tooltip {
   @include rounded-border("small");
+  min-width: 3%;
+  max-width: 10%;
 
   position: absolute;
   top: -12.5%;
@@ -49,20 +51,19 @@
   overflow: hidden;
 }
 
-.tooltipRight {
-  right: -1%;
+.tooltipYellow {
+  background: map-get($yellow, 100);
+  color: map-get($blue, 100);
+}
 
+.tooltipGreen {
   background: map-get($green, 100);
   color: map-get($green, 400);
 }
 
-.tooltipLeft {
-  min-width: 3%;
-  max-width: 10%;
-  left: -1%;
-
-  background: map-get($yellow, 100);
-  color: map-get($blue, 100);
+.tooltipBlue {
+  background: map-get($blue, 200);
+  color: white;
 }
 
 .title {

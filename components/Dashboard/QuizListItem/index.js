@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 import Button from "components/Button";
 
-const QuizListItem = ({ title, _id, deleteQuiz, index }) => {
+const QuizListItem = ({ title, _id, isPublic = false, deleteQuiz, index }) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [quizLink, setQuizLink] = useState("");
 
@@ -37,14 +37,30 @@ const QuizListItem = ({ title, _id, deleteQuiz, index }) => {
       <p className={styles.link}>{quizLink}</p>
 
       {isTooltipVisible && (
-        <div className={[styles.tooltip, styles.tooltipRight].join(" ")}>
+        <div
+          className={[styles.tooltip, styles.tooltipGreen].join(" ")}
+          style={{ right: "-1%" }}
+        >
           <FontAwesomeIcon icon={faCheck} />
         </div>
       )}
 
-      <div className={[styles.tooltip, styles.tooltipLeft].join(" ")}>
+      <div
+        className={[styles.tooltip, styles.tooltipBlue].join(" ")}
+        style={{ left: "-1%" }}
+      >
         {index}
       </div>
+
+      {isPublic && (
+        <div
+          className={[styles.tooltip, styles.tooltipYellow].join(" ")}
+          style={{ left: "8%", width: "10%", cursor: "default" }}
+          title="This quiz is visible to other players"
+        >
+          Public
+        </div>
+      )}
 
       <div className={styles.settings}>
         <Link href={`/Quiz/${_id}`}>
