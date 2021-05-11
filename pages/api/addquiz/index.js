@@ -31,7 +31,7 @@ const handler = async (req, res) => {
     const { title, timeControl, questions } = req.body;
 
     //validate request body
-    if (!title) {
+    if (!title.trim()) {
       return res.status(422).json({
         message: "Quiz title must contain atleast 1 character.",
       });
@@ -56,7 +56,12 @@ const handler = async (req, res) => {
 
     // answers validation
     questions.forEach(({ answers, question, correct }) => {
-      if (!question || question.length < 5) {
+      const trimmedAnswers = Object.values(answers).map(answer =>
+        answer.trim()
+      );
+      const trimmedQuestion = question.trim();
+
+      if (trimmedQuestion.length < 5) {
         validationError = "Question must have atleast 5 characters.";
         return;
       }
@@ -66,7 +71,12 @@ const handler = async (req, res) => {
         return;
       }
 
-      if (!answers[0] || answers[1] || answers[2] || answers[3]) {
+      if (
+        !trimmedAnswers[0] ||
+        !trimmedAnswers[1] ||
+        !trimmedAnswers[2] ||
+        !trimmedAnswers[3]
+      ) {
         validationError = "Answer must have atleast 1 character.";
         return;
       }

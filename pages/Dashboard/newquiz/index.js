@@ -86,13 +86,13 @@ const newQuiz = () => {
   };
 
   const handleSetQuestion = value => {
-    setQuestion(value);
+    setQuestion(value.trim());
   };
 
   const handleSetAnswer = (value, index) => {
     setAnswers(prev => ({
       ...prev,
-      [index]: value,
+      [index]: value.trim(),
     }));
   };
 
