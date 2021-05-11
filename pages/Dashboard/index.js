@@ -3,20 +3,28 @@ import styles from "./index.module.scss";
 // backend
 import { connectToDb } from "utils/connectToDb";
 import User from "models/user";
+import Quiz from "models/quiz";
 // frontend
 import gsap from "gsap";
 import { getSession, useSession } from "next-auth/client";
 import { useState, useRef, useEffect } from "react";
 
+import Inbox from "components/Dashboard/Inbox";
+import PublicQuizList from "components/Dashboard/PublicQuizList";
 import Settings from "components/Dashboard/Settings";
+import Spinner from "components/Spinner";
 import UserPanel from "components/Dashboard/UserPanel";
 import QuizList from "components/Dashboard/QuizList";
-import Inbox from "components/Dashboard/Inbox";
-import Spinner from "components/Spinner";
 import { useThrottle } from "hooks/useThrottle";
 import { useHttpRequest } from "hooks/useHttpRequest";
+import { getRandomElements } from "utils/getRandomElements";
 
-const Dashboard = ({ quizList = [], messages = [], unreadMessages = 0 }) => {
+const Dashboard = ({
+  quizList = [],
+  messages = [],
+  unreadMessages = 0,
+  publicQuizes = [],
+}) => {
   const [dashboardView, setDashboardView] = useState(1);
   const [localMessages, setLocalMessages] = useState(JSON.parse(messages));
   const [unread, setUnread] = useState(unreadMessages);
@@ -67,11 +75,12 @@ const Dashboard = ({ quizList = [], messages = [], unreadMessages = 0 }) => {
 
     const container = containerRef.current.children;
     // removes from the array index which is currently visible
-    const hiddenComponents = [1, 2, 3].filter(el => el !== dashboardView);
+    const hiddenComponents = [1, 2, 3, 4].filter(el => el !== dashboardView);
 
     // move invisible components to the bottom of the screen
     gsap.set(container[hiddenComponents[0]], { y: "100vh" });
     gsap.set(container[hiddenComponents[1]], { y: "100vh" });
+    gsap.set(container[hiddenComponents[2]], { y: "100vh" });
 
     // show clicked component
     gsap.to(container[index], { y: 0 });
@@ -96,6 +105,7 @@ const Dashboard = ({ quizList = [], messages = [], unreadMessages = 0 }) => {
         error={error}
         clearError={clearError}
       />
+      <PublicQuizList publicQuizList={JSON.parse(publicQuizes)} />
     </div>
   );
 };
@@ -130,6 +140,12 @@ export const getServerSideProps = async context => {
     };
   }
 
+  //! fetches all public quizes - might be inefficient for greater numbers
+  const publicQuizList = await Quiz.find({ isPublic: true }).select(["title"]);
+  const randomPublicQuizes = JSON.stringify(
+    getRandomElements(publicQuizList, 10)
+  );
+
   const quizList = JSON.stringify(existingUser.quizes);
   const messages = existingUser.inbox;
 
@@ -140,6 +156,7 @@ export const getServerSideProps = async context => {
   return {
     props: {
       messages: JSON.stringify(messages),
+      publicQuizes: randomPublicQuizes,
       unreadMessages,
       quizList,
     },

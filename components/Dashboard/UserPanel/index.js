@@ -8,6 +8,7 @@ import {
   faCog,
   faSignOutAlt,
   faInbox,
+  faListAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
@@ -26,29 +27,49 @@ const UserPanel = ({ setDashboardView, index, unreadMessages }) => {
       </h2>
 
       <Link href="/Dashboard/newquiz">
-        <a>
-          <Button fontSize="large" important>
+        <a style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <Button fontSize="large" important size="large">
             <FontAwesomeIcon icon={faPlus} /> New Quiz
           </Button>
         </a>
       </Link>
 
-      <Button onClick={() => setDashboardView(1)} disabled={index === 1}>
+      <Button
+        onClick={() => setDashboardView(4)}
+        disabled={index === 4}
+        size="large"
+      >
+        <FontAwesomeIcon icon={faListAlt} /> Public quizes
+      </Button>
+
+      <Button
+        onClick={() => setDashboardView(1)}
+        disabled={index === 1}
+        size="large"
+      >
         <FontAwesomeIcon icon={faList} /> Quiz list
       </Button>
 
-      <Button onClick={() => setDashboardView(2)} disabled={index === 2}>
+      <Button
+        onClick={() => setDashboardView(2)}
+        disabled={index === 2}
+        size="large"
+      >
         <FontAwesomeIcon icon={faCog} /> Settings
       </Button>
 
-      <Button onClick={() => setDashboardView(3)} disabled={index === 3}>
+      <Button
+        onClick={() => setDashboardView(3)}
+        disabled={index === 3}
+        size="large"
+      >
         <FontAwesomeIcon icon={faInbox} /> Inbox{" "}
         {unreadMessages > 0 && (
           <span className={styles.test}>{unreadMessages}</span>
         )}
       </Button>
 
-      <Button onClick={signout} danger>
+      <Button onClick={signout} danger size="medium">
         <FontAwesomeIcon icon={faSignOutAlt} /> Logout{" "}
       </Button>
     </div>

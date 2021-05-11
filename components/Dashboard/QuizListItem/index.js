@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 import Button from "components/Button";
 
-const QuizListItem = ({ title, _id, isPublic = false, deleteQuiz, index }) => {
+const QuizListItem = ({ title, _id, isPublic, deleteQuiz, index }) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [quizLink, setQuizLink] = useState("");
 

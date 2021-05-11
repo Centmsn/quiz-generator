@@ -18,13 +18,8 @@ const Quiz = ({ quiz, quizOwner }) => {
   const [time, setTime] = useState(null);
   const router = useRouter();
   const parsed = JSON.parse(quiz);
-  const {
-    addScore,
-    setSummary,
-    username,
-    setUsername,
-    resetStore,
-  } = useContext(GameContext);
+  const { addScore, setSummary, username, setUsername, resetStore } =
+    useContext(GameContext);
 
   const timeBarRef = useRef(null);
 
@@ -244,6 +239,16 @@ export const getServerSideProps = async context => {
 
   //! add error handling
   const currentQuiz = await Quiz.findById(id);
+
+  // if quiz does not exist
+  if (!currentQuiz) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
 
   let quizOwner;
   if (session) {

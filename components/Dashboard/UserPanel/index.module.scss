@@ -17,8 +17,9 @@
 }
 
 .title {
-  @include rounded-border("small");
+  flex-basis: 100%;
 
+  text-align: center;
   font-size: 2.5rem;
 
   color: map-get($blue, 100);
