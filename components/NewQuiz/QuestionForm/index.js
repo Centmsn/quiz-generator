@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./index.module.scss";
 
+import { validateString } from "utils/validateString";
+
 const QuestionForm = ({ value, setQuestion }) => {
   const [error, setError] = useState(null);
 
@@ -9,11 +11,11 @@ const QuestionForm = ({ value, setQuestion }) => {
 
     setQuestion(e.target.value);
 
-    if (value.length < 5) {
+    if (validateString(value, { trim: true, maxLength: 4 })) {
       setError("Question must have atleast 5 chars.");
     }
 
-    if (value.length >= 5 && error) {
+    if (validateString(value, { trim: true, minLength: 5 }) && error) {
       setError(null);
     }
   };

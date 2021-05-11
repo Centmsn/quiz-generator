@@ -3,6 +3,12 @@ import styles from "./index.module.scss";
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTimes,
+  faArrowLeft,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 import QuizContext from "context/QuizContext";
 import AnswerForm from "components/NewQuiz/AnswerForm";
@@ -12,12 +18,7 @@ import QuizSettingsForm from "components/NewQuiz/QuizSettingsForm";
 import Spinner from "components/Spinner";
 import PopUp from "components/PopUp";
 import { useHttpRequest } from "hooks/useHttpRequest";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTimes,
-  faArrowLeft,
-  faArrowRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { validateString } from "utils/validateString";
 
 const INITIAL_ANSWERS = {
   0: "",
@@ -86,13 +87,13 @@ const newQuiz = () => {
   };
 
   const handleSetQuestion = value => {
-    setQuestion(value.trim());
+    setQuestion(value);
   };
 
   const handleSetAnswer = (value, index) => {
     setAnswers(prev => ({
       ...prev,
-      [index]: value.trim(),
+      [index]: value,
     }));
   };
 
@@ -124,14 +125,16 @@ const newQuiz = () => {
     reset();
   };
 
+  // add question btn is disabled if validation failed
   const addBtnDisabled = !(
-    question.length > 4 &&
-    answers[0] &&
-    answers[1] &&
-    answers[2] &&
-    answers[3]
+    validateString(question, { trim: true, minLength: 5 }) &&
+    validateString(Object.values(answers), {
+      minLength: 1,
+      trim: true,
+    })
   );
 
+  // update btn is disabled when nothing has changed
   const updateBtnDisabled =
     (question === questions[current]?.question &&
       answers[0] === questions[current]?.answers[0] &&
