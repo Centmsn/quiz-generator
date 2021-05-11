@@ -5,6 +5,11 @@ const quiz = new Schema({
     type: String,
     ref: "user",
   },
+  isPublic: {
+    type: Boolean,
+    default: false,
+    requried: true,
+  },
   title: { type: String, required: true },
   timeLimit: {
     limit: {

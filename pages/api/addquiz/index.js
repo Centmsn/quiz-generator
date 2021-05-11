@@ -28,7 +28,14 @@ const handler = async (req, res) => {
       });
     }
 
-    const { title, timeControl, questions } = req.body;
+    const { title, timeControl, questions, isPublic } = req.body;
+
+    //validate public option
+    if (typeof isPublic !== "boolean") {
+      return res.status(422).json({
+        message: "Public option is not a valid data.",
+      });
+    }
 
     //validate request body
     if (!title.trim()) {
@@ -88,7 +95,8 @@ const handler = async (req, res) => {
 
     const newQuiz = new Quiz({
       creator: existingUser,
-      title: title,
+      isPublic,
+      title,
       timeLimit: timeControl,
       questions: [...questions],
     });

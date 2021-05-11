@@ -34,11 +34,13 @@ const newQuiz = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const {
     questions,
-    manageQuestion,
-    reset,
-    timeControl,
     current,
+    timeControl,
+    isPublic,
+    reset,
+    manageQuestion,
     setCurrentQuestion,
+    toggleIsPublic,
   } = useContext(QuizContext);
   const { loading, error, sendRequest, clearError } = useHttpRequest();
 
@@ -107,6 +109,7 @@ const newQuiz = () => {
       "POST",
       JSON.stringify({
         title,
+        isPublic,
         timeControl: {
           limit: timeControl.limit * 60,
           limitType: timeControl.limitType,
@@ -211,6 +214,8 @@ const newQuiz = () => {
         <QuizSettingsForm
           closeModal={handleToggleModal}
           addQuiz={handleAddQuiz}
+          isPublic={isPublic}
+          toggleIsPublic={toggleIsPublic}
         />
       )}
     </div>

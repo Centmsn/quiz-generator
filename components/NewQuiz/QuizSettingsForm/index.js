@@ -8,7 +8,7 @@ import Checkbox from "components/Checkbox";
 import QuizTimeForm from "components/NewQuiz/QuizTimeForm";
 import { useThrottle } from "hooks/useThrottle";
 
-const QuizNameForm = ({ closeModal, addQuiz }) => {
+const QuizNameForm = ({ closeModal, addQuiz, isPublic, toggleIsPublic }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [timeFormVisibility, setTimeFormVisibility] = useState(false);
   const [name, setName] = useState("");
@@ -25,6 +25,10 @@ const QuizNameForm = ({ closeModal, addQuiz }) => {
   const handleAddQuiz = () => {
     setIsButtonDisabled(true);
     addQuiz(name);
+  };
+
+  const handleSetPublic = () => {
+    toggleIsPublic();
   };
 
   const handleTimeFormVisibility = throttle(() => {
@@ -77,7 +81,13 @@ const QuizNameForm = ({ closeModal, addQuiz }) => {
         </Button>
 
         <Checkbox
-          label="Time limit"
+          label="Quiz is visible to other players"
+          onClick={handleSetPublic}
+          isChecked={isPublic}
+        />
+
+        <Checkbox
+          label="Add time limit"
           onClick={handleTimeFormVisibility}
           isChecked={timeFormVisibility}
         />

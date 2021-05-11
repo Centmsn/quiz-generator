@@ -8,6 +8,7 @@ const TIME_CONTROL_DEFAULT = {
 };
 const QUESTIONS_DEFAULT = [];
 const CURRENT_QUESTION_DEFAULT = 0;
+const IS_PUBLIC_DEFAULT = false;
 
 /**
  * Functional react component - provides store for quizContext
@@ -20,15 +21,22 @@ export const QuizContextProvider = ({ children }) => {
     CURRENT_QUESTION_DEFAULT
   );
   const [timeControl, setTimeControl] = useState(TIME_CONTROL_DEFAULT);
+  const [isPublic, setIsPublic] = useState(IS_PUBLIC_DEFAULT);
 
+  //! add JSDOC
   const handleCurrentQuestion = index => {
     if (typeof index !== "number") {
       throw new Error(
-        `Incorrect argument. Expected number instead got ${typeof index}`
+        `Incorrect argument. Expected number, instead got ${typeof index}`
       );
     }
 
     setCurrentQuestion(index);
+  };
+
+  //! add JSDOC
+  const handleSetPublic = () => {
+    setIsPublic(prev => !prev);
   };
 
   /**
@@ -41,7 +49,7 @@ export const QuizContextProvider = ({ children }) => {
     // initial validation
     if (typeof questionObj !== "object") {
       throw new Error(
-        `Incorrect argument. Expected object instead got ${typeof questionObj}`
+        `Incorrect argument. Expected object, instead got ${typeof questionObj}`
       );
     }
 
@@ -95,7 +103,7 @@ export const QuizContextProvider = ({ children }) => {
     // validate arguments
     if (typeof type !== "string") {
       throw new Error(
-        `Incorrect argument. Expected string instead got ${typeof type}`
+        `Incorrect argument. Expected string, instead got ${typeof type}`
       );
     }
 
@@ -103,13 +111,13 @@ export const QuizContextProvider = ({ children }) => {
 
     if (typeof limit !== "number") {
       throw new Error(
-        `Incorrect argument. Expected number | null instead got ${typeof limit}`
+        `Incorrect argument. Expected (number | null), instead got ${typeof limit}`
       );
     }
 
     if (formattedType !== "quiz" && formattedType !== "question") {
       throw new Error(
-        `Incorrect argument. Expected 'quiz' | 'question' | null. Instead got ${type}`
+        `Incorrect argument. Expected ('quiz' | 'question' | null), Instead got ${type}`
       );
     }
     // enable time control
@@ -127,6 +135,7 @@ export const QuizContextProvider = ({ children }) => {
     setQuestion(QUESTIONS_DEFAULT);
     setTimeControl(TIME_CONTROL_DEFAULT);
     setCurrentQuestion(CURRENT_QUESTION_DEFAULT);
+    setIsPublic(IS_PUBLIC_DEFAULT);
   };
 
   return (
@@ -135,6 +144,8 @@ export const QuizContextProvider = ({ children }) => {
         questions,
         timeControl,
         current: currentQuestion,
+        isPublic,
+        toggleIsPublic: handleSetPublic,
         setTimeControl: handleTimeControl,
         setCurrentQuestion: handleCurrentQuestion,
         manageQuestion: handleQuestionObject,
