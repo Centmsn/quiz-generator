@@ -126,6 +126,7 @@ export const QuizContextProvider = ({ children }) => {
   const handleReset = () => {
     setQuestion(QUESTIONS_DEFAULT);
     setTimeControl(TIME_CONTROL_DEFAULT);
+    setCurrentQuestion(CURRENT_QUESTION_DEFAULT);
   };
 
   return (
