@@ -7,6 +7,7 @@ import {
   faTrash,
   faLink,
   faPlay,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -14,12 +15,17 @@ import { useEffect, useState } from "react";
 import Button from "components/Button";
 
 const QuizListItem = ({ title, _id, isPublic, deleteQuiz, index }) => {
+  const [showConfirmButton, setShowConfirmButton] = useState(false);
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [quizLink, setQuizLink] = useState("");
 
   useEffect(() => {
     setQuizLink(`${window.location.origin}/Quiz/${_id}`);
   }, []);
+
+  const handleToggleConfirm = () => {
+    setShowConfirmButton(prev => !prev);
+  };
 
   const handleCopyLink = () => {
     copy(quizLink);
@@ -74,9 +80,20 @@ const QuizListItem = ({ title, _id, isPublic, deleteQuiz, index }) => {
           Copy link <FontAwesomeIcon icon={faLink} />
         </Button>
 
-        <Button danger size="small" onClick={() => deleteQuiz(_id)}>
-          Delete <FontAwesomeIcon icon={faTrash} />
-        </Button>
+        {showConfirmButton ? (
+          <>
+            <Button size="xsmall" onClick={() => deleteQuiz(_id)} danger>
+              <FontAwesomeIcon icon={faCheck} /> Confirm
+            </Button>
+            <Button onClick={handleToggleConfirm} size="xsmall">
+              <FontAwesomeIcon icon={faTimes} /> Cancel
+            </Button>
+          </>
+        ) : (
+          <Button danger size="small" onClick={handleToggleConfirm}>
+            Delete <FontAwesomeIcon icon={faTrash} />
+          </Button>
+        )}
       </div>
     </div>
   );
