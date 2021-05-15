@@ -30,6 +30,18 @@
   font-size: 0;
 }
 
+.tooltip {
+  position: absolute;
+  top: calc(50% + 5rem);
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 8rem;
+
+  text-align: center;
+}
+
 .box {
   @include rounded-border("medium");
 

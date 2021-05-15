@@ -28,7 +28,7 @@ const Dashboard = ({
   const [dashboardView, setDashboardView] = useState(1);
   const [localMessages, setLocalMessages] = useState(JSON.parse(messages));
   const [unread, setUnread] = useState(unreadMessages);
-  const containerRef = useRef(null);
+  const containerRef = useRef(0);
   const [session] = useSession();
   const { throttle } = useThrottle();
   const { sendRequest, loading, error, clearError } = useHttpRequest();
@@ -40,11 +40,11 @@ const Dashboard = ({
   useEffect(() => {
     if (!session) return;
 
-    if (dashboardView === 3 && unreadMessages > 0) {
+    if (dashboardView === 3 && unread > 0) {
       sendRequest("/api/msg/read", "PATCH");
 
       // set unread messages to null
-      setUnread(null);
+      setUnread(0);
     }
   }, [dashboardView]);
 
@@ -90,7 +90,7 @@ const Dashboard = ({
 
   return (
     <div className={styles.container} ref={containerRef}>
-      {loading && <Spinner overlay />}
+      {loading && <Spinner text="loading..." overlay />}
       <UserPanel
         setDashboardView={handleDashboardView}
         index={dashboardView}

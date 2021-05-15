@@ -3,7 +3,7 @@ import NextAuth from "next-auth";
 import bcrypt from "bcryptjs";
 
 import User from "models/user";
-import Messager from "models/message";
+import Message from "models/message";
 import Quiz from "models/quiz";
 import { connectToDb } from "utils/connectToDb";
 

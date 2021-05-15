@@ -1,4 +1,7 @@
 import styles from "./index.module.scss";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { signIn } from "next-auth/client";
 import { useState } from "react";
 
@@ -103,7 +106,7 @@ const Navigation = () => {
         Login
       </Button>
       <Button onClick={() => signIn("google")} important>
-        Login with Google
+        <FontAwesomeIcon icon={faGoogle} /> Login with Google
       </Button>
       <span className={styles.span}>or</span>
       <Button onClick={handleSignup} disabled={isLoginDisabled}>

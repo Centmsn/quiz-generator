@@ -39,6 +39,8 @@ const Spinner = ({ text = "", overlay = false }) => {
         <div className={[styles.box, styles.box3].join(" ")}></div>
         <div className={[styles.box, styles.box4].join(" ")}></div>
       </div>
+
+      {text && <p className={styles.tooltip}>{text}</p>}
     </>
   );
 };
