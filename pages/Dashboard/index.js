@@ -113,7 +113,6 @@ const Dashboard = ({
         clearError={clearError}
       />
       <PublicQuizList publicQuizList={JSON.parse(publicQuizes)} />
-      <Spinner overlay text="loading..." />
     </div>
   );
 };
