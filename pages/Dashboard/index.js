@@ -90,13 +90,14 @@ const Dashboard = ({
     const tl = gsap.timeline();
     tl.to(container[dashboardView], { y: "-100vh" }).to(
       container[dashboardView],
-      { display: "none" }
+      { display: "none", duration: 0 }
     );
   }, 500);
 
   return (
     <div className={styles.container} ref={containerRef}>
       {loading && <Spinner text="loading..." overlay />}
+
       <UserPanel
         setDashboardView={handleDashboardView}
         index={dashboardView}
@@ -112,6 +113,7 @@ const Dashboard = ({
         clearError={clearError}
       />
       <PublicQuizList publicQuizList={JSON.parse(publicQuizes)} />
+      <Spinner overlay text="loading..." />
     </div>
   );
 };
