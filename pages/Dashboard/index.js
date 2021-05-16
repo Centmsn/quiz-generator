@@ -34,7 +34,7 @@ const Dashboard = ({
   const { sendRequest, loading, error, clearError } = useHttpRequest();
 
   useEffect(() => {
-    gsap.set(containerRef.current.children[1], { y: 0 });
+    gsap.set(containerRef.current.children[1], { y: 0, display: "flex" });
   }, []);
 
   useEffect(() => {
@@ -74,18 +74,24 @@ const Dashboard = ({
     setDashboardView(index);
 
     const container = containerRef.current.children;
+
     // removes from the array index which is currently visible
     const hiddenComponents = [1, 2, 3, 4].filter(el => el !== dashboardView);
 
     // move invisible components to the bottom of the screen
-    gsap.set(container[hiddenComponents[0]], { y: "100vh" });
-    gsap.set(container[hiddenComponents[1]], { y: "100vh" });
-    gsap.set(container[hiddenComponents[2]], { y: "100vh" });
+    hiddenComponents.forEach(index => {
+      gsap.set(container[index], { y: "100vh" });
+    });
 
     // show clicked component
+    gsap.set(container[index], { display: "flex" });
     gsap.to(container[index], { y: 0 });
     // hide current component
-    gsap.to(container[dashboardView], { y: "-100vh" });
+    const tl = gsap.timeline();
+    tl.to(container[dashboardView], { y: "-100vh" }).to(
+      container[dashboardView],
+      { display: "none" }
+    );
   }, 500);
 
   return (

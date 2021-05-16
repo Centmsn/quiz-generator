@@ -1,10 +1,24 @@
 import styles from "./index.module.scss";
 
+import { useContext } from "react";
+
 import Container from "components/Dashboard/Container";
 import Checkbox from "components/Checkbox";
 import Radio from "components/Radio";
+import SettingsContext from "context/SettingsContext";
 
 const Settings = () => {
+  const { fontSize, darkmode, setFontSize, setDarkmode } =
+    useContext(SettingsContext);
+
+  const handleFontSize = value => {
+    setFontSize(value);
+  };
+
+  const handleDarkmode = () => {
+    setDarkmode(!darkmode);
+  };
+
   return (
     <Container title="Settings">
       <section
@@ -20,7 +34,7 @@ const Settings = () => {
         <Checkbox
           label="Darkmode"
           isChecked={false}
-          onClick={() => {}}
+          onClick={handleDarkmode}
           disabled
         />
       </section>
@@ -37,23 +51,20 @@ const Settings = () => {
         <p>Adjust font size to Your needs</p>
         <Radio
           label="small"
-          onClick={() => {}}
-          disabled
-          active={false}
+          onClick={() => handleFontSize(1)}
+          active={fontSize === 12}
           value={"placeholder"}
         />
         <Radio
           label="medium"
-          onClick={() => {}}
-          disabled
-          active
+          onClick={() => handleFontSize(2)}
+          active={fontSize === 16}
           value={"placeholder"}
         />
         <Radio
           label="large"
-          onClick={() => {}}
-          disabled
-          active={false}
+          onClick={() => handleFontSize(3)}
+          active={fontSize === 20}
           value={"placeholder"}
         />
       </section>

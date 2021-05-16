@@ -19,7 +19,13 @@ const handler = async (req, res) => {
     }
 
     const currentUser = await User.findOne({ email: session.user.email });
-    const currentQuiz = await Quiz.findById(req.query.id);
+    const currentQuiz = await Quiz.findById(req.query.id).populate("creator");
+
+    if (currentUser.id !== currentQuiz.creator.id) {
+      return res.status(401).json({
+        message: "401 Forbidden",
+      });
+    }
 
     if (!currentQuiz || !currentUser) {
       res.status(500).json({
@@ -37,7 +43,7 @@ const handler = async (req, res) => {
 
       await session.commitTransaction();
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: "500 internal server error",
       });
     }

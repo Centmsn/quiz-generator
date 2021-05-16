@@ -47,7 +47,7 @@ const UserPanel = ({ setDashboardView, index, unreadMessages }) => {
         disabled={index === 1}
         size="large"
       >
-        <FontAwesomeIcon icon={faList} /> Quiz list
+        <FontAwesomeIcon icon={faList} /> Your quizes
       </Button>
 
       <Button

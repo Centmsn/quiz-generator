@@ -3,8 +3,9 @@ import styles from "./index.module.scss";
 const Container = ({ children, light, title }) => {
   return (
     <div
-      className={styles.container}
-      style={{ background: light ? "white" : "" }}
+      className={[styles.container, light ? styles.containerLight : ""].join(
+        " "
+      )}
     >
       <h3 className={[styles.title, light ? styles.titleLight : ""].join(" ")}>
         {title}

@@ -17,6 +17,11 @@
   background: map-get($blue, 200);
 
   overflow-y: auto;
+  display: none;
+}
+
+.containerLight {
+  background: white;
 }
 
 .title {

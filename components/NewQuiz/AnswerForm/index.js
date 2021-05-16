@@ -5,7 +5,15 @@ import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { LETTER_ENUM } from "consts";
 
 const AnswerForm = ({ isCorrect, value, setQuestion, setCorrect }) => {
-  const handleSetCorrectAnswer = index => {
+  const handleSetCorrectAnswer = (e, index) => {
+    if (e.keyCode) {
+      if ([32, 13].includes(e.keyCode)) {
+        setCorrect(index);
+      }
+
+      return;
+    }
+
     setCorrect(index);
   };
 
@@ -29,11 +37,13 @@ const AnswerForm = ({ isCorrect, value, setQuestion, setCorrect }) => {
             onChange={e => handleSetQuestion(e, i)}
           ></textarea>
           <span
-            onClick={() => handleSetCorrectAnswer(i)}
+            onClick={e => handleSetCorrectAnswer(e, i)}
+            onKeyDown={e => handleSetCorrectAnswer(e, i)}
             className={[
               isAnswerCorrect ? styles.correct : styles.incorrect,
               styles.toggleCorrectAnswer,
             ].join(" ")}
+            tabIndex="0"
           >
             <FontAwesomeIcon icon={isAnswerCorrect ? faCheck : faTimes} />
           </span>

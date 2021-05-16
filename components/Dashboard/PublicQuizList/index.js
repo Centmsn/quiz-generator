@@ -9,8 +9,8 @@ import Button from "components/Button";
 
 const PublicQuizList = ({ publicQuizList }) => {
   const rendersPublicQuizes = () => {
-    return publicQuizList.map(quiz => (
-      <div className={styles.listItem}>
+    return publicQuizList.map((quiz, index) => (
+      <div className={styles.listItem} key={index}>
         <h3 className={styles.listItemTitle}>{quiz.title}</h3>
         <Link href={`/Quiz/${quiz._id}`}>
           <a>
