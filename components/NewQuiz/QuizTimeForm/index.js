@@ -51,7 +51,12 @@ const QuizTimeForm = () => {
 
       <section className={styles.section}>
         <p>Adjust limit (minutes)</p>
-        <Slider min={1} max={60} onChange={handleTimeLimit} />
+        <Slider
+          min={1}
+          max={60}
+          onChange={handleTimeLimit}
+          initial={timeControl.limit}
+        />
       </section>
     </>
   );

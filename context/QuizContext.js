@@ -39,6 +39,14 @@ export const QuizContextProvider = ({ children }) => {
     setIsPublic(prev => !prev);
   };
 
+  const handleStoreValue = ({ isPublic, questions, timeLimit }) => {
+    //! if editing
+    console.log(timeLimit);
+    setQuestion(questions);
+    setTimeControl(timeLimit);
+    setIsPublic(isPublic);
+  };
+
   /**
    * Add / edit question
    * @param {Object} questionObj - question object
@@ -150,6 +158,7 @@ export const QuizContextProvider = ({ children }) => {
         setCurrentQuestion: handleCurrentQuestion,
         manageQuestion: handleQuestionObject,
         reset: handleReset,
+        setStoreValue: handleStoreValue,
       }}
     >
       {children}

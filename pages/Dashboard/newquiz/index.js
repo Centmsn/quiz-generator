@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,13 +10,15 @@ import {
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-import QuizContext from "context/QuizContext";
 import AnswerForm from "components/NewQuiz/AnswerForm";
-import QuestionForm from "components/NewQuiz/QuestionForm";
 import Button from "components/Button";
-import QuizSettingsForm from "components/NewQuiz/QuizSettingsForm";
-import Spinner from "components/Spinner";
 import PopUp from "components/PopUp";
+import Spinner from "components/Spinner";
+import QuizModel from "models/quiz";
+import QuizContext from "context/QuizContext";
+import QuestionForm from "components/NewQuiz/QuestionForm";
+import QuizSettingsForm from "components/NewQuiz/QuizSettingsForm";
+import { connectToDb } from "utils/connectToDb";
 import { useHttpRequest } from "hooks/useHttpRequest";
 import { validateString } from "utils/validateString";
 
@@ -27,7 +29,7 @@ const INITIAL_ANSWERS = {
   3: "",
 };
 
-const newQuiz = () => {
+const newQuiz = props => {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState(INITIAL_ANSWERS);
   const [correct, setCorrect] = useState(0);
@@ -41,10 +43,26 @@ const newQuiz = () => {
     manageQuestion,
     setCurrentQuestion,
     toggleIsPublic,
+    setStoreValue,
   } = useContext(QuizContext);
   const { loading, error, sendRequest, clearError } = useHttpRequest();
 
   const router = useRouter();
+
+  // if quizToEdit is not falsy - enter edit mode
+  useEffect(() => {
+    const { quizToEdit } = props;
+
+    if (quizToEdit) {
+      const quiz = JSON.parse(quizToEdit);
+      // set initial values
+      setAnswers(quiz.questions[0].answers);
+      setQuestion(quiz.questions[0].question);
+
+      // replace current store value with quizToEdit object
+      setStoreValue(quiz);
+    }
+  }, []);
 
   const handleQuestion = () => {
     const questionObject = {
@@ -104,9 +122,20 @@ const newQuiz = () => {
   };
 
   const handleAddQuiz = async title => {
+    // ! quiz is parsed 3 times
+    // test part
+    const quiz = props.quizToEdit;
+    let quizId = null;
+    if (quiz) {
+      quizId = JSON.parse(quiz)._id;
+    }
+
+    const path = quizId ? `/api/editquiz/${quizId}` : "/api/addquiz";
+    const method = quizId ? "PATCH" : "POST";
+
     const response = await sendRequest(
-      "/api/addquiz",
-      "POST",
+      path,
+      method,
       JSON.stringify({
         title,
         isPublic,
@@ -216,10 +245,33 @@ const newQuiz = () => {
           addQuiz={handleAddQuiz}
           isPublic={isPublic}
           toggleIsPublic={toggleIsPublic}
+          // !refactor
+          title={props.quizToEdit && JSON.parse(props.quizToEdit).title}
         />
       )}
     </div>
   );
+};
+
+export const getServerSideProps = async context => {
+  const { query } = context;
+
+  if (!query.id) {
+    return {
+      props: {},
+    };
+  }
+
+  // connect to db
+  await connectToDb();
+
+  const quiz = JSON.stringify(await QuizModel.findById(query.id));
+
+  return {
+    props: {
+      quizToEdit: quiz,
+    },
+  };
 };
 
 export default newQuiz;

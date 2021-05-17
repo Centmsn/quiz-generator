@@ -1,21 +1,35 @@
 import styles from "./index.module.scss";
 
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 
 import Button from "components/Button";
 import Checkbox from "components/Checkbox";
 import QuizTimeForm from "components/NewQuiz/QuizTimeForm";
+import QuizContext from "context/QuizContext";
 import { useThrottle } from "hooks/useThrottle";
 
-const QuizNameForm = ({ closeModal, addQuiz, isPublic, toggleIsPublic }) => {
+const QuizNameForm = ({
+  closeModal,
+  addQuiz,
+  isPublic,
+  toggleIsPublic,
+  title = "",
+}) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [timeFormVisibility, setTimeFormVisibility] = useState(false);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(title);
+  const { timeControl } = useContext(QuizContext);
   const { throttle } = useThrottle();
   const backdropRef = useRef(null);
   const nameFormRef = useRef(null);
   const timeFormRef = useRef(null);
+
+  useEffect(() => {
+    if (timeControl.limitType) {
+      handleTimeFormVisibility();
+    }
+  }, []);
 
   const handleCloseModal = e => {
     if (e.target !== backdropRef.current) return;

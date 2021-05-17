@@ -8,6 +8,7 @@ import {
   faLink,
   faPlay,
   faTimes,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -76,6 +77,15 @@ const QuizListItem = ({ title, _id, isPublic, deleteQuiz, index }) => {
             </Button>
           </a>
         </Link>
+
+        <Link href={`/Dashboard/newquiz?id=${_id}`}>
+          <a>
+            <Button size="small">
+              Edit <FontAwesomeIcon icon={faEdit} />
+            </Button>
+          </a>
+        </Link>
+
         <Button size="small" onClick={handleCopyLink}>
           Copy link <FontAwesomeIcon icon={faLink} />
         </Button>

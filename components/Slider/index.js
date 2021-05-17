@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 
 import PropTypes from "prop-types";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const DRAGGABLE_WIDTH = 48;
 
@@ -10,10 +10,31 @@ const DRAGGABLE_WIDTH = 48;
  * @param {Object} props - react props
  * @returns {JSX.Element}
  */
-const Slider = ({ label = "", min = 0, max = 100, onChange = () => {} }) => {
+const Slider = ({
+  label = "",
+  min = 0,
+  max = 100,
+  initial = 0,
+  onChange = () => {},
+}) => {
   const [position, setPosition] = useState(-DRAGGABLE_WIDTH / 2);
   const [value, setValue] = useState(min);
   const sliderRef = useRef(null);
+
+  useEffect(() => {
+    if (initial) {
+      console.log("init");
+      setValue(initial / 60);
+      const { width } = sliderRef.current.getBoundingClientRect();
+
+      // TODO refactor
+      setPosition(
+        (width / (max - min)) * (initial / 60) -
+          DRAGGABLE_WIDTH / 2 -
+          width / (max - min)
+      );
+    }
+  }, []);
 
   const handleStartDrag = e => {
     e.preventDefault();
@@ -31,10 +52,8 @@ const Slider = ({ label = "", min = 0, max = 100, onChange = () => {} }) => {
 
   const handleDraggablePosition = e => {
     //slider dimension and position
-    const {
-      x: sliderX,
-      width: sliderWidth,
-    } = sliderRef.current.getBoundingClientRect();
+    const { x: sliderX, width: sliderWidth } =
+      sliderRef.current.getBoundingClientRect();
 
     // mouse location after removing slider offset
     const mouseX = e.clientX - sliderX;
