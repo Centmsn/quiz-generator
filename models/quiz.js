@@ -10,6 +10,18 @@ const quiz = new Schema({
     default: false,
     requried: true,
   },
+  stats: {
+    solved: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    average: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+  },
   title: { type: String, required: true },
   timeLimit: {
     limit: {
