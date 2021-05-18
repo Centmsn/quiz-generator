@@ -29,7 +29,7 @@ const INITIAL_ANSWERS = {
   3: "",
 };
 
-const newQuiz = props => {
+const newQuiz = ({ quizToEdit = null }) => {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState(INITIAL_ANSWERS);
   const [correct, setCorrect] = useState(0);
@@ -51,8 +51,6 @@ const newQuiz = props => {
 
   // if quizToEdit is not falsy - enter edit mode
   useEffect(() => {
-    const { quizToEdit } = props;
-
     if (quizToEdit) {
       const quiz = JSON.parse(quizToEdit);
       // set initial values
@@ -61,6 +59,12 @@ const newQuiz = props => {
 
       // replace current store value with quizToEdit object
       setStoreValue(quiz);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!quizToEdit) {
+      reset();
     }
   }, []);
 
@@ -123,11 +127,9 @@ const newQuiz = props => {
 
   const handleAddQuiz = async title => {
     // ! quiz is parsed 3 times
-    // test part
-    const quiz = props.quizToEdit;
     let quizId = null;
-    if (quiz) {
-      quizId = JSON.parse(quiz)._id;
+    if (quizToEdit) {
+      quizId = JSON.parse(quizToEdit)._id;
     }
 
     const path = quizId ? `/api/editquiz/${quizId}` : "/api/addquiz";
@@ -246,7 +248,7 @@ const newQuiz = props => {
           isPublic={isPublic}
           toggleIsPublic={toggleIsPublic}
           // !refactor
-          title={props.quizToEdit && JSON.parse(props.quizToEdit).title}
+          title={quizToEdit && JSON.parse(quizToEdit).title}
         />
       )}
     </div>

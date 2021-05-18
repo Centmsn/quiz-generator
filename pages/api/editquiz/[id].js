@@ -19,18 +19,43 @@ const handler = async (req, res) => {
 
     const { title, timeControl, questions, isPublic } = req.body;
 
-    const quizToUpdate = await QuizModel.findById(req.query.id).populate(
-      "creator"
-    );
+    let quizToUpdate;
+
+    try {
+      quizToUpdate = await QuizModel.findById(req.query.id).populate("creator");
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Could not find the quiz. Please try again later" });
+    }
+
+    let quizOwner;
+    try {
+      quizOwner = await UserModel.findOne({
+        email: quizToUpdate.creator.email,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Uuppss... something went wrong. Please try again later",
+      });
+    }
+
+    if (quizOwner.email !== session.user.email) {
+      return res.status(403).json({ message: "403 forbidden" });
+    }
 
     quizToUpdate.title = title;
     quizToUpdate.timeControl = timeControl;
     quizToUpdate.questions = questions;
     quizToUpdate.isPublic = isPublic;
 
-    console.log(quizToUpdate);
-
-    await quizToUpdate.save();
+    try {
+      await quizToUpdate.save();
+    } catch (error) {
+      return res.status(500).json({
+        message: "Could not update the quiz. Please try again later",
+      });
+    }
 
     res.json({ message: "OK" });
   }
