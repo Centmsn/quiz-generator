@@ -2,6 +2,7 @@ import { getSession } from "next-auth/client";
 import mongoose from "mongoose";
 
 import { connectToDb } from "utils/connectToDb";
+import { validateQuizObject } from "utils/validateQuizObject";
 import User from "models/user";
 import Quiz from "models/quiz";
 
@@ -30,76 +31,23 @@ const handler = async (req, res) => {
 
     const { title, timeControl, questions, isPublic } = req.body;
 
-    //validate public option
-    if (typeof isPublic !== "boolean") {
-      return res.status(422).json({
-        message: "Public option is not a valid data.",
-      });
-    }
-
-    //validate request body
-    if (!title.trim()) {
-      return res.status(422).json({
-        message: "Quiz title must contain atleast 1 character.",
-      });
-    }
-
-    // time limit validation
-    if (typeof timeControl.limit !== "number" || timeControl.limit < 0) {
-      return res.status(422).json({
-        message:
-          "Time limit must be a number. Time limit must be greater than 0",
-      });
-    }
-
-    // questions length validation
-    if (!questions.length) {
-      return res.status(422).json({
-        message: "Quiz must have atleast 1 question.",
-      });
-    }
-
-    let validationError = null;
-
-    // answers validation
-    questions.forEach(({ answers, question, correct }) => {
-      const trimmedAnswers = Object.values(answers).map(answer =>
-        answer.trim()
-      );
-      const trimmedQuestion = question.trim();
-
-      if (trimmedQuestion.length < 5) {
-        validationError = "Question must have atleast 5 characters.";
-        return;
-      }
-
-      if (typeof correct !== "number" || correct > 3) {
-        validationError = "Correct answer is not a valid data.";
-        return;
-      }
-
-      if (
-        !trimmedAnswers[0] ||
-        !trimmedAnswers[1] ||
-        !trimmedAnswers[2] ||
-        !trimmedAnswers[3]
-      ) {
-        validationError = "Answer must have atleast 1 character.";
-        return;
-      }
-    });
-
-    if (validationError) {
-      return res.status(422).json({ message: validationError });
-    }
-
-    const newQuiz = new Quiz({
+    const quizObject = {
       creator: existingUser,
-      isPublic,
       title,
       timeLimit: timeControl,
-      questions: [...questions],
-    });
+      questions,
+      isPublic,
+    };
+
+    // validates quiz object
+    const errors = validateQuizObject(quizObject);
+    const errorMessages = Object.values(errors).join(" ");
+
+    if (errorMessages.length) {
+      return res.status(422).json({ message: errorMessages });
+    }
+
+    const newQuiz = new Quiz(quizObject);
 
     try {
       const session = await mongoose.startSession();

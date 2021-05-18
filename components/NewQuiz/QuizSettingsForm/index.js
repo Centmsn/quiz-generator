@@ -89,7 +89,7 @@ const QuizNameForm = ({
         <Button
           important
           onClick={handleAddQuiz}
-          disabled={!name || isButtonDisabled}
+          // disabled={!name || isButtonDisabled}
         >
           Confirm
         </Button>

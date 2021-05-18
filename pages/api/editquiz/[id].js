@@ -18,7 +18,6 @@ const handler = async (req, res) => {
     await connectToDb();
 
     const { title, timeControl, questions, isPublic } = req.body;
-    console.log(timeControl);
 
     let quizToUpdate;
 
@@ -41,10 +40,13 @@ const handler = async (req, res) => {
       });
     }
 
+    // if logged user is not a quiz owner
     if (quizOwner.email !== session.user.email) {
       return res.status(403).json({ message: "403 forbidden" });
     }
 
+    //! missing quiz validation - extract to utils function
+    // update quiz
     quizToUpdate.title = title;
     quizToUpdate.timeLimit = timeControl;
     quizToUpdate.questions = questions;

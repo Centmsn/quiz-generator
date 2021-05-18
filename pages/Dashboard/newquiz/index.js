@@ -62,6 +62,7 @@ const newQuiz = ({ quizToEdit = null }) => {
     }
   }, []);
 
+  // if not in edit mode - reset quiz context store
   useEffect(() => {
     if (!quizToEdit) {
       reset();
@@ -132,6 +133,7 @@ const newQuiz = ({ quizToEdit = null }) => {
       quizId = JSON.parse(quizToEdit)._id;
     }
 
+    // method and url depends on current mode - edit or add quiz
     const path = quizId ? `/api/editquiz/${quizId}` : "/api/addquiz";
     const method = quizId ? "PATCH" : "POST";
 
@@ -227,7 +229,7 @@ const newQuiz = ({ quizToEdit = null }) => {
           size="small"
           danger
           onClick={handleToggleModal}
-          disabled={!questions.length}
+          // disabled={!questions.length}
         >
           Finish
         </Button>
