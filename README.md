@@ -1,34 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About application
 
-## Getting Started
+It is online quiz generator, which allows You to create a quiz, and share it with Your friends or all other user of the app!
 
-First, run the development server:
+Visit [Quiz generator](https://quiz-generator-chi.vercel.app), and try it out.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Main features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Application requires you to login first, two method are available:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Google Oauth
+- Credentials (email + password)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Once you are logged in, you can:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Create a quiz (set time limit, mark as public, and more)
+- Edit existing quiz
+- Delete existing quiz
+- Play a quiz (your own, public or shared with you via url)
+- Read messages (feedback after one of your quizes is solved)
+- Change settings
+- Logout
