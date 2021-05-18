@@ -4,14 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTimes,
-  faArrowLeft,
-  faArrowRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import AnswerForm from "components/NewQuiz/AnswerForm";
-import Button from "components/Button";
+import ButtonsContainer from "components/NewQuiz/ButtonsContainer";
 import PopUp from "components/PopUp";
 import Spinner from "components/Spinner";
 import QuizModel from "models/quiz";
@@ -20,7 +16,6 @@ import QuestionForm from "components/NewQuiz/QuestionForm";
 import QuizSettingsForm from "components/NewQuiz/QuizSettingsForm";
 import { connectToDb } from "utils/connectToDb";
 import { useHttpRequest } from "hooks/useHttpRequest";
-import { validateString } from "utils/validateString";
 
 const INITIAL_ANSWERS = {
   0: "",
@@ -161,25 +156,6 @@ const newQuiz = ({ quizToEdit = null }) => {
     reset();
   };
 
-  // add question btn is disabled if validation failed
-  const addBtnDisabled = !(
-    validateString(question, { trim: true, minLength: 5 }) &&
-    validateString(Object.values(answers), {
-      minLength: 1,
-      trim: true,
-    })
-  );
-
-  // update btn is disabled when nothing has changed
-  const updateBtnDisabled =
-    (question === questions[current]?.question &&
-      answers[0] === questions[current]?.answers[0] &&
-      answers[1] === questions[current]?.answers[1] &&
-      answers[2] === questions[current]?.answers[2] &&
-      answers[3] === questions[current]?.answers[3] &&
-      correct === questions[current]?.correct) ||
-    addBtnDisabled;
-
   return (
     <div className={styles.container}>
       {error && (
@@ -206,42 +182,14 @@ const newQuiz = ({ quizToEdit = null }) => {
         setCorrect={handleSetCorrect}
       />
 
-      <div className={styles.btnContainer}>
-        <Button
-          size="xsmall"
-          onClick={() => handleFillForms(current - 1)}
-          disabled={current - 1 < 0}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} /> Previous
-        </Button>
-
-        <Button
-          size="small"
-          onClick={handleQuestion}
-          disabled={
-            current === questions.length ? addBtnDisabled : updateBtnDisabled
-          }
-        >
-          {current === questions.length ? "Add question" : "Update question"}
-        </Button>
-
-        <Button
-          size="small"
-          danger
-          onClick={handleToggleModal}
-          // disabled={!questions.length}
-        >
-          Finish
-        </Button>
-
-        <Button
-          size="xsmall"
-          onClick={() => handleFillForms(current + 1)}
-          disabled={current + 1 > questions.length}
-        >
-          Next <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
-      </div>
+      <ButtonsContainer
+        fillForms={handleFillForms}
+        handleQuestion={handleQuestion}
+        handleModal={handleToggleModal}
+        currentQuestion={question}
+        currentAnswers={answers}
+        correctAnswer={correct}
+      />
 
       {isModalVisible && (
         <QuizSettingsForm

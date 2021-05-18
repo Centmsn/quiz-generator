@@ -26,15 +26,6 @@
   }
 }
 
-.btnContainer {
-  grid-area: 11/2/-1/12;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-}
-
 .questionNumber {
   grid-area: 1/1/2/-1;
 
