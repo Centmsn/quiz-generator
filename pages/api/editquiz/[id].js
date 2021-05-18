@@ -18,6 +18,7 @@ const handler = async (req, res) => {
     await connectToDb();
 
     const { title, timeControl, questions, isPublic } = req.body;
+    console.log(timeControl);
 
     let quizToUpdate;
 
@@ -45,7 +46,7 @@ const handler = async (req, res) => {
     }
 
     quizToUpdate.title = title;
-    quizToUpdate.timeControl = timeControl;
+    quizToUpdate.timeLimit = timeControl;
     quizToUpdate.questions = questions;
     quizToUpdate.isPublic = isPublic;
 
