@@ -52,7 +52,14 @@ const handler = async (req, res) => {
     });
   }
 
-  const quiz = await Quiz.findById(quizId);
+  let quiz;
+  try {
+    quiz = await Quiz.findById(quizId).populate("creator");
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
 
   if (!quiz) {
     return res.status(500).json({
@@ -73,8 +80,23 @@ const handler = async (req, res) => {
     return res.status(500).json({ message: "Coult not send result" });
   }
 
+  // ! add error handling
+  // update quiz owner in DB
   quizOwner.inbox.push(msg);
   await quizOwner.save();
+
+  //update quiz in DB
+  const { solved, average } = quiz.stats;
+  quiz.stats.solved += 1;
+  if (!solved) {
+    quiz.stats.average = result;
+  }
+
+  if (solved > 0) {
+    quiz.stats.average = (average + result) / 2;
+  }
+
+  await quiz.save();
 
   res.json({ message: "OK" });
 };
