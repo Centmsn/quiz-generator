@@ -1,3 +1,14 @@
+/**
+ * Validates quiz object before sending it to the DB
+ * @param {Object} quiz - quiz object
+ * @param {Boolean} quiz.isPublic - sets quiz visibility to public
+ * @param {String} quiz.title - quiz title
+ * @param {Object} quiz.timeLimit - object which contains time limit and time limit type
+ * @param {Number} quiz.timeLimit.limit - time in seconds
+ * @param {('quiz' | 'question')} quiz.timeLimit.limitType - limit type
+ * @param {Array.<{question: String, correct: Number, answers: {0: String, 1: String, 2: String, 3: String}}>} quiz.question - question object
+ * @returns {Object} object with error | empty object
+ */
 export const validateQuizObject = quiz => {
   const { isPublic, timeLimit, title, questions } = quiz;
   const errors = {};

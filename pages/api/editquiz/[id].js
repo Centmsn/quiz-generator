@@ -3,6 +3,7 @@ import { getSession } from "next-auth/client";
 import QuizModel from "models/quiz";
 import UserModel from "models/user";
 import { connectToDb } from "utils/connectToDb";
+import { validateQuizObject } from "utils/validateQuizObject";
 
 const handler = async (req, res) => {
   if (req.method === "PATCH") {
@@ -45,7 +46,21 @@ const handler = async (req, res) => {
       return res.status(403).json({ message: "403 forbidden" });
     }
 
-    //! missing quiz validation - extract to utils function
+    const quizObject = {
+      title,
+      timeLimit: timeControl,
+      questions,
+      isPublic,
+    };
+
+    // validates quiz object
+    const errors = validateQuizObject(quizObject);
+    const errorMessages = Object.values(errors).join(" ");
+
+    if (errorMessages.length) {
+      return res.status(422).json({ message: errorMessages });
+    }
+
     // update quiz
     quizToUpdate.title = title;
     quizToUpdate.timeLimit = timeControl;
