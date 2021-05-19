@@ -36,6 +36,9 @@
   justify-content: center;
   align-items: center;
 
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
   font-size: 2.5rem;
 
   cursor: pointer;
@@ -69,13 +72,11 @@
 }
 
 .correct {
-  color: map-get($green, 500);
-  background: map-get($green, 100);
+  @include theme($green);
 }
 
 .incorrect {
-  color: map-get($red, 500);
-  background: map-get($red, 100);
+  @include theme($red);
 
   &::before {
     content: "Click to mark as correct answer";

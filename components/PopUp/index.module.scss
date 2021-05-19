@@ -6,6 +6,7 @@
   @extend %flex-center;
   @include rounded-border("small");
   @include shadow("medium", map-get($gray, 400));
+  @include theme($red);
 
   z-index: 9999;
 
@@ -28,14 +29,11 @@
 }
 
 .error {
-  background-color: fade-out(map-get($red, 200), 0.25);
-  color: map-get($red, 500);
+  @include theme($red);
 }
 
 .important {
-  background-color: fade-out(map-get($yellow, 200), 0.25);
-
-  color: map-get($gray, 500);
+  @include theme($yellow);
 }
 
 .important .closeBtn {

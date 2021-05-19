@@ -46,14 +46,12 @@
 
 .number {
   @include rounded-border("small");
+  @include theme($red);
 
   width: 5%;
 
   text-align: center;
   font-size: 3rem;
-
-  background: map-get($red, 100);
-  color: map-get($red, 500);
 }
 
 .question {
@@ -64,8 +62,6 @@
 
   text-align: center;
 
-  // background: map-get($red, 100);
-  // color: map-get($red, 500);
   background: map-get($gray, 200);
   color: black;
 }
@@ -95,6 +91,5 @@
 }
 
 .correct {
-  background: map-get($green, 100);
-  color: map-get($green, 500);
+  @include theme($green);
 }

@@ -3,13 +3,12 @@
 
 .tooltip {
   @include rounded-border("small");
+  @include theme($yellow);
+
   width: 90%;
   height: 10%;
 
   text-align: center;
-
-  background: map-get($yellow, 200);
-  color: black;
 }
 
 .list {

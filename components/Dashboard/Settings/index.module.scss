@@ -42,6 +42,5 @@
 }
 
 .temporaryImportant {
-  color: map-get($red, 500);
-  background: map-get($red, 100);
+  @include theme($red);
 }
