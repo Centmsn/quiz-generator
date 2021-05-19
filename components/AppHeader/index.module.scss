@@ -3,10 +3,10 @@
 
 .container {
   @include rounded-border("small");
+  @include theme($gray);
 
   grid-area: 2/2/11/8;
 
-  background: map-get($gray, 200);
   padding: 2rem;
 }
 

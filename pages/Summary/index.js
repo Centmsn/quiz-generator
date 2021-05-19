@@ -28,7 +28,7 @@ const Summary = () => {
 
   useEffect(() => {
     //! refactor to useHttp hook
-    fetch("/api/msg", {
+    fetch("/api/msg/send", {
       method: "POST",
       body: JSON.stringify({
         quizId: router.query.id,
