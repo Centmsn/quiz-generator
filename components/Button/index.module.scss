@@ -43,10 +43,7 @@
 }
 
 .important {
-  border: 2px solid map-get($yellow, 300);
-
-  color: black;
-  background: map-get($yellow, 200);
+  @include theme($yellow);
 
   &:before {
     background: map-get($yellow, 300);
@@ -54,10 +51,7 @@
 }
 
 .confirm {
-  border: 2px solid map-get($green, 500);
-
-  color: white;
-  background: map-get($green, 300);
+  @include theme($green);
 
   &:before {
     background: map-get($green, 400);
@@ -65,10 +59,7 @@
 }
 
 .danger {
-  border: 2px solid map-get($red, 500);
-
-  color: white;
-  background: map-get($red, 300);
+  @include theme($red);
 
   &:before {
     background: map-get($red, 400);
