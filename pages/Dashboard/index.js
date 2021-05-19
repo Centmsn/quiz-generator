@@ -96,7 +96,7 @@ const Dashboard = ({
 
   return (
     <div className={styles.container} ref={containerRef}>
-      {loading && <Spinner text="loading..." overlay />}
+      {loading && <Spinner overlay />}
 
       <UserPanel
         setDashboardView={handleDashboardView}
@@ -148,7 +148,10 @@ export const getServerSideProps = async context => {
   }
 
   //! fetches all public quizes - might be inefficient for greater numbers
-  const publicQuizList = await Quiz.find({ isPublic: true }).select(["title"]);
+  const publicQuizList = await Quiz.find({ isPublic: true }).select([
+    "title",
+    "stats",
+  ]);
   const randomPublicQuizes = JSON.stringify(
     getRandomElements(publicQuizList, 10)
   );

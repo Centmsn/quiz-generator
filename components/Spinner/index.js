@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
  * Functional React component - renders loading spinner
  * @returns {JSX.Element}
  */
-const Spinner = ({ text = "", overlay = false }) => {
+const Spinner = ({ text = "loading...", overlay = false }) => {
   const spinnerRef = useRef(null);
 
   useEffect(() => {

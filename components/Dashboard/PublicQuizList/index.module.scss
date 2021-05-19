@@ -22,8 +22,9 @@
 
 .listItem {
   @include rounded-border("small");
+  position: relative;
 
-  margin: 1rem auto;
+  margin: 2rem auto;
   width: 90%;
 
   display: flex;
@@ -35,14 +36,39 @@
   background: map-get($gray, 200);
 
   padding: 0 1rem;
+
+  &::before {
+    @include rounded-border("small");
+
+    content: "Quiz title";
+    position: absolute;
+    top: -25%;
+    left: -2.5%;
+
+    background-color: map-get($blue, 200);
+    color: white;
+
+    padding: 0.25rem 1rem;
+  }
 }
 
-.listItemTitle {
+.listItemElement {
   @include rounded-border("small");
+  border: 2px solid map-get($gray, 300);
 
-  flex-basis: 75%;
+  text-align: center;
 
   background: white;
 
   padding: 0.5rem 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.listItemElementImportant {
+  background: map-get($yellow, 100);
+}
+
+.listItemTitle {
+  flex-basis: 50%;
 }

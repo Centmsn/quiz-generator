@@ -22,7 +22,7 @@ const Home = () => {
       <AppHeader />
       <LoginForm />
 
-      {(session || loading) && <Spinner text="loading..." overlay />}
+      {(session || loading) && <Spinner overlay />}
     </div>
   );
 };

@@ -9,18 +9,43 @@ import Button from "components/Button";
 
 const PublicQuizList = ({ publicQuizList }) => {
   const rendersPublicQuizes = () => {
-    return publicQuizList.map((quiz, index) => (
-      <div className={styles.listItem} key={index}>
-        <h3 className={styles.listItemTitle}>{quiz.title}</h3>
-        <Link href={`/Quiz/${quiz._id}`}>
-          <a>
-            <Button size="large">
-              Play <FontAwesomeIcon icon={faPlay} />
-            </Button>
-          </a>
-        </Link>
-      </div>
-    ));
+    console.log(publicQuizList);
+
+    return publicQuizList.map(
+      ({ title, _id, stats: { solved, average } }, index) => {
+        const averageResult = solved > 0 ? `${average}%` : "N/A";
+
+        return (
+          <div className={styles.listItem} key={index}>
+            <h3
+              className={[styles.listItemTitle, styles.listItemElement].join(
+                " "
+              )}
+            >
+              {title}
+            </h3>
+            <p className={styles.listItemElement}>
+              Solved: <strong>{solved}</strong> times
+            </p>
+            <p
+              className={[
+                styles.listItemElement,
+                styles.listItemElementImportant,
+              ].join(" ")}
+            >
+              Average result: <strong>{averageResult}</strong>
+            </p>
+            <Link href={`/Quiz/${_id}`}>
+              <a>
+                <Button size="large">
+                  Play <FontAwesomeIcon icon={faPlay} />
+                </Button>
+              </a>
+            </Link>
+          </div>
+        );
+      }
+    );
   };
 
   return (
