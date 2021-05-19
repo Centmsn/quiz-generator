@@ -92,10 +92,10 @@ const QuizListItem = ({ title, _id, isPublic, deleteQuiz, index }) => {
 
         {showConfirmButton ? (
           <>
-            <Button size="xsmall" onClick={() => deleteQuiz(_id)} danger>
+            <Button size="xsmall" onClick={() => deleteQuiz(_id)} confirm>
               <FontAwesomeIcon icon={faCheck} /> Confirm
             </Button>
-            <Button onClick={handleToggleConfirm} size="xsmall">
+            <Button onClick={handleToggleConfirm} size="xsmall" danger>
               <FontAwesomeIcon icon={faTimes} /> Cancel
             </Button>
           </>

@@ -53,6 +53,17 @@
   }
 }
 
+.confirm {
+  border: 2px solid map-get($green, 500);
+
+  color: white;
+  background: map-get($green, 300);
+
+  &:before {
+    background: map-get($green, 400);
+  }
+}
+
 .danger {
   border: 2px solid map-get($red, 500);
 

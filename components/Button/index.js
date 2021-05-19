@@ -10,6 +10,7 @@ const Button = ({
   children,
   onClick = () => {},
   danger = false,
+  confirm = false,
   important = false,
   disabled = false,
   fontSize = "medium",
@@ -39,6 +40,7 @@ const Button = ({
         styles.button,
         danger ? styles.danger : "",
         important ? styles.important : "",
+        confirm ? styles.confirm : "",
         disabled ? styles.disabled : "",
       ].join(" ")}
       style={{
@@ -64,14 +66,19 @@ Button.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Marks the button as danger. Do not set important and danger to true concurrently
+   * Red theme. Do not set important | danger | confirm to true concurrently
    */
   danger: PropTypes.bool,
 
   /**
-   * Marks the button as important. Do not set important and danger to true concurrently
+   * Yellow theme. Do not set important | danger | confirm to true concurrently
    */
   important: PropTypes.bool,
+
+  /**
+   * Green theme. Do not set important | danger | confirm to true concurrently
+   */
+  confirm: PropTypes.bool,
 
   /**
    * Marks the button as disabled. Can be set together with danger / important.
