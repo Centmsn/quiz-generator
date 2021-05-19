@@ -8,7 +8,8 @@
   margin: 2rem auto;
 
   width: 95%;
-  height: 20%;
+  min-height: 20%;
+  max-height: 50%;
 
   border: 2px solid map-get($blue, 200);
 
@@ -24,10 +25,20 @@
   align-items: center;
 }
 
-.link {
-  @include rounded-border("small");
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  width: 100%;
+.text {
+  @include rounded-border("small");
+  margin: 1.25rem;
+
+  flex-grow: 1;
+
+  text-align: center;
 
   background: white;
   color: map-get($blue, 200);

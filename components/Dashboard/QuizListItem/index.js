@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 
 import Button from "components/Button";
 
-const QuizListItem = ({ title, _id, isPublic, deleteQuiz, index }) => {
+const QuizListItem = ({ title, _id, isPublic, stats, deleteQuiz, index }) => {
   const [showConfirmButton, setShowConfirmButton] = useState(false);
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [quizLink, setQuizLink] = useState("");
@@ -41,7 +41,15 @@ const QuizListItem = ({ title, _id, isPublic, deleteQuiz, index }) => {
   return (
     <div className={styles.container} key={_id}>
       <h3 className={styles.title}>{title}</h3>
-      <p className={styles.link}>{quizLink}</p>
+      <div className={styles.info}>
+        <p className={styles.text}>{quizLink}</p>
+        <p className={styles.text}>
+          Solved: <strong>{stats.solved}</strong> times
+        </p>
+        <p className={styles.text}>
+          Average result: <strong>{stats.average}%</strong>
+        </p>
+      </div>
 
       {isTooltipVisible && (
         <div

@@ -89,11 +89,11 @@ const handler = async (req, res) => {
   const { solved, average } = quiz.stats;
   quiz.stats.solved += 1;
   if (!solved) {
-    quiz.stats.average = result;
+    quiz.stats.average = Math.round(result);
   }
 
   if (solved > 0) {
-    quiz.stats.average = (average + result) / 2;
+    quiz.stats.average = Math.round((average + result) / 2);
   }
 
   await quiz.save();
