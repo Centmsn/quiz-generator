@@ -21,6 +21,8 @@
 
 .listItem {
   @include rounded-border("small");
+  @include theme($gray, black);
+
   position: relative;
 
   margin: 2rem auto;
@@ -29,10 +31,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  border: 2px solid map-get($blue, 100);
-
-  background: map-get($gray, 200);
 
   padding: 0 1rem;
 
@@ -53,7 +51,6 @@
 
 .listItemElement {
   @include rounded-border("small");
-  border: 2px solid map-get($gray, 300);
 
   text-align: center;
 

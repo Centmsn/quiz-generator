@@ -3,6 +3,7 @@
 
 .container {
   @include rounded-border("small");
+  @include theme($gray);
 
   position: relative;
   margin: 2rem auto;
@@ -10,10 +11,6 @@
   width: 95%;
   min-height: 20%;
   max-height: 50%;
-
-  border: 2px solid map-get($blue, 200);
-
-  background: map-get($gray, 200);
 
   padding: 1rem;
 }

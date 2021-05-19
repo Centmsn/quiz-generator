@@ -13,23 +13,23 @@
 .menu {
   @extend %flex-center;
   @include rounded-border("small");
+  @include theme($gray);
+
   flex-basis: 90%;
   height: 10%;
 
   justify-content: space-around;
-
-  background: map-get($gray, 200);
 }
 
 .message {
   @extend %flex-center;
   @include rounded-border("small");
+  @include theme($gray, black);
+
   margin: 1rem auto;
   width: 90%;
   height: 10%;
   justify-content: space-between;
-
-  background: map-get($gray, 200);
 
   padding: 0.5rem;
 

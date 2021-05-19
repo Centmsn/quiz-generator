@@ -32,17 +32,19 @@
 
 .tooltip {
   @include rounded-border("small");
+  @include theme($gray);
   position: absolute;
-  top: calc(50% + 5rem);
+
+  top: 110%;
   left: 50%;
 
   transform: translate(-50%, -50%);
 
-  width: 8rem;
-
-  background: map-get($gray, 200);
+  min-width: 8rem;
+  max-width: 25vw;
 
   text-align: center;
+  font-size: 1rem;
 }
 
 .box {

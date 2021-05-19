@@ -19,7 +19,7 @@
 @mixin theme($color, $text: null) {
   border: 2px solid map-get($color, 500);
 
-  @if $color == $yellow {
+  @if $color == $yellow or $color == $gray {
     background-color: map-get($color, 200);
     color: black;
   } @else {
