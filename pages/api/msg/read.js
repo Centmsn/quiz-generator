@@ -9,7 +9,10 @@ const handler = async (req, res) => {
   await connectToDb();
 
   const session = await getSession({ req });
-  //! if no session
+
+  if (!session) {
+    return res.status(401).json({ message: "401 Unathorized" });
+  }
 
   const currentUser = await User.findOne({
     email: session.user.email,
@@ -19,10 +22,14 @@ const handler = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 
+  if (currentUser.email !== session.user.email) {
+    return res.status(403).json({ messsage: "403 Forbidden" });
+  }
+
   try {
     await Message.updateMany({ recipient: currentUser.id }, { isRead: true });
   } catch (err) {
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "500 Internal server error" });
   }
 
   res.status(200).json({ message: "OK" });

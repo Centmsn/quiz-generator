@@ -218,7 +218,7 @@ export const getServerSideProps = async context => {
   // connect to db
   await connectToDb();
 
-  const quiz = JSON.stringify(await QuizModel.findById(query.id));
+  const quiz = JSON.stringify((await QuizModel.findById(query.id)) || {});
 
   return {
     props: {

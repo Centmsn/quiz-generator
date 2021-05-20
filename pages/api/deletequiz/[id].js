@@ -14,7 +14,7 @@ const handler = async (req, res) => {
 
     if (!session) {
       return res.status(401).json({
-        message: "401 Forbidden",
+        message: "401 Unathorized",
       });
     }
 
@@ -23,7 +23,7 @@ const handler = async (req, res) => {
 
     if (currentUser.id !== currentQuiz.creator.id) {
       return res.status(401).json({
-        message: "401 Forbidden",
+        message: "403 Forbidden",
       });
     }
 

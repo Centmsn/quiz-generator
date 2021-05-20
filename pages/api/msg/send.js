@@ -5,8 +5,6 @@ import { connectToDb } from "utils/connectToDb";
 
 // send a message - quiz result
 const handler = async (req, res) => {
-  //! add error handling
-  // send a message
   if (req.method === "POST") {
     // connect to db
     await connectToDb();
@@ -55,10 +53,13 @@ const handler = async (req, res) => {
       return res.status(500).json({ message: "Coult not send result" });
     }
 
-    // ! add error handling
-    // update quiz owner in DB
-    quizOwner.inbox.push(msg);
-    await quizOwner.save();
+    try {
+      // update quiz owner in DB
+      quizOwner.inbox.push(msg);
+      await quizOwner.save();
+    } catch (error) {
+      return res.status(500).json({ message: "500 Internal server error" });
+    }
 
     //update quiz in DB
     const { solved, average } = quiz.stats;
@@ -71,7 +72,12 @@ const handler = async (req, res) => {
       quiz.stats.average = Math.round((average + result) / 2);
     }
 
-    await quiz.save();
+    // TODO: use mongoose session to update quiz in DB and send msg to the user concurrently
+    try {
+      await quiz.save();
+    } catch (error) {
+      return res.status(500).json({ message: "500 Internal server error" });
+    }
 
     res.json({ message: "OK" });
   }
