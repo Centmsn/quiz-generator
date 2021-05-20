@@ -171,10 +171,11 @@ const newQuiz = ({ quizToEdit = null }) => {
         </a>
       </Link>
 
-      <div className={styles.questionNumber}>
-        Question number: {current + 1}
-      </div>
-      <QuestionForm value={question} setQuestion={handleSetQuestion} />
+      <QuestionForm
+        value={question}
+        setQuestion={handleSetQuestion}
+        index={current + 1}
+      />
       <AnswerForm
         isCorrect={correct}
         value={answers}

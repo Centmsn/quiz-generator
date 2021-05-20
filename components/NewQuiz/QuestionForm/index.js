@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 
 import { validateString } from "utils/validateString";
 
-const QuestionForm = ({ value, setQuestion }) => {
+const QuestionForm = ({ value, index, setQuestion }) => {
   const [error, setError] = useState(null);
 
   const handleSetQuestion = e => {
@@ -22,6 +22,8 @@ const QuestionForm = ({ value, setQuestion }) => {
 
   return (
     <div className={styles.container}>
+      <span className={styles.index}>{index}</span>
+
       <h3 className={styles.title}>Question</h3>
       <textarea
         className={styles.question}

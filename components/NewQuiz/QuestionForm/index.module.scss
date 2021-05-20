@@ -1,8 +1,10 @@
 @import "styles/variables";
 @import "styles/mixins";
+@import "styles/partials";
 
 .container {
   @include rounded-border("small");
+  @include theme($gray);
 
   position: relative;
   grid-area: 2/2/6/12;
@@ -13,8 +15,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
-  background: map-get($gray, 200);
 
   padding: 1rem;
 }
@@ -29,6 +29,7 @@
   text-align: center;
   font-size: 2rem;
 
+  color: map-get($gray, 500);
   background: white;
 }
 
@@ -59,4 +60,19 @@
   color: map-get($red, 500);
 
   padding: 0.5rem;
+}
+
+.index {
+  @extend %flex-center;
+  @include theme($yellow);
+  @include rounded-border("small");
+
+  position: absolute;
+  top: -2rem;
+  left: -2rem;
+
+  width: 4rem;
+  height: 4rem;
+
+  font-size: 1.5rem;
 }

@@ -25,12 +25,3 @@
     color: map-get($red, 400);
   }
 }
-
-.questionNumber {
-  grid-area: 1/1/2/-1;
-
-  text-align: center;
-  font-size: 2rem;
-
-  color: white;
-}

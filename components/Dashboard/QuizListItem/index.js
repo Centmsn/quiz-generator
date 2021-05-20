@@ -40,7 +40,45 @@ const QuizListItem = ({ title, _id, isPublic, stats, deleteQuiz, index }) => {
 
   return (
     <div className={styles.container} key={_id}>
-      <h3 className={styles.title}>{title}</h3>
+      {/* quiz index */}
+      <div
+        className={[styles.tooltip, styles.tooltipBlue].join(" ")}
+        style={{ left: "-1%" }}
+        title="Quiz number"
+      >
+        {index}
+      </div>
+
+      {/* information if quiz is public */}
+      {isPublic && (
+        <div
+          className={[styles.tooltip, styles.tooltipYellow].join(" ")}
+          style={{ left: "8%" }}
+          title="This quiz is visible to other players"
+        >
+          Public
+        </div>
+      )}
+
+      {/* quiz name */}
+      <h3
+        className={[styles.tooltip, styles.title, styles.tooltipBlue].join(" ")}
+        title="Quiz name"
+      >
+        {title}
+      </h3>
+
+      {/* feedback after link is copied */}
+      {isTooltipVisible && (
+        <div
+          className={[styles.tooltip, styles.tooltipGreen].join(" ")}
+          style={{ right: "-1%" }}
+        >
+          <FontAwesomeIcon icon={faCheck} />
+        </div>
+      )}
+
+      {/* quiz stats - link, solved average result */}
       <div className={styles.info}>
         <p className={styles.text}>{quizLink}</p>
         <p className={styles.text}>
@@ -51,32 +89,7 @@ const QuizListItem = ({ title, _id, isPublic, stats, deleteQuiz, index }) => {
         </p>
       </div>
 
-      {isTooltipVisible && (
-        <div
-          className={[styles.tooltip, styles.tooltipGreen].join(" ")}
-          style={{ right: "-1%" }}
-        >
-          <FontAwesomeIcon icon={faCheck} />
-        </div>
-      )}
-
-      <div
-        className={[styles.tooltip, styles.tooltipBlue].join(" ")}
-        style={{ left: "-1%" }}
-      >
-        {index}
-      </div>
-
-      {isPublic && (
-        <div
-          className={[styles.tooltip, styles.tooltipYellow].join(" ")}
-          style={{ left: "8%", width: "10%", cursor: "default" }}
-          title="This quiz is visible to other players"
-        >
-          Public
-        </div>
-      )}
-
+      {/* buttons container */}
       <div className={styles.settings}>
         <Link href={`/Quiz/${_id}`}>
           <a>

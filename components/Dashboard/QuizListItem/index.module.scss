@@ -1,5 +1,6 @@
 @import "styles/variables";
 @import "styles/mixins";
+@import "styles/partials";
 
 .container {
   @include rounded-border("small");
@@ -44,29 +45,31 @@
 }
 
 .tooltip {
+  @extend %flex-center;
   @include rounded-border("small");
-  min-width: 3%;
-  max-width: 10%;
 
   position: absolute;
-  top: -12.5%;
+  top: -1.25rem;
 
-  border: 2px solid map-get($blue, 200);
+  height: 2.5rem;
+  min-width: 2.5rem;
 
   text-align: center;
 
   padding: 0.25rem 0.5rem;
-  overflow: hidden;
+  cursor: default;
+  user-select: none;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .tooltipYellow {
   background: map-get($yellow, 100);
-  color: map-get($blue, 100);
+  border: 2px solid map-get($gray, 500);
 }
 
 .tooltipGreen {
-  background: map-get($green, 100);
-  color: map-get($green, 400);
+  @include theme($green);
 }
 
 .tooltipBlue {
@@ -75,18 +78,8 @@
 }
 
 .title {
-  @include rounded-border("small");
-  position: absolute;
-  top: -12.5%;
   left: 50%;
 
   width: 50%;
   transform: translate(-50%, -50%);
-
-  text-align: center;
-
-  background: map-get($blue, 200);
-  color: white;
-
-  padding: 0.25rem;
 }
