@@ -4,6 +4,7 @@
 .container {
   @include rounded-border("small");
   @include shadow("medium");
+  @include flex();
 
   z-index: 9999;
   position: absolute;
@@ -14,11 +15,6 @@
   height: 35vh;
 
   transform: translate(-50%, -50%);
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 
   color: white;
   background: map-get($blue, 200);

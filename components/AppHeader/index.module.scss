@@ -44,8 +44,7 @@
 }
 
 .instruction {
-  display: flex;
-  justify-content: space-between;
+  @include flex(space-between, center);
 }
 
 .box {

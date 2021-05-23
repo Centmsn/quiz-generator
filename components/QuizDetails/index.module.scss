@@ -20,15 +20,11 @@
 
 .card {
   @include rounded-border("small");
+  @include flex(space-around, center);
 
   margin-bottom: 1rem;
   width: 100%;
   height: auto;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
 
   background: white;
 
@@ -36,12 +32,9 @@
 }
 
 .questionContainer {
-  width: 90%;
+  @include flex(space-between, center);
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  width: 90%;
 }
 
 .number {

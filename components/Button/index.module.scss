@@ -3,12 +3,9 @@
 
 .button {
   @include rounded-border("small");
+  @include flex();
 
   position: relative;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   border: 2px solid map-get($gray, 500);
 

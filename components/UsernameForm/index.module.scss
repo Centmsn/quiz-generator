@@ -1,9 +1,8 @@
 @import "styles/variables";
-@import "styles/partials";
 @import "styles/mixins";
 
 .modal {
-  @extend %flex-center;
+  @include flex();
 
   z-index: 9999;
   position: absolute;
@@ -16,7 +15,7 @@
 }
 
 .form {
-  @extend %flex-center;
+  @include flex();
   @include shadow("small");
   @include rounded-border("small");
 

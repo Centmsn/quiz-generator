@@ -1,6 +1,9 @@
 @import "styles/variables";
+@import "styles/mixins";
 
 .container {
+  @include flex(center, flex-start);
+
   position: absolute;
   top: 0;
   right: calc(100vw / 12);
@@ -8,11 +11,6 @@
   left: calc((100vw / 12) * 3);
 
   transform: translateY(100vh);
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
 
   background: map-get($blue, 200);
 

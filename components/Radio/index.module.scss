@@ -2,10 +2,7 @@
 @import "styles/variables";
 
 .radioContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  @include flex();
 
   span {
     margin: 0 1rem;

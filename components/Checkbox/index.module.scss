@@ -2,24 +2,18 @@
 @import "styles/mixins";
 
 .checkboxContainer {
-  flex-basis: 100%;
+  @include flex();
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  flex-basis: 100%;
 }
 
 .checkbox {
   @include rounded-border("small");
+  @include flex();
+
   margin: 0 1rem;
   width: 2rem;
   height: 2rem;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 
   box-shadow: 0 0 0 2px map-get($blue, 100);
 

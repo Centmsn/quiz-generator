@@ -1,6 +1,5 @@
 @import "styles/variables";
 @import "styles/mixins";
-@import "styles/partials";
 
 .container {
   height: 100vh;
@@ -16,7 +15,7 @@
 .questionContainer {
   @include rounded-border("small");
   @include shadow("medium", map-get($gray, 500));
-  @extend %flex-center;
+  @include flex();
 
   grid-area: 2/2/6/12;
 
@@ -29,23 +28,16 @@
 }
 
 .answerContainer {
-  grid-area: 7/2/12/12;
+  @include flex(space-around, center);
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+  grid-area: 7/2/12/12;
 }
 
 .tooltip {
   @include rounded-border("small");
+  @include flex(space-around, center);
 
   grid-area: 6/2/7/12;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
 
   text-align: center;
 
@@ -66,7 +58,7 @@
 }
 
 .timeBarContainer {
-  @extend %flex-center;
+  @include flex();
   position: absolute;
   top: 1rem;
   right: 0;
@@ -89,14 +81,10 @@
 .answer {
   @include rounded-border("small");
   @include shadow("medium", map-get($gray, 500));
+  @include flex(space-between, center);
 
   flex-basis: 49%;
   height: 47%;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
 
   font-size: 1.5rem;
 
@@ -113,13 +101,10 @@
 }
 
 .answerNumber {
+  @include flex();
+
   flex-basis: 10%;
   height: 100%;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;

@@ -1,16 +1,11 @@
 @import "styles/variables";
 @import "styles/mixins";
-@import "styles/partials";
 
 .container {
   @include shadow("small", map-get($gray, 500));
+  @include flex(center, flex-start);
 
   grid-area: 1/1/-1/3;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
 
   color: white;
   background: map-get($blue, 200);
@@ -34,7 +29,7 @@
 }
 
 .test {
-  @extend %flex-center;
+  @include flex();
   position: absolute;
   top: -30%;
   right: -10%;

@@ -1,5 +1,5 @@
 @import "styles/variables";
-@import "styles/partials";
+@import "styles/mixins";
 
 .section {
   width: 100%;
@@ -21,5 +21,5 @@
 }
 
 .sectionFlex {
-  @extend %flex-center;
+  @include flex();
 }

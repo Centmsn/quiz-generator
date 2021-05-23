@@ -20,13 +20,9 @@
 .settingsSection {
   @include rounded-border("small");
   @include shadow("small");
+  @include flex(space-around, center);
 
   flex-basis: 90%;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
 
   text-align: center;
 

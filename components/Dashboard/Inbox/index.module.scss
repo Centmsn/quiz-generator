@@ -1,5 +1,4 @@
 @import "styles/variables";
-@import "styles/partials";
 @import "styles/mixins";
 
 .inbox {
@@ -11,9 +10,9 @@
 }
 
 .menu {
-  @extend %flex-center;
   @include rounded-border("small");
   @include theme($gray);
+  @include flex();
 
   flex-basis: 90%;
   height: 10%;
@@ -22,9 +21,9 @@
 }
 
 .message {
-  @extend %flex-center;
   @include rounded-border("small");
   @include theme($gray, black);
+  @include flex();
 
   margin: 1rem auto;
   width: 90%;
@@ -35,8 +34,8 @@
 
   p,
   span {
-    @extend %flex-center;
     @include rounded-border("small");
+    @include flex();
 
     margin: 0;
     height: 100%;
@@ -83,6 +82,5 @@
 }
 
 .icon {
-  // flex-basis: 2%;
   font-size: 3rem;
 }

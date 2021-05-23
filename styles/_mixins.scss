@@ -31,3 +31,10 @@
     color: $text;
   }
 }
+
+@mixin flex($justify: center, $align: center) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: $justify;
+  align-items: $align;
+}

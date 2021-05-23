@@ -3,13 +3,9 @@
 
 .loginContainer {
   @include rounded-border("small");
+  @include flex(center, flex-start);
 
   grid-area: 2/9/11/12;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
 
   border: 2px solid map-get($gray, 500);
 

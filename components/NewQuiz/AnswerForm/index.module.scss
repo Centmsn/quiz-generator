@@ -2,25 +2,18 @@
 @import "styles/mixins";
 
 .container {
-  grid-area: 6/2/11/12;
+  @include flex(space-around, center);
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+  grid-area: 6/2/11/12;
 }
 
 .answerContainer {
   @include rounded-border("small");
+  @include flex(space-between, center);
 
   position: relative;
   flex-basis: 49%;
   height: 45%;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
 
   background: white;
 
@@ -28,13 +21,10 @@
 }
 
 .toggleCorrectAnswer {
+  @include flex();
+
   flex-basis: 10%;
   height: 100%;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -58,13 +48,10 @@
 }
 
 .answerNumber {
+  @include flex();
+
   flex-basis: 10%;
   height: 100%;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 
   font-size: 2rem;
 
@@ -79,6 +66,8 @@
   @include theme($red);
 
   &::before {
+    @include flex();
+
     content: "Click to mark as correct answer";
     position: absolute;
     top: 0;
@@ -87,11 +76,6 @@
     left: 0;
 
     transform: translateX(-100%);
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
 
     font-size: 2rem;
 

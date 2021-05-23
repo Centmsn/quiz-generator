@@ -38,13 +38,9 @@
 .buttonsContainer {
   @include shadow("small");
   @include rounded-border("small");
+  @include flex(space-around, center);
 
   grid-area: 7/2/9/12;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
 
   background: white;
 }
