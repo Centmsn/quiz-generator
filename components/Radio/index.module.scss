@@ -14,7 +14,7 @@
   width: 3rem;
   height: 3rem;
 
-  border: 2px solid map-get($blue, 200);
+  border: 2px solid map-get($blue, 400);
   border-radius: 50%;
 
   background: white;
@@ -34,7 +34,7 @@
 
     border-radius: 50%;
 
-    background: map-get($blue, 200);
+    background: map-get($blue, 400);
 
     transition: transform 300ms linear;
   }

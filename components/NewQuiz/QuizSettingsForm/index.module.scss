@@ -17,7 +17,7 @@
   transform: translate(-50%, -50%);
 
   color: white;
-  background: map-get($blue, 200);
+  background: map-get($blue, 400);
 
   padding: 1rem;
   overflow: auto;
@@ -36,7 +36,7 @@
   height: 50%;
   width: 50%;
 
-  background: map-get($blue, 200);
+  background: map-get($blue, 400);
 }
 
 .backdrop {

@@ -8,7 +8,7 @@
   grid-area: 1/1/-1/3;
 
   color: white;
-  background: map-get($blue, 200);
+  background: map-get($blue, 400);
 }
 
 .title {
@@ -17,7 +17,7 @@
   text-align: center;
   font-size: 2.5rem;
 
-  color: map-get($blue, 100);
+  color: map-get($blue, 500);
   background: map-get($gray, 100);
 
   padding: 0.5rem;

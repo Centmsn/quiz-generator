@@ -41,7 +41,7 @@
 
   text-align: center;
 
-  color: map-get($blue, 200);
+  color: map-get($blue, 400);
 }
 
 .info {
@@ -73,7 +73,7 @@
   width: 100%;
   height: 1rem;
 
-  background: map-get($blue, 300);
+  background: map-get($blue, 400);
 
   transform-origin: left center;
 }
@@ -88,7 +88,7 @@
 
   font-size: 1.5rem;
 
-  background: map-get($blue, 200);
+  background: map-get($blue, 400);
   color: white;
 
   overflow-y: auto;
@@ -112,7 +112,7 @@
   font-size: 2.5rem;
 
   background: map-get($gray, 200);
-  color: map-get($blue, 200);
+  color: map-get($blue, 400);
 
   transition: 300ms;
   transform-origin: left center;

@@ -13,7 +13,7 @@
 .title {
   font-size: 5rem;
 
-  color: map-get($blue, 200);
+  color: map-get($blue, 400);
 }
 
 .icon {
@@ -38,7 +38,7 @@
   box-shadow: 5px 5px 10px 0 map-get($gray, 500);
 
   color: white;
-  background: map-get($blue, 200);
+  background: map-get($blue, 400);
 
   padding: 1rem;
 }
@@ -60,7 +60,7 @@
 
   box-shadow: 5px 5px 10px 0 map-get($gray, 500);
 
-  background: map-get($blue, 200);
+  background: map-get($blue, 400);
   color: white;
 
   &__number {
