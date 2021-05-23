@@ -21,6 +21,7 @@ const Inbox = ({
   clearError = () => {},
 }) => {
   const renderMessages = () => {
+    // if inbox is empty
     if (!messages.length) {
       return (
         <div className={styles.tooltip}>
@@ -33,6 +34,7 @@ const Inbox = ({
       );
     }
 
+    // render messages
     return messages.map(({ username, result, quizName, isRead }, index) => (
       <div key={index} className={styles.message}>
         <span className={styles.info}>

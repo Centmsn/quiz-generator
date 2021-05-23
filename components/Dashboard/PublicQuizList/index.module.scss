@@ -33,14 +33,15 @@
 
   &::before {
     @include rounded-border("small");
+    @include theme($blue);
 
     content: "Quiz title";
     position: absolute;
-    top: -25%;
-    left: -2.5%;
+    top: -1.25rem;
+    left: -1rem;
 
-    background-color: map-get($blue, 400);
-    color: white;
+    height: 1.5rem;
+    min-width: 4rem;
 
     padding: 0.25rem 1rem;
   }

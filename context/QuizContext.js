@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 const QuizContext = createContext({});
 
-const TIME_CONTROL_DEFAULT = {
+const TIME_LIMIT_DEFAULT = {
   limit: null,
   limitType: null,
 };
@@ -20,7 +20,7 @@ export const QuizContextProvider = ({ children }) => {
   const [currentQuestion, setCurrentQuestion] = useState(
     CURRENT_QUESTION_DEFAULT
   );
-  const [timeControl, setTimeControl] = useState(TIME_CONTROL_DEFAULT);
+  const [timeLimit, setTimeLimit] = useState(TIME_LIMIT_DEFAULT);
   const [isPublic, setIsPublic] = useState(IS_PUBLIC_DEFAULT);
 
   //! add JSDOC
@@ -41,9 +41,8 @@ export const QuizContextProvider = ({ children }) => {
 
   const handleStoreValue = ({ isPublic, questions, timeLimit }) => {
     //! if editing
-    console.log(timeLimit);
     setQuestion(questions);
-    setTimeControl(timeLimit);
+    setTimeLimit(timeLimit);
     setIsPublic(isPublic);
   };
 
@@ -101,10 +100,10 @@ export const QuizContextProvider = ({ children }) => {
    * @param {String} type - limit can be set for quiz or signle question
    * @returns {undefined}
    */
-  const handleTimeControl = (limit, type) => {
+  const handleTimeLimit = (limit, type) => {
     // if both arguments are null - remove time control
     if (limit === null && type === null) {
-      setTimeControl(TIME_CONTROL_DEFAULT);
+      setTimeLimit(TIME_LIMIT_DEFAULT);
       return;
     }
 
@@ -129,7 +128,7 @@ export const QuizContextProvider = ({ children }) => {
       );
     }
     // enable time control
-    setTimeControl({
+    setTimeLimit({
       limit,
       limitType: type,
     });
@@ -141,7 +140,7 @@ export const QuizContextProvider = ({ children }) => {
    */
   const handleReset = () => {
     setQuestion(QUESTIONS_DEFAULT);
-    setTimeControl(TIME_CONTROL_DEFAULT);
+    setTimeLimit(TIME_LIMIT_DEFAULT);
     setCurrentQuestion(CURRENT_QUESTION_DEFAULT);
     setIsPublic(IS_PUBLIC_DEFAULT);
   };
@@ -150,11 +149,11 @@ export const QuizContextProvider = ({ children }) => {
     <QuizContext.Provider
       value={{
         questions,
-        timeControl,
+        timeLimit,
         current: currentQuestion,
         isPublic,
         toggleIsPublic: handleSetPublic,
-        setTimeControl: handleTimeControl,
+        setTimeLimit: handleTimeLimit,
         setCurrentQuestion: handleCurrentQuestion,
         manageQuestion: handleQuestionObject,
         reset: handleReset,

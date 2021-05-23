@@ -15,11 +15,11 @@
   width: 2rem;
   height: 2rem;
 
-  box-shadow: 0 0 0 2px map-get($blue, 100);
+  box-shadow: 0 0 0 2px map-get($blue, 400);
 
   font-size: 2rem;
 
-  color: map-get($blue, 100);
+  color: map-get($blue, 500);
   background: white;
 
   cursor: pointer;

@@ -29,12 +29,12 @@ const handler = async (req, res) => {
       });
     }
 
-    const { title, timeControl, questions, isPublic } = req.body;
+    const { title, timeLimit, questions, isPublic } = req.body;
 
     const quizObject = {
       creator: existingUser,
       title,
-      timeLimit: timeControl,
+      timeLimit,
       questions,
       isPublic,
     };

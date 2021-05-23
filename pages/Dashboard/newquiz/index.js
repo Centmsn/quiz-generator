@@ -32,7 +32,7 @@ const newQuiz = ({ quizToEdit = null }) => {
   const {
     questions,
     current,
-    timeControl,
+    timeLimit,
     isPublic,
     reset,
     manageQuestion,
@@ -138,9 +138,9 @@ const newQuiz = ({ quizToEdit = null }) => {
       JSON.stringify({
         title,
         isPublic,
-        timeControl: {
-          limit: timeControl.limit * 60,
-          limitType: timeControl.limitType,
+        timeLimit: {
+          limit: timeLimit.limit * 60,
+          limitType: timeLimit.limitType,
         },
         questions,
       }),

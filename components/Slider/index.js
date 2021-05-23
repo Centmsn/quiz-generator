@@ -23,7 +23,6 @@ const Slider = ({
 
   useEffect(() => {
     if (initial) {
-      console.log("init");
       setValue(initial / 60);
       const { width } = sliderRef.current.getBoundingClientRect();
 

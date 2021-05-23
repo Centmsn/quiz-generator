@@ -67,8 +67,7 @@
 }
 
 .tooltipBlue {
-  background: map-get($blue, 400);
-  color: white;
+  @include theme($blue);
 }
 
 .title {

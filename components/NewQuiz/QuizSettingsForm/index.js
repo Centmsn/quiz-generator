@@ -19,14 +19,14 @@ const QuizNameForm = ({
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [timeFormVisibility, setTimeFormVisibility] = useState(false);
   const [name, setName] = useState(title);
-  const { timeControl } = useContext(QuizContext);
+  const { timeLimit } = useContext(QuizContext);
   const { throttle } = useThrottle();
   const backdropRef = useRef(null);
   const nameFormRef = useRef(null);
   const timeFormRef = useRef(null);
 
   useEffect(() => {
-    if (timeControl.limitType) {
+    if (timeLimit.limitType) {
       handleTimeFormVisibility();
     }
   }, []);

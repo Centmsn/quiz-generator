@@ -9,8 +9,6 @@ import Button from "components/Button";
 
 const PublicQuizList = ({ publicQuizList }) => {
   const rendersPublicQuizes = () => {
-    console.log(publicQuizList);
-
     return publicQuizList.map(
       ({ title, _id, stats: { solved, average } }, index) => {
         const averageResult = solved > 0 ? `${average}%` : "N/A";
