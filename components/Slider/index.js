@@ -83,7 +83,11 @@ const Slider = ({
   return (
     <div>
       <span>{label}</span>
-      <div className={styles.slider} ref={sliderRef}>
+      <div
+        className={styles.slider}
+        ref={sliderRef}
+        onClick={handleDraggablePosition}
+      >
         <div
           className={styles.progressBar}
           style={{
