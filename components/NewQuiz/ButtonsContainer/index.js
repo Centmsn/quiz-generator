@@ -59,7 +59,7 @@ const ButtonsContainer = ({
 
       <Button
         size="small"
-        style="danger"
+        style="primary"
         onClick={handleModal}
         disabled={!questions.length}
       >

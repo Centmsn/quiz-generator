@@ -17,7 +17,6 @@ import UserPanel from "components/Dashboard/UserPanel";
 import QuizList from "components/Dashboard/QuizList";
 import { useThrottle } from "hooks/useThrottle";
 import { useHttpRequest } from "hooks/useHttpRequest";
-import { getRandomElements } from "utils/getRandomElements";
 
 const Dashboard = ({
   quizList = [],
@@ -57,6 +56,15 @@ const Dashboard = ({
     }
 
     setLocalMessages(data.content);
+  };
+
+  const fetchPublicQuizes = async () => {
+    const data = await sendRequest("/api/public", "GET");
+
+    //  TODO add error handling
+    if (!data) return;
+
+    console.log(data);
   };
 
   const deleteInbox = async () => {
@@ -112,7 +120,10 @@ const Dashboard = ({
         error={error}
         clearError={clearError}
       />
-      <PublicQuizList publicQuizList={JSON.parse(publicQuizes)} />
+      <PublicQuizList
+        publicQuizList={JSON.parse(publicQuizes)}
+        fetchList={fetchPublicQuizes}
+      />
     </div>
   );
 };
@@ -132,6 +143,7 @@ export const getServerSideProps = async context => {
     };
   }
 
+  // ! refactor fetching messages
   const existingUser = await User.findOne({
     email: session.user.email,
   })
@@ -147,14 +159,12 @@ export const getServerSideProps = async context => {
     };
   }
 
-  //! fetches all public quizes - might be inefficient for greater numbers
-  const publicQuizList = await Quiz.find({ isPublic: true }).select([
-    "title",
-    "stats",
+  // fetching random quizes which are marked as public
+  const publicQuizList = await Quiz.aggregate([
+    { $match: { isPublic: true } },
+    { $sample: { size: 10 } },
+    { $project: { title: 1, stats: 1 } },
   ]);
-  const randomPublicQuizes = JSON.stringify(
-    getRandomElements(publicQuizList, 10)
-  );
 
   const quizList = JSON.stringify(existingUser.quizes);
   const messages = existingUser.inbox;
@@ -166,7 +176,7 @@ export const getServerSideProps = async context => {
   return {
     props: {
       messages: JSON.stringify(messages),
-      publicQuizes: randomPublicQuizes,
+      publicQuizes: JSON.stringify(publicQuizList),
       unreadMessages,
       quizList,
     },

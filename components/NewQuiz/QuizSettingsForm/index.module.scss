@@ -5,6 +5,7 @@
   @include rounded-border("small");
   @include shadow("medium");
   @include flex();
+  @include theme($gray);
 
   z-index: 9999;
   position: absolute;
@@ -16,9 +17,6 @@
 
   transform: translate(-50%, -50%);
 
-  color: white;
-  background: map-get($blue, 400);
-
   padding: 1rem;
   overflow: auto;
 }
@@ -26,6 +24,7 @@
 .timeFormContainer {
   @include rounded-border("small");
   @include shadow("medium");
+  @include theme($gray);
 
   position: absolute;
   top: 70%;
@@ -35,8 +34,6 @@
 
   height: 50%;
   width: 50%;
-
-  background: map-get($blue, 400);
 }
 
 .backdrop {
@@ -47,7 +44,7 @@
   bottom: 0;
   left: 0;
 
-  background: fade-out(map-get($gray, 200), 0.2);
+  background: fade-out(map-get($blue, 500), 0.4);
 }
 
 .input {
@@ -65,9 +62,8 @@
 .title {
   flex-basis: 100%;
 
-  border-bottom: 2px solid map-get($gray, 200);
+  border-bottom: 2px solid map-get($gray, 400);
 
   text-align: center;
-
-  color: white;
+  text-transform: uppercase;
 }

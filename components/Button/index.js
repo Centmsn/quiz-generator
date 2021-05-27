@@ -84,7 +84,7 @@ Button.propTypes = {
   /**
    * Button style
    */
-  style: PropTypes.oneOf(["primary, danger, important, confirm"]),
+  style: PropTypes.oneOf(["primary", "danger", "important", "confirm"]),
 
   /**
    * Marks the button as disabled. Can be set together with danger / important.
@@ -92,14 +92,14 @@ Button.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Button font size; Use "small" / "medium" / "large"
+   * Button font size; Use "small" | "medium" | "large"
    */
   fontSize: PropTypes.oneOf(["small", "medium", "large"]),
 
   /**
-   * Button size; Use "small" / "medium" / "large"
+   * Button size; Use "xsmall" | "small" | "medium" | "large | "xlarge"
    */
-  size: PropTypes.oneOf(["xsmall", "small", "medium", "large"]),
+  size: PropTypes.oneOf(["xsmall", "small", "medium", "large", "xlarge"]),
 };
 
 export default Button;

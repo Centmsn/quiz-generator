@@ -7,7 +7,7 @@ import Link from "next/link";
 import Container from "components/Dashboard/Container";
 import Button from "components/Button";
 
-const PublicQuizList = ({ publicQuizList }) => {
+const PublicQuizList = ({ publicQuizList, fetchList }) => {
   const rendersPublicQuizes = () => {
     return publicQuizList.map(
       ({ title, _id, stats: { solved, average } }, index) => {
@@ -53,7 +53,7 @@ const PublicQuizList = ({ publicQuizList }) => {
           <p>Here You can find randomly selected public quizes.</p>
           <p>Mark Your quiz as public so other users can play it!</p>
         </div>
-        <Button size="small" style="primary">
+        <Button size="small" style="primary" onClick={fetchList}>
           <FontAwesomeIcon icon={faRedo} /> Refresh
         </Button>
       </div>

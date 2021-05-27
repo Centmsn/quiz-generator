@@ -34,7 +34,7 @@ const QuizTimeForm = () => {
   return (
     <>
       <section className={[styles.section, styles.sectionFlex].join(" ")}>
-        <p>Apply time limit to:</p>
+        <h5>Apply time limit to:</h5>
         <Radio
           label="Quiz"
           value="quiz"
@@ -50,7 +50,8 @@ const QuizTimeForm = () => {
       </section>
 
       <section className={styles.section}>
-        <p>Adjust limit (minutes)</p>
+        <h5>Adjust time limit (minutes)</h5>
+        <p>Use the slider below to set time limit for your quiz</p>
         <Slider
           min={1}
           max={60}
