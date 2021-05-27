@@ -50,6 +50,35 @@ const Slider = ({
   };
 
   const handleDraggablePosition = e => {
+    // !refactor
+    if (e.keyCode) {
+      if ([37, 39].includes(e.keyCode)) {
+        let newValue;
+        if (e.keyCode === 39) {
+          if (value >= max) return;
+          newValue = value + 1;
+          setValue(prev => prev + 1);
+        }
+
+        if (e.keyCode === 37) {
+          if (value <= min) return;
+          newValue = value - 1;
+          setValue(prev => prev - 1);
+        }
+
+        const { width } = sliderRef.current.getBoundingClientRect();
+
+        // TODO refactor
+        setPosition(
+          (width / (max - min)) * newValue -
+            DRAGGABLE_WIDTH / 2 -
+            width / (max - min)
+        );
+      }
+
+      return;
+    }
+
     //slider dimension and position
     const { x: sliderX, width: sliderWidth } =
       sliderRef.current.getBoundingClientRect();
@@ -95,7 +124,9 @@ const Slider = ({
           }}
         ></div>
         <div
+          tabIndex="0"
           className={styles.draggable}
+          onKeyDown={handleDraggablePosition}
           onMouseDown={handleStartDrag}
           style={{ transform: `translateX(${position}px)` }}
         >

@@ -15,7 +15,10 @@ const Checkbox = ({
   disabled = false,
   label = "",
 }) => {
-  const handleOnClick = () => {
+  const handleChange = e => {
+    if (disabled) return;
+
+    if (e.keyCode && ![13, 32].includes(e.keyCode)) return;
     onClick(!isChecked);
   };
 
@@ -23,7 +26,8 @@ const Checkbox = ({
     <div className={styles.checkboxContainer}>
       <span>{label}</span>
       <div
-        onClick={handleOnClick}
+        onClick={handleChange}
+        onKeyDown={handleChange}
         className={[
           styles.checkbox,
           disabled ? styles.disabled : "",

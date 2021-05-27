@@ -14,9 +14,12 @@ const Radio = ({
   value = null,
   disabled = false,
 }) => {
-  const handleOnClick = () => {
+  const handleChange = e => {
     // do not execute callback if active or disabled
     if (disabled || active) return;
+
+    if (e.keyCode && ![13, 32].includes(e.keyCode)) return;
+
     onClick(value);
   };
 
@@ -29,7 +32,8 @@ const Radio = ({
           disabled ? styles.disabled : "",
           active ? styles.active : "",
         ].join(" ")}
-        onClick={handleOnClick}
+        onClick={handleChange}
+        onKeyDown={handleChange}
         tabIndex="0"
       ></div>
     </div>
