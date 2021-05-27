@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faRedo } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 import Container from "components/Dashboard/Container";
@@ -49,8 +49,13 @@ const PublicQuizList = ({ publicQuizList }) => {
   return (
     <Container title="Public quizes" light>
       <div className={styles.tooltip}>
-        <p>Here You can find randomly selected public quizes.</p>
-        <p>Mark Your quiz as public so other users can play it!</p>
+        <div>
+          <p>Here You can find randomly selected public quizes.</p>
+          <p>Mark Your quiz as public so other users can play it!</p>
+        </div>
+        <Button size="small" style="primary">
+          <FontAwesomeIcon icon={faRedo} /> Refresh
+        </Button>
       </div>
       <div className={styles.list}>{rendersPublicQuizes()}</div>
     </Container>

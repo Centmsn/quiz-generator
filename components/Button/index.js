@@ -2,6 +2,30 @@ import styles from "./index.module.scss";
 import PropTypes from "prop-types";
 
 /**
+ * enum for button size
+ * @enum
+ * @readonly
+ */
+const BUTTON_SIZE_ENUM = {
+  xsmall: "15%",
+  small: "30%",
+  medium: "60%",
+  large: "75%",
+  xlarge: "90%",
+};
+
+/**
+ * enum for button font size
+ * @enum
+ * @readonly
+ */
+const BUTTON_FONT_SIZE_ENUM = {
+  small: "1.25rem",
+  medium: "1.5rem",
+  large: "1.75rem",
+};
+
+/**
  * Functional React component - renders button
  * @param {Object} props - React props
  * @returns {JSX.Element}
@@ -9,38 +33,30 @@ import PropTypes from "prop-types";
 const Button = ({
   children,
   onClick = () => {},
-  danger = false,
-  confirm = false,
-  important = false,
   disabled = false,
+  style = 0,
   fontSize = "medium",
   size = "medium",
 }) => {
   const handleOnClick = e => {
+    if (disabled) return;
+
     // event is passed to the callback function
     onClick(e);
   };
 
-  let font;
-  if (fontSize === "small") font = "1.25rem";
-  if (fontSize === "medium") font = "1.5rem";
-  if (fontSize === "large") font = "1.75rem";
-
-  let btnSize;
-
-  if (size === "xsmall") btnSize = "15%";
-  if (size === "small") btnSize = "30%";
-  if (size === "medium") btnSize = "60%";
-  if (size === "large") btnSize = "75%";
+  // button size
+  const font =
+    BUTTON_FONT_SIZE_ENUM[fontSize] || BUTTON_FONT_SIZE_ENUM["medium"];
+  // button text size
+  const btnSize = BUTTON_SIZE_ENUM[size] || BUTTON_SIZE_ENUM["medium"];
 
   return (
     <button
       onClick={handleOnClick}
       className={[
         styles.button,
-        danger ? styles.danger : "",
-        important ? styles.important : "",
-        confirm ? styles.confirm : "",
+        styles[style],
         disabled ? styles.disabled : "",
       ].join(" ")}
       style={{
@@ -66,19 +82,9 @@ Button.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Red theme. Do not set important | danger | confirm to true concurrently
+   * Button style
    */
-  danger: PropTypes.bool,
-
-  /**
-   * Yellow theme. Do not set important | danger | confirm to true concurrently
-   */
-  important: PropTypes.bool,
-
-  /**
-   * Green theme. Do not set important | danger | confirm to true concurrently
-   */
-  confirm: PropTypes.bool,
+  style: PropTypes.oneOf(["primary, danger, important, confirm"]),
 
   /**
    * Marks the button as disabled. Can be set together with danger / important.

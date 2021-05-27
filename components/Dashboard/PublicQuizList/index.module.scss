@@ -8,6 +8,8 @@
   width: 90%;
   height: 10%;
 
+  @include flex(space-around);
+
   text-align: center;
 }
 

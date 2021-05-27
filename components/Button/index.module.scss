@@ -47,6 +47,14 @@
   }
 }
 
+.primary {
+  @include theme($blue);
+
+  &:before {
+    background: map-get($blue, 300);
+  }
+}
+
 .confirm {
   @include theme($green);
 

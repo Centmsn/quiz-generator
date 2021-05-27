@@ -87,7 +87,7 @@ const QuizNameForm = ({
           maxLength="25"
         />
         <Button
-          important
+          style="important"
           onClick={handleAddQuiz}
           disabled={!name || isButtonDisabled}
         >

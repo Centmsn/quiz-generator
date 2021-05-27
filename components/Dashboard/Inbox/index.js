@@ -64,7 +64,7 @@ const Inbox = ({
           size="small"
           onClick={deleteInbox}
           disabled={!messages.length}
-          danger
+          style="danger"
         >
           <FontAwesomeIcon icon={faTrashAlt} /> Delete all
         </Button>

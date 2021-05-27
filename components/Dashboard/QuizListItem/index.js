@@ -93,7 +93,7 @@ const QuizListItem = ({ title, _id, isPublic, stats, deleteQuiz, index }) => {
       <div className={styles.settings}>
         <Link href={`/Quiz/${_id}`}>
           <a>
-            <Button size="small">
+            <Button size="small" style="primary">
               Play <FontAwesomeIcon icon={faPlay} />
             </Button>
           </a>
@@ -113,15 +113,19 @@ const QuizListItem = ({ title, _id, isPublic, stats, deleteQuiz, index }) => {
 
         {showConfirmButton ? (
           <>
-            <Button size="xsmall" onClick={() => deleteQuiz(_id)} confirm>
+            <Button
+              size="xsmall"
+              onClick={() => deleteQuiz(_id)}
+              style="confirm"
+            >
               <FontAwesomeIcon icon={faCheck} /> Confirm
             </Button>
-            <Button onClick={handleToggleConfirm} size="xsmall" danger>
+            <Button onClick={handleToggleConfirm} size="xsmall" style="danger">
               <FontAwesomeIcon icon={faTimes} /> Cancel
             </Button>
           </>
         ) : (
-          <Button danger size="small" onClick={handleToggleConfirm}>
+          <Button style="danger" size="small" onClick={handleToggleConfirm}>
             Delete <FontAwesomeIcon icon={faTrash} />
           </Button>
         )}

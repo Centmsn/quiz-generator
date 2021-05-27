@@ -105,7 +105,7 @@ const Navigation = () => {
       <Button onClick={handleSignIn} disabled={isLoginDisabled}>
         Login
       </Button>
-      <Button onClick={() => signIn("google")} important>
+      <Button onClick={() => signIn("google")} style="important">
         <FontAwesomeIcon icon={faGoogle} /> Login with Google
       </Button>
       <span className={styles.span}>or</span>

@@ -79,7 +79,7 @@ const Summary = () => {
       </div>
 
       <div className={styles.buttonsContainer} ref={navRef}>
-        <Button important size="small" onClick={handleShowDetails}>
+        <Button style="important" size="small" onClick={handleShowDetails}>
           <FontAwesomeIcon icon={faAlignCenter} />{" "}
           {isDetailsVisible ? "Hide details" : "Show details"}
         </Button>
@@ -92,7 +92,7 @@ const Summary = () => {
         </Link>
         <Link href={session ? "/Dashboard" : "/"}>
           <a>
-            <Button danger>
+            <Button style="danger">
               <FontAwesomeIcon icon={faHome} /> Home page
             </Button>
           </a>

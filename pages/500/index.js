@@ -11,7 +11,7 @@ const InternalServerError = () => {
       <h3>Something went really wrong...</h3>
       <Link href="/">
         <a>
-          <Button danger>Take me back to home page</Button>
+          <Button style="danger">Take me back to home page</Button>
         </a>
       </Link>
     </div>

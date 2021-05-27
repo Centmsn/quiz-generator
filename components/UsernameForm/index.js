@@ -35,7 +35,11 @@ const UsernameForm = ({ startQuiz }) => {
           Name must contain atleast 2 characters
         </span>
 
-        <Button onClick={handleStartQuiz} important disabled={!isValidName}>
+        <Button
+          onClick={handleStartQuiz}
+          style="important"
+          disabled={!isValidName}
+        >
           Submit
         </Button>
       </form>

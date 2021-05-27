@@ -28,7 +28,7 @@ const UserPanel = ({ setDashboardView, index, unreadMessages }) => {
 
       <Link href="/Dashboard/newquiz">
         <a style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-          <Button fontSize="large" important size="large">
+          <Button fontSize="large" style="primary" size="large">
             <FontAwesomeIcon icon={faPlus} /> New Quiz
           </Button>
         </a>
@@ -69,7 +69,7 @@ const UserPanel = ({ setDashboardView, index, unreadMessages }) => {
         )}
       </Button>
 
-      <Button onClick={signout} danger size="medium">
+      <Button onClick={signout} style="danger" size="medium">
         <FontAwesomeIcon icon={faSignOutAlt} /> Logout{" "}
       </Button>
     </div>
