@@ -30,6 +30,7 @@
 }
 
 .title {
+  @include title();
   flex-basis: 100%;
 
   border-bottom: 2px solid map-get($gray, 200);

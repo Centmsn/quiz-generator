@@ -24,7 +24,7 @@
     transform: scaleX(0);
     transform-origin: left center;
 
-    background: map-get($yellow, 200);
+    background: map-get($gray, 200);
 
     transition: transform 300ms linear;
   }

@@ -12,13 +12,9 @@
 }
 
 .title {
+  @include title(2.5rem, map-get($blue, 500));
   flex-basis: 100%;
 
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 2.5rem;
-
-  color: map-get($blue, 500);
   background: map-get($gray, 100);
 
   padding: 0.5rem;

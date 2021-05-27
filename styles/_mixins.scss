@@ -42,3 +42,12 @@
   justify-content: $justify;
   align-items: $align;
 }
+
+@mixin title($size: 2rem, $color: white, $case: uppercase) {
+  font-size: $size;
+
+  text-align: center;
+  text-transform: $case;
+
+  color: $color;
+}

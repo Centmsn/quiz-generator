@@ -60,10 +60,8 @@
 }
 
 .title {
+  @include title(2rem, black);
   flex-basis: 100%;
 
   border-bottom: 2px solid map-get($gray, 400);
-
-  text-align: center;
-  text-transform: uppercase;
 }
