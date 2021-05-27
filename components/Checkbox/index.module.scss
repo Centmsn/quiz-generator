@@ -10,23 +10,28 @@
 .checkbox {
   @include rounded-border("small");
   @include flex();
+  @include theme($red);
 
   margin: 0 1rem;
-  width: 2rem;
-  height: 2rem;
-
-  box-shadow: 0 0 0 2px map-get($blue, 400);
+  width: 2.25rem;
+  height: 2.25rem;
 
   font-size: 2rem;
-
-  color: map-get($blue, 500);
-  background: white;
 
   cursor: pointer;
 
   &:hover,
   &:focus {
-    background: map-get($yellow, 200);
+    background: map-get($red, 200);
+  }
+}
+
+.checked {
+  @include theme($green);
+
+  &:hover,
+  &:focus {
+    background: map-get($green, 200);
   }
 }
 

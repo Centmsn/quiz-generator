@@ -24,7 +24,11 @@ const Checkbox = ({
       <span>{label}</span>
       <div
         onClick={handleOnClick}
-        className={[styles.checkbox, disabled ? styles.disabled : ""].join(" ")}
+        className={[
+          styles.checkbox,
+          disabled ? styles.disabled : "",
+          isChecked ? styles.checked : "",
+        ].join(" ")}
         tabIndex="0"
       >
         <FontAwesomeIcon icon={isChecked ? faCheck : faTimes} />
